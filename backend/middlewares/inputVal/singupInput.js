@@ -1,12 +1,9 @@
 const zod = require("zod");
 
 const valSchema = zod.object({
+  uname: zod.string().email(),
   fname: zod.string(),
   lname: zod.string(),
-  //   phno: zod.string().transform((val) => {
-  //     if (val.length !== 10) throw new Error("It must have 10 digits!!");
-  //     return parseInt(val, 10);
-  //   }),
   phno: zod.string().superRefine((val, ctx) => {
     if (val.length !== 10) {
       ctx.addIssue({
@@ -17,7 +14,6 @@ const valSchema = zod.object({
     }
     return parseInt(val, 10);
   }),
-  uname: zod.string().email(),
   pwd: zod.string().superRefine((val, ctx) => {
     if (val.length < 6) {
       ctx.addIssue({
@@ -31,13 +27,13 @@ const valSchema = zod.object({
 });
 
 const signupInputval = (req, res, next) => {
-  const { fname, lname, phno, uname, pwd } = req.body;
+  const { uname, fname, lname, phno, pwd } = req.body;
 
   const check = valSchema.safeParse({
+    uname,
     fname,
     lname,
     phno,
-    uname,
     pwd,
   });
 

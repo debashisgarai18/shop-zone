@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 const { MONGO_URI } = require("../config");
 
-mongoose
-  .connect(MONGO_URI, {
-    authSource: "admin",
-  })
-  .then((res) => console.log(res))
-  .catch((err) => console.log(err));
+mongoose.connect(MONGO_URI);
 
 const userSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   firstName: {
     type: String,
     required: true,
@@ -20,12 +20,6 @@ const userSchema = new mongoose.Schema({
   phoneNumber: {
     type: Number,
     required: true,
-    unique: true,
-  },
-  username: {
-    type: String,
-    required: true,
-    unique: true,
   },
   password: {
     type: String,
