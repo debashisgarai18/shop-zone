@@ -1,13 +1,13 @@
 const { Router } = require("express");
-const signupInputval = require("../middlewares/inputVal/singupInput");
-const user = require("../Database");
-const useRouter = Router();
+const userRouter = Router();
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config");
 const bcrypt = require("bcrypt");
-const signinInputVal = require("../middlewares/inputVal/signinInput");
+const signupInputval = require("../middlewares/inputVal/user/singupInput");
+const signinInputVal = require("../middlewares/inputVal/user/signinInput");
+const { user } = require("../Database");
 
-useRouter.post("/signup", signupInputval, async (req, res) => {
+userRouter.post("/signup", signupInputval, async (req, res) => {
   const { fname, lname, phno, uname, pwd } = req.body;
 
   // check whether the user exists or not
@@ -17,7 +17,7 @@ useRouter.post("/signup", signupInputval, async (req, res) => {
 
   if (check) {
     res.status(200).json({
-      message: "This username already exits!!",
+      message: "This user already exits!!",
     });
     return;
   } else {
@@ -43,7 +43,7 @@ useRouter.post("/signup", signupInputval, async (req, res) => {
   }
 });
 
-useRouter.post("/signin", signinInputVal, async (req, res) => {
+userRouter.post("/signin", signinInputVal, async (req, res) => {
   const { uname, pwd } = req.body;
 
   // find the user
@@ -62,7 +62,7 @@ useRouter.post("/signin", signinInputVal, async (req, res) => {
       });
     } else {
       res.status(404).json({
-        message: "The enterred password is incorrect! Check and continue!!",
+        message : "Incorrect Password for User!! Check and retry",
       });
       return;
     }
@@ -74,4 +74,4 @@ useRouter.post("/signin", signinInputVal, async (req, res) => {
   }
 });
 
-module.exports = useRouter;
+module.exports = userRouter;
