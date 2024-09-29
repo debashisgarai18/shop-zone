@@ -3,10 +3,11 @@ const adminRouter = Router();
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config");
 const bcrypt = require("bcrypt");
-const { admin } = require("../Database");
+const { admin, items } = require("../Database");
 const signinInputVal = require("../middlewares/inputVal/admin/signinInput");
 const signupInputval = require("../middlewares/inputVal/admin/signupInput");
 
+// endpoint for admin signup
 adminRouter.post("/signup", signupInputval, async (req, res) => {
   const { uname, pwd } = req.body;
   const exists = await admin.findOne({
@@ -34,6 +35,7 @@ adminRouter.post("/signup", signupInputval, async (req, res) => {
   }
 });
 
+// endpoint for admin signin
 adminRouter.post("/signin", signinInputVal, async (req, res) => {
   const { uname, pwd } = req.body;
   const findAdmin = await admin.findOne({
@@ -60,6 +62,23 @@ adminRouter.post("/signin", signinInputVal, async (req, res) => {
       });
     }
   }
+});
+
+// this is endpoint is to add the fetched data to the items DB
+adminRouter.post("/addItems", async (req, res) => {
+  const op = await fetch("https://fakestoreapi.com/products");
+  const data = await op.json();
+  data.map((e) => {
+    const res = items.create({
+      id: e.id,
+      title: e.title,
+      price: e.price,
+      description: e.description,
+      category: e.category,
+      image: e.image,
+      rating: e.rating,
+    });
+  });
 });
 
 module.exports = adminRouter;

@@ -74,4 +74,8 @@ userRouter.post("/signin", signinInputVal, async (req, res) => {
   }
 });
 
+// endpoint to get the product
+userRouter.get("/items",  ,(req, res) => {
+
+})
 module.exports = userRouter;
