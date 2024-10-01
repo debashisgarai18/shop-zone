@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const { admin, items } = require("../Database");
 const signinInputVal = require("../middlewares/inputVal/admin/signinInput");
 const signupInputval = require("../middlewares/inputVal/admin/signupInput");
+const adminAuth = require("../middlewares/authMiddleware/adminAuth");
 
 // endpoint for admin signup
 adminRouter.post("/signup", signupInputval, async (req, res) => {
@@ -65,20 +66,45 @@ adminRouter.post("/signin", signinInputVal, async (req, res) => {
 });
 
 // this is endpoint is to add the fetched data to the items DB
-adminRouter.post("/addItems", async (req, res) => {
-  const op = await fetch("https://fakestoreapi.com/products");
-  const data = await op.json();
-  data.map((e) => {
-    const res = items.create({
-      id: e.id,
-      title: e.title,
-      price: e.price,
-      description: e.description,
-      category: e.category,
-      image: e.image,
-      rating: e.rating,
+// TODO : DO this later -> add the fields where the admin can add new items and then we can psuh them onto the items DB
+adminRouter.post("/addItems", adminAuth, async (req, res) => {
+  // const op = await fetch("https://fakestoreapi.com/products");
+  // const data = await op.json();
+  // data.map((e) => {
+  //   const res = items.create({
+  //     id: e.id,
+  //     title: e.title,
+  //     price: e.price,
+  //     description: e.description,
+  //     category: e.category,
+  //     image: e.image,
+  //     rating: e.rating,
+  //   });
+  // });
+});
+
+// this is the endpoint to get all the items
+adminRouter.get("/allItems", async (req, res) => {
+  const response = await items.find({});
+  if (response) {
+    res.status(200).json(
+      response.map((e) => {
+        return {
+          id: e.id,
+          title: e.title,
+          price: e.price,
+          desc: e.description,
+          category: e.category,
+          image: e.image,
+          rating: e.rating,
+        };
+      })
+    );
+  } else {
+    res.status(404).json({
+      message: "There is some issue in getting the Items!!",
     });
-  });
+  }
 });
 
 module.exports = adminRouter;

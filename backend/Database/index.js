@@ -32,6 +32,17 @@ const adminSchema = new mongoose.Schema({
   },
 });
 
+// schema for the items in the cart and its count
+const userItemsSchema = new mongoose.Schema({
+  itemID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Items",
+  },
+  count: {
+    type: Number,
+    default: 1,
+  }
+});
 
 // schema for the user data
 const userSchema = new mongoose.Schema({
@@ -49,17 +60,14 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   phoneNumber: {
-    type: Number,
+    type: String,
     required: true,
   },
   password: {
     type: String,
     required: true,
   },
-  items: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Items",
-  },
+  items: [userItemsSchema],
   orderDate: {
     type: Date,
     default: Date.now,

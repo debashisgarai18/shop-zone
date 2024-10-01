@@ -1,10 +1,14 @@
 const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = require("../../config");
 
-const adminAuth = (req, res, next) => {
+const userAuth = (req, res, next) => {
   const headToken = req.headers.authorization;
   const token = headToken.split(" ")[1];
-  if (decode) next();
-  else {
+  const decode = jwt.verify(token, JWT_SECRET);
+  if (decode) {
+    req.userId = decode.id;
+    next();
+  } else {
     res.status(404).json({
       message: "There is some issue in User Authentication",
     });
@@ -12,4 +16,4 @@ const adminAuth = (req, res, next) => {
   }
 };
 
-module.exports = adminAuth;
+module.exports = userAuth;
