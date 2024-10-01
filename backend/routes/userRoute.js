@@ -121,6 +121,46 @@ userRouter.get("/categories", async (req, res) => {
   }
 });
 
+// endpoint to show the items based on the category
+userRouter.get("/getItems/:category", async (req, res) => {
+  const cgory = req.params.category;
+  try {
+    const response = await items.find({});
+    const categorizedItems = response.filter((e) => e.category === cgory);
+    res.status(200).json({
+      categorizedItems: categorizedItems,
+    });
+  } catch (err) {
+    res.status(404).json({
+      message: `Some error occured : ${err}`,
+    });
+    return;
+  }
+});
+
+// endpoint to show the item detail when clicked on a specific Item
+userRouter.get("/itemDetails/:itemId", async (req, res) => {
+  const id = req.params.itemId;
+  try {
+    const itemById = await items.findById(id);
+    if (itemById) {
+      res.status(200).json({
+        item: itemById,
+      });
+    } else {
+      res.status(404).json({
+        message: `The item ${id} is not found`,
+      });
+      return;
+    }
+  } catch (err) {
+    res.status(404).json({
+      message: `Some error occured : ${err}`,
+    });
+    return;
+  }
+});
+
 // endpoint to add the item in the cart -> if saeme item added then increase the count
 userRouter.put("/addToCart/addItem/:itemId", userAuth, async (req, res) => {
   const itemId = req.params.itemId;
