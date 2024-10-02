@@ -169,4 +169,11 @@ adminRouter.get("/itemDetails/:itemId", async (req, res) => {
   }
 });
 
+// endpoint for, if the user is logged in and still trying to access the signin/signup endpoint
+adminRouter.get("/me", adminAuth, (req, res) => {
+  res.status(200).json({
+    message : "Logged in"
+  })
+})
+
 module.exports = adminRouter;

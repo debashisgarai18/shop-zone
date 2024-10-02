@@ -258,4 +258,11 @@ userRouter.get("/paymentPage", userAuth, async (req, res) => {
   }
 });
 
+// endpoint for, if the user is logged in and still trying to access the signin/signup endpoint
+userRouter.get("/me", userAuth, (req, res) => {
+  res.status(200).json({
+    message : "Logged in"
+  })
+})
+
 module.exports = userRouter;
