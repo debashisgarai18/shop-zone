@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home, Signin, Signup, Landing, ProductPage, Checkout } from "./Pages";
 import Navbar from "./Components/Navbar";
 import Menubar from "./Components/Menubar";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/product" element={<ProductPage />} />
         <Route path="/checkout" element={<Checkout />} />
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 }

@@ -223,7 +223,7 @@ const RenderCategories = ({ content, expand }) => {
         <div
           className="flex items-center justify-center gap-[7px] cursor-pointer"
           onMouseOver={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
+        //   onMouseLeave={() => setHover(false)}
         >
           <span className="capitalize font-medium">{content.cat}</span>
           <MdKeyboardArrowDown />
@@ -232,10 +232,11 @@ const RenderCategories = ({ content, expand }) => {
           <div
             className="h-fit w-[150%] bg-[#f5f5f5] rounded-lg shadow-lg absolute top-[1.75rem] left-[-25%]"
             onMouseOver={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
+            // onMouseLeave={() => setHover(false)}
           >
             <div
-              className={`w-full py-[0.75rem] px-[1rem] grid grid-cols-${content.sub.length} gap-[2rem]`}
+              className="w-full py-[0.75rem] px-[1rem] grid gap-[2rem]"
+              style={{gridTemplateColumns : `repeat(${content.sub.length}, minmax(0, 1fr))`}}
             >
               {content.sub.map((e, idx) => {
                 return (
