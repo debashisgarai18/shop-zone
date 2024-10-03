@@ -6,10 +6,10 @@ import Menubar from "./Components/Menubar";
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar/>
       <Menubar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home/>} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />

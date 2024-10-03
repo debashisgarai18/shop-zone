@@ -86,14 +86,16 @@ const categories = [
 
 const Menubar = () => {
   return (
-    <div className="sticky top-0 w-full h-fit flex flex-col items-center">
-      <div className="w-[97%] h-[4rem] flex item-center justify-between">
-        <Categories />
-        <ExpandedCategories />
-        <SupportCenter />
-      </div>
+    <>
+      <div className="hidden sticky top-0 w-full h-fit md:flex flex-col items-center bg-white">
+        <div className="w-[97%] h-[4rem] flex item-center justify-between">
+          <Categories />
+          <ExpandedCategories />
+          <SupportCenter />
+        </div>
       <div className="h-[1px] w-full bg-[#cbcbcc]"></div>
-    </div>
+      </div>
+    </>
   );
 };
 
@@ -102,18 +104,18 @@ const Categories = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
   return (
     <>
-    <div
-      className="w-[13%] flex flex-col relative items-center bg-[#35baf6] justify-center my-[1rem] hover:bg-green-400 rounded-md cursor-pointer"
-      onClick={() => setOpenDropDown((prev) => !prev)}
+      <div
+        className="w-[13%] flex flex-col relative items-center bg-[#35baf6] justify-center my-[1rem] hover:bg-green-400 rounded-md cursor-pointer"
+        onClick={() => setOpenDropDown((prev) => !prev)}
       >
-      <div className="w-[80%] flex items-center justify-center text-sm font-medium text-white gap-[5px]">
-        <GrAppsRounded />
-        <span>Browse All Categories</span>
-        <MdKeyboardArrowDown />
+        <div className="w-[80%] flex items-center justify-center text-sm font-medium text-white gap-[5px]">
+          <GrAppsRounded />
+          <span>Browse All Categories</span>
+          <MdKeyboardArrowDown />
+        </div>
       </div>
-    </div>
       {openDropDown && <BrowseDropDown />}
-        </>
+    </>
   );
 };
 
