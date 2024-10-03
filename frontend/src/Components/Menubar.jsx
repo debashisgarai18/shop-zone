@@ -101,49 +101,65 @@ const Menubar = () => {
 const Categories = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
   return (
+    <>
     <div
       className="w-[13%] flex flex-col relative items-center bg-[#35baf6] justify-center my-[1rem] hover:bg-green-400 rounded-md cursor-pointer"
       onClick={() => setOpenDropDown((prev) => !prev)}
-    >
+      >
       <div className="w-[80%] flex items-center justify-center text-sm font-medium text-white gap-[5px]">
         <GrAppsRounded />
         <span>Browse All Categories</span>
         <MdKeyboardArrowDown />
       </div>
-      {openDropDown && <BrowseDropDown />}
     </div>
+      {openDropDown && <BrowseDropDown />}
+        </>
   );
 };
 
 const BrowseDropDown = () => {
   const [hover, setHover] = useState(null);
   return (
-    <div className="h-fit w-[450px] shadow-lg  bg-[#f5f5f5] text-[#474747] py-[0.5rem] rounded-lg absolute top-[150%] left-0 flex flex-col justify-center px-[1rem]">
+    <div className="h-fit w-[450px] shadow-lg  bg-[#f5f5f5] text-[#474747] py-[0.5rem] rounded-lg absolute top-[100%] left-[28px] flex flex-col justify-center px-[1rem]">
       {categories.map((e, idx) => {
         if (!e.expand && e.cat !== "Home" && e.cat !== "Shop")
           return (
-            <div key={idx} className="py-[0.3rem] hover:text-[#35baf6] text-lg font-medium">
+            <div
+              key={idx}
+              className="py-[0.3rem] hover:text-[#35baf6] text-lg font-medium"
+            >
               {e.cat}
             </div>
           );
         else if (e.cat !== "Home" && e.cat !== "Shop")
           return (
-            <div key={idx} className="flex py-[0.3rem]">
-              <div
-                className="w-full flex justify-between items-center hover:text-[#35baf6] text-lg font-medium"
-                onMouseOver={() => setHover(idx)}
-                // onMouseLeave={() => setHover(null)}
-              >
+            <div
+              key={idx}
+              className="flex py-[0.3rem]"
+              onMouseOver={() => setHover(idx)}
+              onMouseLeave={() => setHover(null)}
+            >
+              <div className="w-full flex justify-between items-center hover:text-[#35baf6] text-lg font-medium cursor-pointer pr-[0.3rem]">
                 <span>{e.cat}</span>
                 <MdKeyboardArrowDown />
               </div>
               {hover === idx && (
-                  <div className="w-0 h-fit absolute right-[-2%] top-0">
-                    {e.sub.map((e, i) => {
-                      return <div key={i} className="py-[0.5rem] text-sm px-[0.5rem]">{e}</div>;
-                    })}
-                  </div>
-                )}
+                <div
+                  className="w-[200px] h-[242px] rounded-md absolute right-[-41%] bg-[#f5f5f5] top-0 shadow-lg cursor-pointer"
+                  onMouseLeave={() => setHover(null)}
+                >
+                  {e.sub.map((e, i) => {
+                    return (
+                      <div
+                        key={i}
+                        className="py-[0.5rem] text-sm px-[0.5rem] font-medium hover:text-[#b2b2b2]"
+                      >
+                        {e}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           );
       })}
