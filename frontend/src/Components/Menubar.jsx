@@ -1,9 +1,88 @@
-import Select from "./Select";
 import { GrAppsRounded } from "react-icons/gr";
 import PropTypes from "prop-types";
 import { MdOutlineHeadset } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useState } from "react";
+
+// this is global dummy array
+// TODO : To be eliminated when data comes from the API
+const categories = [
+  {
+    cat: "Home",
+    expand: false,
+  },
+  {
+    cat: "Fashion",
+    expand: true,
+    sub: ["Men", "Women", "Boys", "Girls"],
+  },
+  {
+    cat: "Electronics",
+    expand: true,
+    sub: [
+      "Mobiles",
+      "TV",
+      "Computers and Accessories",
+      "Smart Watches and Accessories",
+      "Cameras",
+    ],
+  },
+  {
+    cat: "Groceries",
+    expand: true,
+    sub: ["Cooking Essentials", "Homecare"],
+  },
+  {
+    cat: "Footwear",
+    expand: true,
+    sub: ["Men's Footwear", "Women's Footwear", "Children Footwear"],
+  },
+  {
+    cat: "Beauty",
+    expand: false,
+  },
+  {
+    cat: "Wellness",
+    expand: false,
+  },
+  {
+    cat: "Shop",
+    expand: true,
+    sub: [
+      {
+        main: "Fashion",
+        under: ["Men", "Women", "Boys", "Girls"],
+      },
+      {
+        main: "Electronics",
+        under: [
+          "Mobiles",
+          "TV",
+          "Computers and Accessories",
+          "Cameras",
+          "Smart Watches and Accessories",
+          "Cameras",
+        ],
+      },
+      {
+        main: "Groceries",
+        under: ["Cooking Essentials", "Homecare"],
+      },
+      {
+        main: "Footwear",
+        under: ["Men's Footwear", "Women's Footwear", "Children Footwear"],
+      },
+      {
+        main: "Beauty",
+        under: [],
+      },
+      {
+        main: "Wellness",
+        under: [],
+      },
+    ],
+  },
+];
 
 const Menubar = () => {
   return (
@@ -18,103 +97,63 @@ const Menubar = () => {
   );
 };
 
+// funtction for the brose all categories button
 const Categories = () => {
+  const [openDropDown, setOpenDropDown] = useState(false);
   return (
-    <div className="w-[13%] flex items-center bg-[#35baf6] justify-center my-[1rem] hover:bg-green-400 rounded-md">
-      <div className="w-[80%] relative flex items-center justify-center ">
-        <Select
-          icon=<GrAppsRounded className="absolute left-[5px] text-[1rem] text-white" />
-          bgColor="bg-transparent"
-          rounded
-          textColor="text-white"
-          textSize="text-sm"
-          hoverBg="bg-[#4a924d]"
-          fontWeight="medium"
-        />
+    <div
+      className="w-[13%] flex flex-col relative items-center bg-[#35baf6] justify-center my-[1rem] hover:bg-green-400 rounded-md cursor-pointer"
+      onClick={() => setOpenDropDown((prev) => !prev)}
+    >
+      <div className="w-[80%] flex items-center justify-center text-sm font-medium text-white gap-[5px]">
+        <GrAppsRounded />
+        <span>Browse All Categories</span>
+        <MdKeyboardArrowDown />
       </div>
+      {openDropDown && <BrowseDropDown />}
     </div>
   );
 };
 
-// TODO : implement the array elems as objects, the one which has drop to true will have the dropdown feature
+const BrowseDropDown = () => {
+  const [hover, setHover] = useState(null);
+  return (
+    <div className="h-fit w-[450px] shadow-lg  bg-[#f5f5f5] text-[#474747] py-[0.5rem] rounded-lg absolute top-[150%] left-0 flex flex-col justify-center px-[1rem]">
+      {categories.map((e, idx) => {
+        if (!e.expand && e.cat !== "Home" && e.cat !== "Shop")
+          return (
+            <div key={idx} className="py-[0.3rem] hover:text-[#35baf6] text-lg font-medium">
+              {e.cat}
+            </div>
+          );
+        else if (e.cat !== "Home" && e.cat !== "Shop")
+          return (
+            <div key={idx} className="flex py-[0.3rem]">
+              <div
+                className="w-full flex justify-between items-center hover:text-[#35baf6] text-lg font-medium"
+                onMouseOver={() => setHover(idx)}
+                // onMouseLeave={() => setHover(null)}
+              >
+                <span>{e.cat}</span>
+                <MdKeyboardArrowDown />
+              </div>
+              {hover === idx && (
+                  <div className="w-0 h-fit absolute right-[-2%] top-0">
+                    {e.sub.map((e, i) => {
+                      return <div key={i} className="py-[0.5rem] text-sm px-[0.5rem]">{e}</div>;
+                    })}
+                  </div>
+                )}
+            </div>
+          );
+      })}
+    </div>
+  );
+};
+
+// function to diaplay all the categories
+// TODO : Change the dummy data to the original fetched data
 const ExpandedCategories = () => {
-  const categories = [
-    {
-      cat: "Home",
-      expand: false,
-    },
-    {
-      cat: "Fashion",
-      expand: true,
-      sub: ["Men", "Women", "Boys", "Girls"],
-    },
-    {
-      cat: "Electronics",
-      expand: true,
-      sub: [
-        "Mobiles",
-        "TV",
-        "Computers and Accessories",
-        "Smart Watches and Accessories",
-        "Cameras",
-      ],
-    },
-    {
-      cat: "Groceries",
-      expand: true,
-      sub: ["Cooking Essentials", "Homecare"],
-    },
-    {
-      cat: "Footwear",
-      expand: true,
-      sub: ["Men's Footwear", "Women's Footwear", "Children Footwear"],
-    },
-    {
-      cat: "Beauty",
-      expand: false,
-    },
-    {
-      cat: "Wellness",
-      expand: false,
-    },
-    {
-      cat: "Shop",
-      expand: true,
-      sub: [
-        {
-          main: "Fashion",
-          under: ["Men", "Women", "Boys", "Girls"],
-        },
-        {
-          main: "Electronics",
-          under: [
-            "Mobiles",
-            "TV",
-            "Computers and Accessories",
-            "Cameras",
-            "Smart Watches and Accessories",
-            "Cameras",
-          ],
-        },
-        {
-          main: "Groceries",
-          under: ["Cooking Essentials", "Homecare"],
-        },
-        {
-          main: "Footwear",
-          under: ["Men's Footwear", "Women's Footwear", "Children Footwear"],
-        },
-        {
-          main: "Beauty",
-          under: [],
-        },
-        {
-          main: "Wellness",
-          under: [],
-        },
-      ],
-    },
-  ];
   return (
     <div className="w-[45%] my-[1rem] flex justify-around items-center relative">
       {categories.map((e, idx) => {
@@ -131,7 +170,7 @@ const RenderCategories = ({ content, expand }) => {
 
   if (!expand) {
     return <div className="capitalize font-medium">{content.cat}</div>;
-  } else if (expand & (content.cat !== "Shop")) {
+  } else if (expand && content.cat !== "Shop") {
     return (
       <div className="flex flex-col">
         <div
@@ -166,7 +205,7 @@ const RenderCategories = ({ content, expand }) => {
         <div
           className="flex items-center justify-center gap-[7px] cursor-pointer"
           onMouseOver={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
+          onMouseLeave={() => setHover(false)}
         >
           <span className="capitalize font-medium">{content.cat}</span>
           <MdKeyboardArrowDown />
@@ -183,9 +222,18 @@ const RenderCategories = ({ content, expand }) => {
               {content.sub.map((e, idx) => {
                 return (
                   <div key={idx} className="flex flex-col">
-                    <span className="font-medium text-[#35baf6] pb-[1rem] cursor-pointer">{e.main}</span>
+                    <span className="font-medium text-[#35baf6] pb-[1rem] cursor-pointer">
+                      {e.main}
+                    </span>
                     {e.under.map((elem, i) => {
-                      return <div key={i} className="text-[#474747] py-[0.35rem] cursor-pointer hover:bg-[#dedddd] px-[0.3rem]">{elem}</div>;
+                      return (
+                        <div
+                          key={i}
+                          className="text-[#474747] py-[0.35rem] cursor-pointer hover:bg-[#dedddd] px-[0.3rem] text-sm font-medium"
+                        >
+                          {elem}
+                        </div>
+                      );
                     })}
                   </div>
                 );
@@ -198,6 +246,7 @@ const RenderCategories = ({ content, expand }) => {
   }
 };
 
+// function to display the contact details for the customer support
 const SupportCenter = () => {
   return (
     <div className="w-[12%] h-full flex items-center gap-[1rem]">
