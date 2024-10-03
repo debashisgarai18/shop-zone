@@ -50,9 +50,7 @@ const RightTopNav = () => {
       <div className="w-[35%] flex items-center justify-center relative">
         <Select
           data={countries}
-          icon={
-            <FaLocationDot className="absolute left-[5px] text-[#35baf6]" />
-          }
+          icon=<FaLocationDot className="absolute left-[5px] text-[#35baf6]" />
           bgColor="bg-white"
           rounded={false}
           border
@@ -62,12 +60,12 @@ const RightTopNav = () => {
       <div className="w-[calc(100%-35%)] flex items-center justify-around">
         <NotifyIcons
           label="Wishlist"
-          logo={<FaRegHeart className="text-[1.2rem]" />}
+          logo=<FaRegHeart className="text-[1.2rem]" />
           count={0}
         />
         <NotifyIcons
           label="Cart"
-          logo={<FiShoppingCart className="text-[1.2rem]" />}
+          logo=<FiShoppingCart className="text-[1.2rem]" />
           count={0}
         />
         <Button label="Sign in" />
