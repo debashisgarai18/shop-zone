@@ -9,7 +9,7 @@ const Footer = () => {
 }
 
 const ContactPart = () => {
-    return <div className='w-full bg-red-300 h-[200px]'>
+    return <div className='w-full rounded-[2rem] bg-red-300 h-[200px]'>
 
     </div>
 }

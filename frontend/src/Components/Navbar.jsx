@@ -29,7 +29,7 @@ const TopHeader = () => {
     <div className="w-[97%] flex item-center py-[1rem]">
       <div className="w-[23%] flex items-center gap-[0.75rem]">
         <img src={UseImage} className="h-[2rem] md:h-[2.5rem]" />
-        <span className="text-[1.75rem] hidden md:inline">e-Commerce</span>
+        <span className="text-[1.75rem] hidden md:inline">Demo</span>
       </div>
       <div className="w-[45%] flex relative flex-row items-center">
         <input
