@@ -79,7 +79,7 @@ const RightTopNav = () => {
           logo=<FiShoppingCart className="text-[1.2rem]" />
           count={0}
         />
-        <Button label="Sign in" textSize="16px" />
+        <Button label="Sign in" textSize="16px" rounded="rounded-md" active />
       </div>
     </div>
   );
@@ -111,7 +111,7 @@ const HamburgerMenu = () => {
             <span className="text-[1rem] font-medium">Cart</span>
           </div>
           <div className="w-full h-[3rem] ">
-            <Button label="Sign in" textSize="1rem" />
+            <Button label="Sign in" textSize="1rem" rounded="rounded-md" active />
           </div>
         </div>
       )}
