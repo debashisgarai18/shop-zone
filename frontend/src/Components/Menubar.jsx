@@ -87,7 +87,7 @@ const categories = [
 const Menubar = () => {
   return (
     <>
-      <div className="hidden sticky top-0 w-full h-fit md:flex flex-col items-center bg-white">
+      <div className="hidden sticky z-[1000] top-0 w-full h-fit md:flex flex-col items-center bg-white">
         <div className="w-[97%] h-[4rem] flex item-center justify-between">
           <Categories />
           <ExpandedCategories />
