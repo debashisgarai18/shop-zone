@@ -7,35 +7,96 @@ import { FaHandshake } from "react-icons/fa6";
 import { RiMoneyRupeeCircleFill } from "react-icons/ri";
 import { TbHierarchy3 } from "react-icons/tb";
 import { PiPackageBold } from "react-icons/pi";
+import UseImage from "../assets/react.svg";
+import { MdOutlineHeadsetMic } from "react-icons/md";
+import { HiOutlineLocationMarker } from "react-icons/hi";
+import { LuMail } from "react-icons/lu";
+import { FaRegClock } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { IoLogoGithub } from "react-icons/io5";
+import { FaLinkedinIn } from "react-icons/fa6";
+import { FiInstagram } from "react-icons/fi";
 
 const dummyFeatures = [
   {
     name: "Best prices & offers",
     desc: "Orders $50 or more",
-    icon: <IoMdPricetags className="hover:-translate-y-2" />,
+    icon: <IoMdPricetags className="hover:-translate-y-2 transition-all ease-out duration-300" />,
   },
   {
     name: "Free delivery",
     desc: "Orders $50 or more",
-    icon: <FaHandshake className="hover:-translate-y-2" />,
+    icon: <FaHandshake className="hover:-translate-y-2 transition-all ease-out duration-300" />,
   },
   {
     name: "Great daily deal",
     desc: "Orders $50 or more",
-    icon: <RiMoneyRupeeCircleFill className="hover:-translate-y-2" />,
+    icon: <RiMoneyRupeeCircleFill className="hover:-translate-y-2 transition-all ease-out duration-300" />,
   },
   {
     name: "Wide assortment",
     desc: "Orders $50 or more",
-    icon: <TbHierarchy3 className="hover:-translate-y-2" />,
+    icon: <TbHierarchy3 className="hover:-translate-y-2 transition-all ease-out duration-300" />,
   },
   {
     name: "Easy returns",
     desc: "Orders $50 or more",
-    icon: <PiPackageBold className="hover:-translate-y-2" />,
+    icon: <PiPackageBold className="hover:-translate-y-2 transition-all ease-out duration-300" />,
   },
 ];
 
+const dummyFooter = [
+  {
+    title: "Company",
+    subParts: [
+      "About us",
+      "Delivery Information",
+      "Privacy Policy",
+      "Terms and Conditions",
+      "Contact Us",
+      "Support Center",
+      "Careers",
+    ],
+  },
+  {
+    title: "Category",
+    subParts: [
+      "About us",
+      "Delivery Information",
+      "Privacy Policy",
+      "Terms and Conditions",
+      "Contact Us",
+      "Support Center",
+      "Careers",
+    ],
+  },
+  {
+    title: "Corporate",
+    subParts: [
+      "About us",
+      "Delivery Information",
+      "Privacy Policy",
+      "Terms and Conditions",
+      "Contact Us",
+      "Support Center",
+      "Careers",
+    ],
+  },
+  {
+    title: "Popular",
+    subParts: [
+      "About us",
+      "Delivery Information",
+      "Privacy Policy",
+      "Terms and Conditions",
+      "Contact Us",
+      "Support Center",
+      "Careers",
+    ],
+  },
+];
+
+// TODO : Add the responsiveness for the footer part
 const Footer = () => {
   return (
     <div className="w-full mt-[1rem] flex flex-col items-center justify-center">
@@ -53,7 +114,9 @@ const Footer = () => {
             );
           })}
         </div>
-        <BottomPart/>
+        <BottomPart />
+        <div className="w-full h-[1px] bg-[#7E7E86] mb-[1rem] opacity-40"></div>
+        <Socials />
       </div>
     </div>
   );
@@ -110,15 +173,94 @@ const FeaturesPart = ({ title, desc, icon }) => {
 
 // 3rd part
 const BottomPart = () => {
-  return <div className="w-full bg-red-300 flex gap-[1.75rem] items-center">
-    <div className="w-[25%] bg-green-300">
-sdsds
+  return (
+    <div className="w-full flex gap-[1.75rem] mb-[1.rem]">
+      <div className="w-[25%] px-[1rem] py-[1rem] flex flex-col gap-[1.75rem]">
+        <div className="w-full flex items-">
+          <img src={UseImage} className="h-[2rem] md:h-[2.5rem]" />
+          <span className="text-[1.75rem] hidden md:inline">Demo</span>
+        </div>
+        <div className="w-full text-lg">Awesome multi store website</div>
+        <div className="w-full flex flex-col gap-[0.5rem]">
+          <div className="w-full flex items-center gap-[0.75rem]">
+            <HiOutlineLocationMarker className="text-[#35BAF6] font-medium" />
+            <div>
+              {" "}
+              <span className="font-medium text-[#7E7E7E]">Address:</span> 296,
+              Anjangarh, Shyamnagar, 24Pgs (North)
+            </div>
+          </div>
+          <div className="w-full flex items-center gap-[0.75rem]">
+            <MdOutlineHeadsetMic className="text-[#35BAF6] font-medium" />
+            <div>
+              <span className="font-medium text-[#7E7E7E]">Call Us:</span> (+91)
+              - 540-025-124553
+            </div>
+          </div>
+          <div className="w-full flex items-center gap-[0.75rem]">
+            <LuMail className="text-[#35BAF6] font-medium" />
+            <div>
+              <span className="font-medium text-[#7E7E7E]">Email:</span>{" "}
+              sale@Nest.com
+            </div>
+          </div>
+          <div className="w-full flex items-center gap-[0.75rem]">
+            <FaRegClock className="text-[#35BAF6] font-medium" />
+            <div>
+              <span className="font-medium text-[#7E7E7E]">Hours:</span> 10:00 -
+              18:00, Mon - Sat
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-[75%] grid grid-cols-4 px-[1rem] py-[1rem]">
+        {dummyFooter.map((e, index) => {
+          return (
+            <div key={index} className="flex flex-col gap-[1rem]">
+              <div className="font-medium">{e.title}</div>
+              <div className="flex flex-col gap-[0.75rem]">
+                {e.subParts.map((elem, idx) => {
+                  return (
+                    <div
+                      key={idx}
+                      className="hover:text-[#35BAF6] cursor-pointer hover:translate-x-1 transition-all ease-out duration-300"
+                    >
+                      {elem}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
-    <div className="w-[75%] bg-cyan-300">
-sdsds
+  );
+};
+
+// 4th part
+const Socials = () => {
+  return (
+    <div className="w-full flex items-center justify-between mb-[1rem]">
+      <div>© 2024, Ecommerce Website, All rights reserved</div>
+      <div className="flex items-center gap-[1rem] text-xl">
+        <div>Follow Us</div>
+        <div className="cursor-pointer rounded-[50%] px-[0.75rem] py-[0.75rem] bg-[#35BAF6] hover:bg-black transition-all ease-out duration-300">
+          <FaXTwitter className="text-white" />
+        </div>
+        <div className="cursor-pointer rounded-[50%] px-[0.75rem] py-[0.75rem] bg-[#35BAF6] hover:bg-black transition-all ease-out duration-300">
+          <IoLogoGithub className="text-white" />
+        </div>
+        <div className="cursor-pointer rounded-[50%] px-[0.75rem] py-[0.75rem] bg-[#35BAF6] hover:bg-black transition-all ease-out duration-300">
+          <FaLinkedinIn className="text-white" />
+        </div>
+        <div className="cursor-pointer rounded-[50%] px-[0.75rem] py-[0.75rem] bg-[#35BAF6] hover:bg-black transition-all ease-out duration-300">
+          <FiInstagram className="text-white" />
+        </div>
+      </div>
     </div>
-  </div>
-}
+  );
+};
 
 FeaturesPart.propTypes = {
   title: PropTypes.string,
