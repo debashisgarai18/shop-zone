@@ -7,15 +7,20 @@ import SliderImg3 from "../assets/sliderImg/slider3.webp";
 import SliderImg4 from "../assets/sliderImg/slider4.webp";
 import SliderImg5 from "../assets/sliderImg/slider5.webp";
 import "../css/Home.css";
+import { categories } from "../Components/categories";
 
 const Home = () => {
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex justify-center flex-col items-center gap-[1rem]">
       <SliderPart />
+      <FeaturedCategories />
+      <PopularProducts />
     </div>
   );
 };
 
+// TODO : Responsiveness Part
+// Slider Part --> made with react-slick npm package
 const SliderPart = () => {
   let settings = {
     dots: true,
@@ -70,4 +75,55 @@ const SliderPart = () => {
     </div>
   );
 };
+
+// featured categories part
+// TODO : Responsiveness Part
+const FeaturedCategories = () => {
+  return (
+    <div className="w-[97%] flex flex-col gap-[2rem] item-center px-[1rem] mb-[1rem]">
+      <div className="text-2xl font-medium">Featured Categories</div>
+      <div className="flex items-center justify-around w-full">
+        {categories.map((e, idx) => {
+          if (e.logo)
+            return (
+              <div
+                key={idx}
+                className="flex flex-col gap-[0.75rem] items-center"
+              >
+                <div
+                  className="flex items-center justify-center rounded-[50%] px-[1.75rem] py-[1.75rem] hover:shadow-lg hover:-translate-y-2 cursor-pointer transition-all duration-200 ease-in-out"
+                  style={{ backgroundColor: e.bgColor }}
+                >
+                  <img className="w-[70px] h-[70px]" src={e.logo} alt={e.cat} />
+                </div>
+                <div className="text-lg font-medium text-[#333333]">{e.cat}</div>
+              </div>
+            );
+        })}
+      </div>
+    </div>
+  );
+};
+
+// Popular Product Part
+// TODO : Responsiveness Part -> later
+// TODO : redesign the upperpart sec div => learn from video
+const PopularProducts = () => {
+  return <div className="w-[97%] h-[400px] px-[1rem]">
+    {/* Upper part */}
+    <div className="w-full flex items-center justify-between">
+      <div className="text-2xl font-medium">Popular Products</div>
+      <div className="flex items-center text-[0.875rem] gap-[1rem] tracking-[0.02857em]" style={{fontFamily : "Roboto, Helvetica, Arial, sans-serif"}}>
+        {
+          categories.map((e, idx) => {
+            if(e.logo)
+              return <button key={idx} className="uppercase px-[1rem] py-[0.5rem] text-[#333333] cursor-pointer focus:text-[#1976D2] focus:border-b-[2px] focus:border-b-[#1976D2] transition-all duration-200 ease-in-out font-medium" >{e.cat}</button>
+          })
+        }
+      </div>
+    </div>
+  </div>
+}
+
+
 export default Home;
