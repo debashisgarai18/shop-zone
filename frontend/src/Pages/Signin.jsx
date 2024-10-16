@@ -1,7 +1,6 @@
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 
-
 const Signin = () => {
   const nav = useNavigate();
   const handleFormSubmit = (e) => {
@@ -39,12 +38,18 @@ const Signin = () => {
             Sign In
           </button>
           <div className="w-full text-center">OR</div>
-          <button className="bg-white border-[1px] border-[#35baf6] w-full h-full py-[1rem]  text-black uppercase cursor-pointer  rounded-xl flex font-medium items-center justify-center gap-[1rem]">
+          <button className="bg-white border-[1px] border-[#35baf6] w-full h-full py-[1rem]  text-black uppercase cursor-pointer  rounded-xl flex font-medium items-center justify-center gap-[1rem] hover:bg-[#F6FAFD]">
             <FcGoogle className="text-2xl" />
             <div className="text-sm">sign in with google</div>
           </button>
           <div className="w-full text-center">
-            Not have an account? <span className="text-[#4284bd] font-medium cursor-pointer" onClick={() => nav("/signup")}>Sign Up</span>
+            Not have an account?{" "}
+            <span
+              className="text-[#4284bd] font-medium cursor-pointer"
+              onClick={() => nav("/signup")}
+            >
+              Sign Up
+            </span>
           </div>
         </form>
       </div>
