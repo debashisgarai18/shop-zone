@@ -10,6 +10,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 // TODO : Implement the hamburger for mobile devices
 const Navbar = () => {
@@ -25,9 +26,10 @@ const Navbar = () => {
 
 // this is the first header for the navbar
 const TopHeader = () => {
+  const nav = useNavigate()
   return (
     <div className="w-[97%] flex item-center py-[1rem]">
-      <div className="w-[23%] flex items-center gap-[0.75rem]">
+      <div className="w-[23%] flex items-center gap-[0.75rem] cursor-pointer" onClick={() => nav("/")}>
         <img src={UseImage} className="h-[2rem] md:h-[2.5rem]" />
         <span className="text-[1.75rem] hidden md:inline">Demo</span>
       </div>
@@ -56,6 +58,11 @@ const RightTopNav = () => {
     ...countries,
     ...useFetchdata("https://countriesnow.space/api/v0.1/countries"),
   ];
+
+  const nav = useNavigate();
+  const handleClick = () => {
+    nav("/signin")
+  }
   return (
     <div className="w-[33%] hidden md:flex gap-[1rem]">
       <div className="w-[35%] flex items-center justify-center relative">
@@ -79,7 +86,7 @@ const RightTopNav = () => {
           logo=<FiShoppingCart className="text-[1.2rem]" />
           count={0}
         />
-        <Button label="Sign in" textSize="16px" rounded="rounded-md" active />
+        <Button label="Sign in" textSize="16px" rounded="rounded-md" active click = {handleClick} />
       </div>
     </div>
   );
