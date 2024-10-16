@@ -68,3 +68,7 @@
         font-size: 0.5rem;
     }
 }
+
+.slick-slide{
+    padding-right: 20px !important;
+}

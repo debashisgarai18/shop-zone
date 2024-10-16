@@ -409,3 +409,102 @@ export const dummy_product = [
         ]
     }
 ]
+
+export const dummy_featured_products = [
+    {
+        name : "men t-shirt",
+        star : 4,
+        by : "some_name",
+        disPrice : "Rs 400",
+        orgPrice : "Rs 500",
+        img : "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1729063519/1729063513478_1000014029787-Green-GREEN-1000014029787_01-2100.jpg"
+    },
+    {
+        name : "iPhone 15",
+        star : 5,
+        by : "Applee",
+        disPrice : "Rs 54000",
+        orgPrice : "Rs 79000",
+        img : "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1729062467/1729062465538_apple-iphone-13-128-gb-pink-digital-o491997703-p590798557-0-202208221207.webp"
+    },
+    {
+        name : "iPhone 15",
+        star : 5,
+        by : "Applee",
+        disPrice : "Rs 54000",
+        orgPrice : "Rs 79000",
+        img : "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1729062467/1729062465538_apple-iphone-13-128-gb-pink-digital-o491997703-p590798557-0-202208221207.webp"
+    },
+    {
+        name : "men t-shirt",
+        star : 4,
+        by : "some_name",
+        disPrice : "Rs 400",
+        orgPrice : "Rs 500",
+        img : "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1729063519/1729063513478_1000014029787-Green-GREEN-1000014029787_01-2100.jpg"
+    },
+    {
+        name : "men t-shirt",
+        star : 4,
+        by : "some_name",
+        disPrice : "Rs 400",
+        orgPrice : "Rs 500",
+        img : "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1729063519/1729063513478_1000014029787-Green-GREEN-1000014029787_01-2100.jpg"
+    },
+    {
+        name : "iPhone 15",
+        star : 5,
+        by : "Applee",
+        disPrice : "Rs 54000",
+        orgPrice : "Rs 79000",
+        img : "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1729062467/1729062465538_apple-iphone-13-128-gb-pink-digital-o491997703-p590798557-0-202208221207.webp"
+    },
+    {
+        name : "Nike air janardan 69",
+        star : 5,
+        by : "Nike",
+        disPrice : "Rs 6969",
+        orgPrice : "Rs 8999",
+        img : "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1729061510/1729061501881_fabbmate-casual-sports-shoes-white-sneakers-for-women-girls-white-shoes-product-images-rvouh9agls-0-202406162001.jpg"
+    },
+    {
+        name : "Nike air janardan 69",
+        star : 5,
+        by : "Nike",
+        disPrice : "Rs 6969",
+        orgPrice : "Rs 8999",
+        img : "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1729061510/1729061501881_fabbmate-casual-sports-shoes-white-sneakers-for-women-girls-white-shoes-product-images-rvouh9agls-0-202406162001.jpg"
+    },
+    {
+        name : "iPhone 15",
+        star : 5,
+        by : "Applee",
+        disPrice : "Rs 54000",
+        orgPrice : "Rs 79000",
+        img : "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1729062467/1729062465538_apple-iphone-13-128-gb-pink-digital-o491997703-p590798557-0-202208221207.webp"
+    },
+    {
+        name : "men t-shirt",
+        star : 4,
+        by : "some_name",
+        disPrice : "Rs 400",
+        orgPrice : "Rs 500",
+        img : "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1729063519/1729063513478_1000014029787-Green-GREEN-1000014029787_01-2100.jpg"
+    },
+    {
+        name : "Nike air janardan 69",
+        star : 5,
+        by : "Nike",
+        disPrice : "Rs 6969",
+        orgPrice : "Rs 8999",
+        img : "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1729061510/1729061501881_fabbmate-casual-sports-shoes-white-sneakers-for-women-girls-white-shoes-product-images-rvouh9agls-0-202406162001.jpg"
+    },
+    {
+        name : "Nike air janardan 69",
+        star : 5,
+        by : "Nike",
+        disPrice : "Rs 6969",
+        orgPrice : "Rs 8999",
+        img : "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1729061510/1729061501881_fabbmate-casual-sports-shoes-white-sneakers-for-women-girls-white-shoes-product-images-rvouh9agls-0-202406162001.jpg"
+    }
+]
