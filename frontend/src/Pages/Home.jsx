@@ -8,13 +8,15 @@ import SliderImg4 from "../assets/sliderImg/slider4.webp";
 import SliderImg5 from "../assets/sliderImg/slider5.webp";
 import "../css/Home.css";
 import { categories } from "../Components/categories";
+import PopularProducts from "../Components/PopularProducts";
+import { useState } from "react";
 
 const Home = () => {
   return (
     <div className="w-full flex justify-center flex-col items-center gap-[1rem]">
       <SliderPart />
       <FeaturedCategories />
-      <PopularProducts />
+      <PopularProductsMenu />
     </div>
   );
 };
@@ -91,12 +93,14 @@ const FeaturedCategories = () => {
                 className="flex flex-col gap-[0.75rem] items-center"
               >
                 <div
-                  className="flex items-center justify-center rounded-[50%] px-[1.75rem] py-[1.75rem] hover:shadow-lg hover:-translate-y-2 cursor-pointer transition-all duration-200 ease-in-out"
+                  className="flex items-center justify-center rounded-[50%] px-[1.75rem] py-[1.75rem] hover:shadow-xl hover:-translate-y-2 cursor-pointer transition-all duration-200 ease-in-out"
                   style={{ backgroundColor: e.bgColor }}
                 >
                   <img className="w-[70px] h-[70px]" src={e.logo} alt={e.cat} />
                 </div>
-                <div className="text-lg font-medium text-[#333333]">{e.cat}</div>
+                <div className="text-lg font-medium text-[#333333]">
+                  {e.cat}
+                </div>
               </div>
             );
         })}
@@ -108,22 +112,37 @@ const FeaturedCategories = () => {
 // Popular Product Part
 // TODO : Responsiveness Part -> later
 // TODO : redesign the upperpart sec div => learn from video
-const PopularProducts = () => {
-  return <div className="w-[97%] h-[400px] px-[1rem]">
-    {/* Upper part */}
-    <div className="w-full flex items-center justify-between">
-      <div className="text-2xl font-medium">Popular Products</div>
-      <div className="flex items-center text-[0.875rem] gap-[1rem] tracking-[0.02857em]" style={{fontFamily : "Roboto, Helvetica, Arial, sans-serif"}}>
-        {
-          categories.map((e, idx) => {
-            if(e.logo)
-              return <button key={idx} className="uppercase px-[1rem] py-[0.5rem] text-[#333333] cursor-pointer focus:text-[#1976D2] focus:border-b-[2px] focus:border-b-[#1976D2] transition-all duration-200 ease-in-out font-medium" >{e.cat}</button>
-          })
-        }
-      </div>
-    </div>
-  </div>
-}
+const PopularProductsMenu = () => {
+  // states
+  const [selectedCategory, setSelectedCategory] = useState("Fashion");
 
+  return (
+    <div className="w-[97%] px-[1rem] flex flex-col gap-[1.5rem]">
+      {/* Upper part */}
+      <div className="w-full flex items-center justify-between">
+        <div className="text-2xl font-medium">Popular Products</div>
+        <div
+          className="flex items-center text-[0.875rem] gap-[1rem] tracking-[0.02857em]"
+          style={{ fontFamily: "Roboto, Helvetica, Arial, sans-serif" }}
+        >
+          {categories.map((elem, idx) => {
+            if (elem.logo)
+              return (
+                <button
+                  key={idx}
+                  className="uppercase px-[1rem] py-[0.5rem] text-[#333333] cursor-pointer focus:text-[#1976D2] border-b-[2px] border-b-white focus:border-b-[#1976D2] transition-all duration-200 ease-in-out font-medium"
+                  onClick={() => setSelectedCategory(elem.cat)}
+                >
+                  {elem.cat}
+                </button>
+              );
+          })}
+        </div>
+      </div>
+      {/* Lower Part */}
+      <PopularProducts category={selectedCategory} />
+    </div>
+  );
+};
 
 export default Home;
