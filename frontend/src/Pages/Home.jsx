@@ -7,10 +7,9 @@ import SliderImg3 from "../assets/sliderImg/slider3.webp";
 import SliderImg4 from "../assets/sliderImg/slider4.webp";
 import SliderImg5 from "../assets/sliderImg/slider5.webp";
 import "../css/Home.css";
-import { categories } from "../Components/categories";
+import { categories, dummy_featured_products } from "../Components/categories";
 import { PopularProducts, ProductCard } from "../Components/PopularProducts";
 import { useState } from "react";
-import { dummy_featured_products } from "../Components/dummyProductsObject";
 import SliderComponent from "../Components/SliderComponent";
 
 const Home = () => {
@@ -155,7 +154,7 @@ const ProductSliderPart = () => {
   return (
     <div className="w-[97%]">
       <div className="w-full relative px-[1rem]">
-        {/* // TODO : popularize this thing on the basic of the categories available -> like 1/2 tile for each category to naviaget to the category? */}
+        {/* // TODO : popularize this thing on the basic of the categories available -> like 1/2 tile for each category to navigate to the category? */}
         <Slider {...settings} className="w-full rounded-[20px] overflow-hidden">
           <div className="h-[200px] md:h-[200px] w-[25%]">
             <img

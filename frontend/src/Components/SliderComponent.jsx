@@ -21,21 +21,21 @@ const SliderComponent = ({ data, dotsRequired }) => {
     setSliderState(parseInt(idx));
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (sliderState >= data.length - 1) setSliderState(0);
-      else setSliderState((prev) => prev + 1);
-    }, 5000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     if (sliderState >= data.length - 1) setSliderState(0);
+  //     else setSliderState((prev) => prev + 1);
+  //   }, 5000);
 
-    return () => clearInterval(interval);
-  }, [sliderState, data.length]);
+  //   return () => clearInterval(interval);
+  // }, [sliderState, data.length]);
 
   return (
     <div
       className={`w-full h-[200px] md:h-[400px] rounded-2xl relative flex justify-center z-0 overflow-hidden`}
     >
       <div
-        className={`w-full h-full rounded-2xl absolute top-0 left-0 z-1 transition-transform duration-500 ease-out `}
+        className={`w-full h-full rounded-2xl absolute top-0 left-0 z-1 transition-all duration-500 ease-out `}
       >
         <div className={`w-full h-full bg-cover bg-center`}>
           {data[sliderState]}

@@ -1,14 +1,14 @@
 import PropTypes from "prop-types";
-import { dummy_product } from "./dummyProductsObject";
 import { useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import Rating from "@mui/material/Rating";
+import { categories } from "./categories";
 
 export const PopularProducts = ({ category }) => {
   return (
     <div className="w-full grid grid-cols-5 px-[1rem] gap-[1.75rem] py-[1rem]">
-      {dummy_product
+      {categories
         .filter((elem) => elem.cat === category)
         .map((elem) =>
           elem.items.map((e, idx) => (
@@ -50,10 +50,9 @@ export const ProductCard = ({ productInfo, category }) => {
       {/* details part */}
       <div className="w-full px-[1.5rem] pb-[1.75rem] flex flex-col gap-[1rem]">
         <div className="text-sm font-medium">{category}</div>
-        <div className="w-full flex flex-col">
+        <div className="w-full flex flex-col gap-[0.5rem]">
           <div className="text-lg font-bold">{productInfo.name}</div>
           <Rating value={productInfo.star} readOnly precision={0.5} />
-          <div>stars {productInfo.star}</div>
           <div>
             By <span className=" text-[#55BAF6]">{productInfo.by}</span>
           </div>
