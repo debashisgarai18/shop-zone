@@ -11,6 +11,7 @@ import { categories } from "../Components/categories";
 import { PopularProducts, ProductCard } from "../Components/PopularProducts";
 import { useState } from "react";
 import { dummy_featured_products } from "../Components/dummyProductsObject";
+import SliderComponent from "../Components/SliderComponent";
 
 const Home = () => {
   return (
@@ -27,60 +28,47 @@ const Home = () => {
 // TODO : Responsiveness Part
 // Slider Part --> made with react-slick npm package
 const SliderPart = () => {
-  let settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    fade: false,
-    arrows: true,
-  };
+  const sliderImages = [
+    <img
+      loading="lazy"
+      src={SliderImg1}
+      alt="Image 1"
+      className="w-full h-full object-cover"
+      key={1}
+    />,
+    <img
+      loading="lazy"
+      src={SliderImg2}
+      alt="Image 2"
+      className="w-full h-full object-cover"
+      key={2}
+    />,
+    <img
+      loading="lazy"
+      src={SliderImg3}
+      alt="Image 3"
+      className="w-full h-full object-cover"
+      key={3}
+    />,
+    <img
+      loading="lazy"
+      src={SliderImg4}
+      alt="Image 4"
+      className="w-full h-full object-cover"
+      key={4}
+    />,
+    <img
+      loading="lazy"
+      src={SliderImg5}
+      alt="Image 5"
+      className="w-full h-full object-cover"
+      key={5}
+    />,
+  ];
   return (
     <div className="w-[97%]">
       <div className="w-full relative px-[1rem] py-[1rem]">
-        <Slider {...settings} className="w-full rounded-[20px] overflow-hidden">
-          <div className="h-[200px] md:h-[400px] w-full">
-            <img
-              loading="lazy"
-              src={SliderImg1}
-              alt="Image 1"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="h-[200px] md:h-[400px] w-full">
-            <img
-              loading="lazy"
-              src={SliderImg2}
-              alt="Image 2"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="h-[200px] md:h-[400px] w-full">
-            <img
-              loading="lazy"
-              src={SliderImg3}
-              alt="Image 3"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="h-[200px] md:h-[400px] w-full ">
-            <img
-              loading="lazy"
-              src={SliderImg4}
-              alt="Image 4"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="h-[200px] md:h-[400px] w-full">
-            <img
-              loading="lazy"
-              src={SliderImg5}
-              alt="Image 6"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </Slider>
+        <SliderComponent data={sliderImages} dotsRequired />
       </div>
     </div>
   );
