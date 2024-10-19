@@ -3,6 +3,7 @@ import { dummy_product } from "./dummyProductsObject";
 import { useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
+import Rating from "@mui/material/Rating";
 
 export const PopularProducts = ({ category }) => {
   return (
@@ -21,6 +22,7 @@ export const PopularProducts = ({ category }) => {
 // this is the product card to be displayed for the home page
 export const ProductCard = ({ productInfo, category }) => {
   const [hover, setHover] = useState(false);
+
   return (
     <div
       className={`flex flex-col w-full rounded-3xl cursor-pointer gap-[1rem] ${
@@ -32,7 +34,7 @@ export const ProductCard = ({ productInfo, category }) => {
       {/* image part */}
       <div className="h-[300px] w-full relative transition-all duration-300 ease-in">
         <img
-        loading="lazy"
+          loading="lazy"
           src={productInfo.img}
           // TODO : On hovering the whole card the image should scale to 105
           className="h-full w-full object-cover rounded-t-3xl transition-all duration-300 ease-in "
@@ -50,7 +52,7 @@ export const ProductCard = ({ productInfo, category }) => {
         <div className="text-sm font-medium">{category}</div>
         <div className="w-full flex flex-col">
           <div className="text-lg font-bold">{productInfo.name}</div>
-          {/* // TODO : render 5 stars and fill them according to the rating value */}
+          <Rating value={productInfo.star} readOnly precision={0.5} />
           <div>stars {productInfo.star}</div>
           <div>
             By <span className=" text-[#55BAF6]">{productInfo.by}</span>
@@ -88,4 +90,3 @@ ProductCard.propTypes = {
 PopularProducts.propTypes = {
   category: PropTypes.string,
 };
-
