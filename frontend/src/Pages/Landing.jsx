@@ -3,15 +3,20 @@ import { categories } from "../Components/categories";
 import { Slider } from "@mui/material";
 import { useState } from "react";
 import Rating from "@mui/material/Rating";
+import { ProductCard } from "../Components/PopularProducts";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
+// TODO : Navigation to this page on the basis of the category
 const Landing = () => {
+  const [searchParams] = useSearchParams();
+
   return (
-    <section className="w-full h-fit flex justify-center py-[1rem]">
-      <div className="w-[97%] h-fit">
-        <LandingPageTitle category="Electronics" />
+    <section className="w-full h-fit flex justify-center py-[1rem] ">
+      <div className="w-[97%] h-fit ">
+        <LandingPageTitle category={searchParams.get("category")} />
         <div className="w-full mt-[1rem] flex justify-center gap-[1rem]">
           <FilterCategoryPart />
-          <ItemsPart />
+          <ItemsPart category={searchParams.get("category")} />
         </div>
       </div>
     </section>
@@ -46,15 +51,22 @@ LandingPageTitle.propTypes = {
   category: PropTypes.string,
 };
 
+// TODO : Do the responsiveness part
 const FilterCategoryPart = () => {
   const [value, setValue] = useState([100, 1000]);
   const [minVal, setMinVal] = useState(100);
   const [maxVal, setMaxVal] = useState(1000);
 
+  const nav = useNavigate();
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
     setMinVal(newValue[0]);
     setMaxVal(newValue[1]);
+  };
+
+  const handleClick = (cat) => {
+    nav(`/landing?category=${cat}`);
   };
 
   return (
@@ -73,6 +85,7 @@ const FilterCategoryPart = () => {
               <div
                 key={idx}
                 className="flex border-[1px] px-[1rem] border-[#F0F0F0] items-center gap-[1rem] py-[0.5rem] cursor-pointer hover:border-[#9e9d9d]"
+                onClick={() => handleClick(e.cat)}
               >
                 <div className="w-[1.5rem]">
                   <img src={e.logo} />
@@ -142,12 +155,55 @@ const FilterCategoryPart = () => {
           />
         </div>
       </div>
+      {/* // Below Offers */}
+      <div className="w-full h-[600px] rounded-2xl flex flex-col gap-[0.75rem]">
+        <img
+          src="https://media-ik.croma.com/prod/https://media.croma.com/image/upload/v1729337724/Croma%20Assets/CMS/LP%20Page%20Banners/2024/Whats%20Hot/OCT/20102024/Desktop/HP_New-at-Croma_Tablets_20Oct2024_f7ofcy.jpg?tr=w-1024"
+          alt="some Image"
+          className="w-full h-full object-center cursor-pointer rounded-2xl"
+        />
+        <img src="" alt="" />
+      </div>
     </div>
   );
 };
 
-const ItemsPart = () => {
-  return <div className="w-[75%] h-[400px] bg-green-400"></div>;
+// TODO : Do the responsiveness part
+const ItemsPart = ({ category }) => {
+  return (
+    <div className="w-[75%] px-[1rem] py-[1rem]">
+      {categories.filter((e) => e.cat === category)[0].hasProducts ? (
+        <div className="text-[#7E7E7E] text-lg">
+          We&apos;ve found{" "}
+          <span className="text-[#35BAF6] font-medium">
+            {categories.filter((e) => e.cat === category)[0].items?.length}
+          </span>{" "}
+          items for you!
+        </div>
+      ) : (
+        <div className="text-[#7E7E7E] text-lg">
+          We&apos;ve found <span className="text-[#35BAF6] font-medium">0</span>{" "}
+          items for you!
+        </div>
+      )}
+      {categories.filter((e) => e.cat === category)[0].hasProducts ? (
+        <div className="w-full grid grid-cols-4 gap-[1.75rem] py-[1rem]">
+          {categories
+            .filter((e) => e.cat === category)[0]
+            .items?.map((e, idx) => (
+              <ProductCard key={idx} productInfo={e} />
+            ))}
+        </div>
+      ) : (
+        <div className="w-full text-center font-medium text-2xl py-[2rem]">
+          Sorry! no products to show
+        </div>
+      )}
+    </div>
+  );
+};
+ItemsPart.propTypes = {
+  category: PropTypes.string,
 };
 
 export default Landing;

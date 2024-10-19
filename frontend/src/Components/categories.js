@@ -392,14 +392,16 @@ export const categories = [
     expand: false,
     logo: "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1728899932/1728899929510_beauty.png",
     bgColor: "#FFE8F8",
-    hasProducts : true
+    hasProducts : true,
+    items : []
   },
   {
     cat: "Wellness",
     expand: false,
     logo: "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1728899902/1728899898804_well.png",
     bgColor: "#C9FFD0",
-    hasProducts : true
+    hasProducts : true,
+    items : []
   },
   {
     cat: "Shop",

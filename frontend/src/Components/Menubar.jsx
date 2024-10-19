@@ -4,6 +4,7 @@ import { MdOutlineHeadset } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useState } from "react";
 import { categories } from "./categories";
+import { useNavigate } from "react-router-dom";
 
 const Menubar = () => {
   return (
@@ -14,7 +15,7 @@ const Menubar = () => {
           <ExpandedCategories />
           <SupportCenter />
         </div>
-      <div className="h-[1px] w-full bg-[#cbcbcc]"></div>
+        <div className="h-[1px] w-full bg-[#cbcbcc]"></div>
       </div>
     </>
   );
@@ -42,6 +43,11 @@ const Categories = () => {
 
 const BrowseDropDown = () => {
   const [hover, setHover] = useState(null);
+  const nav = useNavigate();
+
+  const handleClick = (cat) => {
+    nav(`/landing?category=${cat}`);
+  };
   return (
     <div className="h-fit w-[450px] shadow-lg  bg-[#f5f5f5] text-[#474747] py-[0.5rem] rounded-lg absolute top-[100%] left-[28px] flex flex-col justify-center px-[1rem]">
       {categories.map((e, idx) => {
@@ -62,7 +68,10 @@ const BrowseDropDown = () => {
               onMouseOver={() => setHover(idx)}
               onMouseLeave={() => setHover(null)}
             >
-              <div className="w-full flex justify-between items-center hover:text-[#35baf6] text-lg font-medium cursor-pointer pr-[0.3rem]">
+              <div
+                className="w-full flex justify-between items-center hover:text-[#35baf6] text-lg font-medium cursor-pointer pr-[0.3rem]"
+                onClick={() => handleClick(e.cat)}
+              >
                 <span>{e.cat}</span>
                 <MdKeyboardArrowDown />
               </div>
@@ -106,9 +115,22 @@ const ExpandedCategories = () => {
 const RenderCategories = ({ content, expand }) => {
   // to handle hover functionality on the arrow button of the categories
   const [hover, setHover] = useState(false);
+  const nav = useNavigate();
+
+  const handleclick = (cat) => {
+    if (cat === "Home") nav("/");
+    else if (cat !== "Shop") nav(`/landing?category=${cat}`);
+  };
 
   if (!expand) {
-    return <div className="capitalize font-medium">{content.cat}</div>;
+    return (
+      <div
+        className="capitalize font-medium cursor-pointer"
+        onClick={() => handleclick(content.cat)}
+      >
+        {content.cat}
+      </div>
+    );
   } else if (expand && content.cat !== "Shop") {
     return (
       <div className="flex flex-col">
@@ -116,6 +138,7 @@ const RenderCategories = ({ content, expand }) => {
           className="flex items-center justify-center gap-[7px] cursor-pointer"
           onMouseOver={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
+          onClick={() => handleclick(content.cat)}
         >
           <span className="capitalize font-medium">{content.cat}</span>
           <MdKeyboardArrowDown />
@@ -157,12 +180,17 @@ const RenderCategories = ({ content, expand }) => {
           >
             <div
               className="w-full py-[0.75rem] px-[1rem] grid gap-[2rem]"
-              style={{gridTemplateColumns : `repeat(${content.sub.length}, minmax(0, 1fr))`}}
+              style={{
+                gridTemplateColumns: `repeat(${content.sub.length}, minmax(0, 1fr))`,
+              }}
             >
               {content.sub.map((e, idx) => {
                 return (
                   <div key={idx} className="flex flex-col">
-                    <span className="font-medium text-[#35baf6] pb-[1rem] cursor-pointer">
+                    <span
+                      className="font-medium text-[#35baf6] pb-[1rem] cursor-pointer"
+                      onClick={() => handleclick(e.main)}
+                    >
                       {e.main}
                     </span>
                     {e.under.map((elem, i) => {
