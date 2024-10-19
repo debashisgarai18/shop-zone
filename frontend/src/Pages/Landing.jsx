@@ -191,6 +191,7 @@ const ItemsPart = ({ category }) => {
           {categories
             .filter((e) => e.cat === category)[0]
             .items?.map((e, idx) => (
+              // TODO : need to send the category and the product index (as of now) to the product display page -> onClick
               <ProductCard key={idx} productInfo={e} />
             ))}
         </div>
