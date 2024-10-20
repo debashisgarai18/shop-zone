@@ -234,7 +234,7 @@ const FeaturedProducts = () => {
             {/* // TODO : check if the data can be fed from the API call or not? */}
             {dummy_featured_products.map((e, idx) => (
               <div key={idx} className="w-[25%] h-full">
-                <ProductCard productInfo={e} />
+                <ProductCard productInfo={e} productId={idx} />
               </div>
             ))}
           </Slider>

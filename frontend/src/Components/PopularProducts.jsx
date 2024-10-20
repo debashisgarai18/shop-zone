@@ -13,7 +13,7 @@ export const PopularProducts = ({ category }) => {
         .filter((elem) => elem.cat === category)
         .map((elem) =>
           elem.items.map((e, idx) => (
-            <ProductCard key={idx} category={category} productInfo={e} />
+            <ProductCard key={idx} category={category} productInfo={e} productId={idx} />
           ))
         )}
     </div>
