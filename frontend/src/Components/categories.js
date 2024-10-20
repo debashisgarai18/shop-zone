@@ -16,7 +16,7 @@ export const categories = [
   {
     cat: "Fashion",
     expand: true,
-    sub: ["Men", "Women", "Boys", "Girls"],
+    sub: ["Men", "Women", "Kids"],
     logo: "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1728900060/1728900057426_fash.png",
     bgColor: "#ECFFEC",
     hasProducts : true,
@@ -116,10 +116,10 @@ export const categories = [
     expand: true,
     sub: [
       "Mobiles",
-      "TV",
-      "Computers and Accessories",
-      "Smart Watches and Accessories",
       "Cameras",
+      "Laptops",
+      "Smart Watches",
+      "Headsets",
     ],
     logo: "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1728900039/1728900036105_ele.png",
     bgColor: "#FEEFEA",
@@ -300,7 +300,7 @@ export const categories = [
   {
     cat: "Footwear",
     expand: true,
-    sub: ["Men's Footwear", "Women's Footwear", "Children Footwear"],
+    sub: ["Men's Footwear", "Women's Footwear", "Kid's Footwear"],
     logo: "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1728899963/1728899960293_foot.png",
     bgColor: "#DEF3FF",
     hasProducts : true,

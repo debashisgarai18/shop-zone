@@ -6,14 +6,56 @@ mongoose.connect(MONGO_URI);
 
 // schema for the items to be added
 const itemsSchema = new mongoose.Schema({
-  id: String,
-  title: String,
-  price: Number,
+  name: {
+    type: String,
+    required : true
+  },
+  by : {
+    type : String,
+    required : true
+  },
+  orgPRice: {
+    type : String,
+    required : true
+  },
+  discPrice : {
+    type : String,
+    required : true
+  },
   description: String,
-  category: String,
+  parentCategory: {
+    type : String,
+    required : true
+  },
+  subCategory : {
+    type : String,
+    required : true
+  },
   image: String,
-  rating: Object,
+  star: Number,
 });
+
+// categories Schema to hold the items for each category
+const categoriesSchema = new mongoose.Schema({
+  cat : {
+    type : String,
+    required : true,
+    unique : true 
+  },
+  expand : {
+    type : Boolean,
+    required : true
+  },
+  hasProducts : {
+    type: Boolean,
+    required : true
+  },
+  sub : [String],
+  logo : String,
+  bgColor : String,
+  // This needs to be taken from the item schema
+  items : [itemsSchema]
+})
 
 // schema for the admin database
 const adminSchema = new mongoose.Schema({
@@ -75,7 +117,8 @@ const userSchema = new mongoose.Schema({
 });
 
 const items = mongoose.model("Items", itemsSchema);
+const category = mongoose.model("Category", categoriesSchema)
 const user = mongoose.model("User", userSchema);
 const admin = mongoose.model("Admin", adminSchema);
 
-module.exports = { user, items, admin };
+module.exports = { user, items, admin, category };
