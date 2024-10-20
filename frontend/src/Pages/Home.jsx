@@ -11,8 +11,13 @@ import { categories, dummy_featured_products } from "../Components/categories";
 import { PopularProducts, ProductCard } from "../Components/PopularProducts";
 import { useState } from "react";
 import SliderComponent from "../Components/SliderComponent";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="w-full flex justify-center flex-col items-center gap-[1rem] mb-[2rem]">
       <SliderPart />
@@ -76,6 +81,7 @@ const SliderPart = () => {
 // featured categories part
 // TODO : Responsiveness Part
 const FeaturedCategories = () => {
+  const nav = useNavigate();
   return (
     <div className="w-[97%] flex flex-col gap-[2rem] item-center px-[1rem] mb-[1rem]">
       <div className="text-2xl font-medium">Featured Categories</div>
@@ -90,6 +96,7 @@ const FeaturedCategories = () => {
                 <div
                   className="flex items-center justify-center rounded-[50%] px-[1.75rem] py-[1.75rem] hover:shadow-xl hover:-translate-y-2 cursor-pointer transition-all duration-200 ease-in-out"
                   style={{ backgroundColor: e.bgColor }}
+                  onClick={() => nav(`/landing?category=${e.cat}`)}
                 >
                   <img className="w-[70px] h-[70px]" src={e.logo} alt={e.cat} />
                 </div>

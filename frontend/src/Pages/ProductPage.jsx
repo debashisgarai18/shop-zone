@@ -6,7 +6,7 @@ import { FaRegHeart } from "react-icons/fa";
 import Button from "../Components/Button";
 import { IoMdAdd } from "react-icons/io";
 import { GrFormSubtract } from "react-icons/gr";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 
 // TODO : Responsiveness part
@@ -33,6 +33,9 @@ const ProductPage = () => {
     if (counter <= 1) setCounter(1);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="w-full flex justify-center py-[2rem]">
       <div className="w-[85%] flex flex-col gap-[2.75rem] justify-between">

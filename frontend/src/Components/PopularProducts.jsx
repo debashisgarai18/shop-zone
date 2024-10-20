@@ -31,7 +31,7 @@ export const ProductCard = ({ productInfo, category, productId }) => {
       } transition-all duration-300 ease-in border-[1px] border-[#E5E5E5]`}
       onMouseOver={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      onClick = {() =>  nav(`/product?category=${category}&id=${productId}`)}
+      onClick = {() =>  nav(`${category && `/product?category=${category}&id=${productId}`}`)}
     >
       {/* image part */}
       <div className="h-[300px] w-full relative transition-all duration-300 ease-in">

@@ -1,11 +1,17 @@
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Signin = () => {
   const nav = useNavigate();
   const handleFormSubmit = (e) => {
     e.preventDefault();
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="w-full bg-[#F1F1F1] mb-[2rem] flex items-center justify-center py-[3rem]">
       <div className="w-[30%] px-[2rem] py-[2rem] bg-white rounded-2xl shadow-xl">

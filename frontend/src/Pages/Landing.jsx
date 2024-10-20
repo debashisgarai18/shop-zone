@@ -5,10 +5,15 @@ import { useState } from "react";
 import Rating from "@mui/material/Rating";
 import { ProductCard } from "../Components/PopularProducts";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
 // TODO : Navigation to this page on the basis of the category
 const Landing = () => {
   const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <section className="w-full h-fit flex justify-center py-[1rem] ">
@@ -53,9 +58,9 @@ LandingPageTitle.propTypes = {
 
 // TODO : Do the responsiveness part
 const FilterCategoryPart = () => {
-  const [value, setValue] = useState([100, 1000]);
+  const [value, setValue] = useState([100, 1000000]);
   const [minVal, setMinVal] = useState(100);
-  const [maxVal, setMaxVal] = useState(1000);
+  const [maxVal, setMaxVal] = useState(1000000);
 
   const nav = useNavigate();
 
@@ -105,7 +110,7 @@ const FilterCategoryPart = () => {
         <div className="w-full flex flex-col">
           <Slider
             min={100}
-            max={1000}
+            max={1000000}
             value={value}
             onChange={handleChange}
             valueLabelDisplay="auto"
@@ -170,7 +175,6 @@ const FilterCategoryPart = () => {
 
 // TODO : Do the responsiveness part
 const ItemsPart = ({ category }) => {
-  
   return (
     <div className="w-[75%] px-[1rem] py-[1rem]">
       {categories.filter((e) => e.cat === category)[0].hasProducts ? (
@@ -193,7 +197,12 @@ const ItemsPart = ({ category }) => {
             .filter((e) => e.cat === category)[0]
             .items?.map((e, idx) => (
               // TODO : need to send the category and the product index (as of now) to the product display page -> onClick
-              <ProductCard key={idx} productInfo={e} category={category} productId = {idx} />
+              <ProductCard
+                key={idx}
+                productInfo={e}
+                category={category}
+                productId={idx}
+              />
             ))}
         </div>
       ) : (
