@@ -4,6 +4,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import Rating from "@mui/material/Rating";
 import { categories } from "./categories";
+import { useNavigate } from "react-router-dom";
 
 export const PopularProducts = ({ category }) => {
   return (
@@ -20,9 +21,9 @@ export const PopularProducts = ({ category }) => {
 };
 
 // this is the product card to be displayed for the home page
-export const ProductCard = ({ productInfo, category }) => {
+export const ProductCard = ({ productInfo, category, productId }) => {
   const [hover, setHover] = useState(false);
-
+  const nav = useNavigate();
   return (
     <div
       className={`flex flex-col w-full rounded-3xl cursor-pointer gap-[1rem] ${
@@ -30,6 +31,7 @@ export const ProductCard = ({ productInfo, category }) => {
       } transition-all duration-300 ease-in border-[1px] border-[#E5E5E5]`}
       onMouseOver={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      onClick = {() =>  nav(`/product?category=${category}&id=${productId}`)}
     >
       {/* image part */}
       <div className="h-[300px] w-full relative transition-all duration-300 ease-in">
@@ -84,6 +86,7 @@ const WishlistView = () => {
 ProductCard.propTypes = {
   productInfo: PropTypes.object,
   category: PropTypes.string,
+  productId : PropTypes.number
 };
 
 PopularProducts.propTypes = {

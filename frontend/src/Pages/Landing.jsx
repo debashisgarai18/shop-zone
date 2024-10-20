@@ -170,6 +170,7 @@ const FilterCategoryPart = () => {
 
 // TODO : Do the responsiveness part
 const ItemsPart = ({ category }) => {
+  
   return (
     <div className="w-[75%] px-[1rem] py-[1rem]">
       {categories.filter((e) => e.cat === category)[0].hasProducts ? (
@@ -192,7 +193,7 @@ const ItemsPart = ({ category }) => {
             .filter((e) => e.cat === category)[0]
             .items?.map((e, idx) => (
               // TODO : need to send the category and the product index (as of now) to the product display page -> onClick
-              <ProductCard key={idx} productInfo={e} />
+              <ProductCard key={idx} productInfo={e} category={category} productId = {idx} />
             ))}
         </div>
       ) : (
