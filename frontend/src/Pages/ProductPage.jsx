@@ -7,8 +7,9 @@ import Button from "../Components/Button";
 import { IoMdAdd } from "react-icons/io";
 import { GrFormSubtract } from "react-icons/gr";
 import { useState } from "react";
-import { GrCart } from "react-icons/gr";
+import { FiShoppingCart } from "react-icons/fi";
 
+// TODO : Responsiveness part
 const ProductPage = () => {
   const [searchParams] = useSearchParams();
   const [counter, setCounter] = useState(1);
@@ -34,7 +35,8 @@ const ProductPage = () => {
 
   return (
     <div className="w-full flex justify-center py-[2rem]">
-      <div className="w-[85%] flex justify-between">
+      <div className="w-[85%] flex flex-col gap-[2.75rem] justify-between">
+        {/* items-info part */}
         <div className="w-full flex justify-between">
           {/* product image */}
           <div className="w-[35%] flex flex-col gap-[1rem]">
@@ -127,7 +129,7 @@ const ProductPage = () => {
                   textSize="2xl"
                   rounded="rounded-md"
                   active
-                  icon=<GrCart />
+                  icon=<FiShoppingCart />
                 />
               </div>
               <div className="w-[40px] h-[40px] flex justify-center items-center border-[1px] cursor-pointer hover:bg-[#35BAF6] hover:text-white rounded-md border-[#BFBFBF]">
@@ -136,6 +138,29 @@ const ProductPage = () => {
             </div>
           </div>
         </div>
+        {/* items-description part */}
+        <div className="w-full px-[1.75rem] py-[1.75rem] flex flex-col border-[1px] gap-[1.75rem] border-[#bfbfbf] rounded-3xl">
+          <div className="w-full flex items-center gap-[1rem]">
+            <button className="px-[1rem] focus:text-[#35BAF6] cursor-pointer py-[0.5rem] text-lg font-medium rounded-3xl border-[1px] border-[#bfbfbf] text-center">
+              Description
+            </button>
+            <button className="px-[1rem] focus:text-[#35BAF6] cursor-pointer py-[0.5rem] text-lg font-medium rounded-3xl border-[1px] border-[#bfbfbf] text-center">
+              Additional Info
+            </button>
+            <button className="px-[1rem] focus:text-[#35BAF6] cursor-pointer py-[0.5rem] text-lg font-medium rounded-3xl border-[1px] border-[#bfbfbf] text-center">
+              Reviews (1)
+            </button>
+          </div>
+          <div className="w-full text-[#7E7E7E]">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui,
+            adipisci. Labore quasi iusto ipsum recusandae dicta odio rerum
+            debitis adipisci voluptate, sunt vitae expedita libero perspiciatis.
+            Incidunt itaque maxime, quas laboriosam nam optio odit sed fugit
+            officia dolorum ducimus labore tenetur minus eveniet ipsum doloribus
+            quasi debitis. Aliquid, ipsam illum. Voluptatum quibusdam ad at.
+          </div>
+        </div>
+        {/* // TODO : Implment the related products part => needs to be taken from backend */}
       </div>
     </div>
   );
