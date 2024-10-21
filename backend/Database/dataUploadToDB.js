@@ -25,7 +25,7 @@ const { categories } = require("./category");
 //             //     await items.create(newItem);
 //                 const updateSubCategory = await category.findOne({
 //                     cat : elem.parentCategory
-//                 }) 
+//                 })
 //                 // console.log(updateSubCategory.cat, elem.subCategory)
 //                 // console.log(updateSubCategory.sub.includes(elem.subCategory))
 //                 if(!updateSubCategory.sub.includes(elem.subCategory)){
@@ -41,4 +41,3 @@ const { categories } = require("./category");
 //         }
 //     })
 // })(categories)
-

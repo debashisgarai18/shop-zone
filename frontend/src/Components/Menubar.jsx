@@ -2,9 +2,9 @@ import { GrAppsRounded } from "react-icons/gr";
 import PropTypes from "prop-types";
 import { MdOutlineHeadset } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { useState } from "react";
-import { categories } from "./categories";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Menubar = () => {
   return (
@@ -43,11 +43,27 @@ const Categories = () => {
 
 const BrowseDropDown = () => {
   const [hover, setHover] = useState(null);
+  const [categories, setCategories] = useState([]);
+
   const nav = useNavigate();
 
   const handleClick = (cat) => {
     nav(`/landing?category=${cat}`);
   };
+
+  // fetch all the catgeories from the DB
+  const getAllCategories = async () => {
+    const response = await axios({
+      method: "get",
+      url: "http://localhost:3000/common/getCategories",
+    });
+    setCategories(response.data.message);
+  };
+
+  useEffect(() => {
+    getAllCategories();
+  }, []);
+
   return (
     <div className="h-fit w-[450px] shadow-lg  bg-[#f5f5f5] text-[#474747] py-[0.5rem] rounded-lg absolute top-[100%] left-[28px] flex flex-col justify-center px-[1rem]">
       {categories.map((e, idx) => {
@@ -102,6 +118,20 @@ const BrowseDropDown = () => {
 // function to diaplay all the categories
 // TODO : Change the dummy data to the original fetched data
 const ExpandedCategories = () => {
+  const [categories, setCategories] = useState([]);
+
+  // fetch all the catgeories from the DB
+  const getAllCategories = async () => {
+    const response = await axios({
+      method: "get",
+      url: "http://localhost:3000/common/getCategories",
+    });
+    setCategories(response.data.message);
+  };
+
+  useEffect(() => {
+    getAllCategories();
+  }, []);
   return (
     <div className="w-[45%] my-[1rem] flex justify-around items-center relative">
       {categories.map((e, idx) => {
@@ -181,10 +211,10 @@ const RenderCategories = ({ content, expand }) => {
             <div
               className="w-full py-[0.75rem] px-[1rem] grid gap-[2rem]"
               style={{
-                gridTemplateColumns: `repeat(${content.sub.length}, minmax(0, 1fr))`,
+                gridTemplateColumns: `repeat(${content.drops.length}, minmax(0, 1fr))`,
               }}
             >
-              {content.sub.map((e, idx) => {
+              {content.drops.map((e, idx) => {
                 return (
                   <div key={idx} className="flex flex-col">
                     <span
