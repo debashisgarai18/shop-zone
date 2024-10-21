@@ -13,7 +13,9 @@ commonRouter.get("/getCategories", async (req, res) => {
                 cat : e.cat,
                 expand : e.expand,
                 sub : e.sub,
-                drops : e.drops
+                drops : e.drops,
+                logo: e.logo,
+                bgColor : e.bgColor
             })
         });
         return res.status(200).json({

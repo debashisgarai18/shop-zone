@@ -7,12 +7,13 @@ import SliderImg3 from "../assets/sliderImg/slider3.webp";
 import SliderImg4 from "../assets/sliderImg/slider4.webp";
 import SliderImg5 from "../assets/sliderImg/slider5.webp";
 import "../css/Home.css";
-import { categories, dummy_featured_products } from "../Components/categories";
+import { dummy_featured_products } from "../Components/categories";
 import { PopularProducts, ProductCard } from "../Components/PopularProducts";
 import { useState } from "react";
 import SliderComponent from "../Components/SliderComponent";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Home = () => {
   useEffect(() => {
@@ -81,6 +82,21 @@ const SliderPart = () => {
 // featured categories part
 // TODO : Responsiveness Part
 const FeaturedCategories = () => {
+  const [categories, setCategories] = useState([]);
+
+  // fetch all the catgeories from the DB
+  const getAllCategories = async () => {
+    const response = await axios({
+      method: "get",
+      url: "http://localhost:3000/common/getCategories",
+    });
+    setCategories(response.data.message);
+  };
+
+  useEffect(() => {
+    getAllCategories();
+  }, []);
+
   const nav = useNavigate();
   return (
     <div className="w-[97%] flex flex-col gap-[2rem] item-center px-[1rem] mb-[1rem]">
@@ -97,7 +113,7 @@ const FeaturedCategories = () => {
                   className="flex items-center justify-center rounded-[50%] px-[1.75rem] py-[1.75rem] hover:shadow-xl hover:-translate-y-2 cursor-pointer transition-all duration-200 ease-in-out"
                   style={{ backgroundColor: e.bgColor }}
                   onClick={() => nav(`/landing?category=${e.cat}`)}
-                >
+                >{console.log(e.logo)}
                   <img className="w-[70px] h-[70px]" src={e.logo} alt={e.cat} />
                 </div>
                 <div className="text-lg font-medium text-[#333333]">
@@ -117,6 +133,20 @@ const FeaturedCategories = () => {
 const PopularProductsMenu = () => {
   // states
   const [selectedCategory, setSelectedCategory] = useState("Fashion");
+  const [categories, setCategories] = useState([]);
+
+  // fetch all the catgeories from the DB
+  const getAllCategories = async () => {
+    const response = await axios({
+      method: "get",
+      url: "http://localhost:3000/common/getCategories",
+    });
+    setCategories(response.data.message);
+  };
+
+  useEffect(() => {
+    getAllCategories();
+  }, []);
 
   return (
     <div className="w-[97%] px-[1rem] flex flex-col gap-[1.5rem]">

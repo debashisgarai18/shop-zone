@@ -37,7 +37,7 @@ export const ProductCard = ({ productInfo, category, productId }) => {
       <div className="h-[300px] w-full relative transition-all duration-300 ease-in">
         <img
           loading="lazy"
-          src={productInfo.img}
+          src="http://res.cloudinary.com/dsqym1wwy/image/upload/v1729535404/tdhj7b2ugnlsgt63phxe.webp"
           // TODO : On hovering the whole card the image should scale to 105
           className="h-full w-full object-cover rounded-t-3xl transition-all duration-300 ease-in "
           alt="ProductImage"

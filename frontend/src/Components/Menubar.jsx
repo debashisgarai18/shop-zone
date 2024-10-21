@@ -132,6 +132,7 @@ const ExpandedCategories = () => {
   useEffect(() => {
     getAllCategories();
   }, []);
+  
   return (
     <div className="w-[45%] my-[1rem] flex justify-around items-center relative">
       {categories.map((e, idx) => {
