@@ -17,7 +17,7 @@ const categories = [
     cat: "Fashion",
     expand: true,
     sub: ["Men", "Women", "Kids"],
-    logo: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729455618/e-commerce/fashion/hisltp3lwc8tkjv0oaym.webp",
+    logo: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729531187/e-commerce/fashion/nmxqtjn5kezbumgufjhq.png",
     bgColor: "#ECFFEC",
     hasProducts: true,
     items: [
@@ -30,7 +30,7 @@ const categories = [
         parentCategory: "Fashion",
         subCategory: "Men",
         availableCount: 200,
-        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456133/e-commerce/fashion/items/men/m4s1ryxadp6svhqqatns.webp",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729541910/Fashion/uy4xyohsombs5jcvj5ww.webp",
       },
       {
         name: "men formal shirt",
@@ -41,7 +41,7 @@ const categories = [
         parentCategory: "Fashion",
         subCategory: "Men",
         availableCount: 200,
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/66b79114aff0d5448b76d72c7c17911c/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729541911/Fashion/yziary7y5ubb1go7dmqm.webp",
       },
       {
         name: "men casual shirt",
@@ -259,7 +259,7 @@ const categories = [
     cat: "Electronics",
     expand: true,
     sub: ["Mobiles", "Headsets", "Cameras", "Laptops", "Smart Watches"],
-    logo: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/0a47e12ed178ddeb858a416db84c49c4/detailed",
+    logo: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729531068/e-commerce/electronics/tejx6yafsrty0vsgtw0h.png",
     bgColor: "#FEEFEA",
     hasProducts: true,
     items: [
@@ -544,7 +544,7 @@ const categories = [
     cat: "Groceries",
     expand: true,
     sub: ["Ccoking Essentials", "Homecare"],
-    logo: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/9b93a9dc207abcb6351d6436eba5d371/detailed",
+    logo: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729531264/e-commerce/groceries/xzjo59e4ypebpxbei94g.png",
     bgColor: "#E7E7E7",
     hasProducts: true,
     items: [
@@ -650,7 +650,7 @@ const categories = [
     cat: "Footwear",
     expand: true,
     sub: ["Men", "Women", "Kids"],
-    logo: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/12d8474a0b67825982f90552ae40b277/detailed",
+    logo: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729531230/e-commerce/footwear/dofxwiw0wy7vvaslk373.png",
     bgColor: "#DEF3FF",
     hasProducts: true,
     items: [
@@ -779,7 +779,7 @@ const categories = [
   {
     cat: "Beauty",
     expand: false,
-    logo: "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1728899932/1728899929510_beauty.png",
+    logo: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729531003/e-commerce/beauty/wlbh66v6xr08oz1jrk8q.png",
     bgColor: "#FFE8F8",
     hasProducts: true,
     items: [],
@@ -787,7 +787,7 @@ const categories = [
   {
     cat: "Wellness",
     expand: false,
-    logo: "https://res.cloudinary.com/dy2p0n2xc/image/upload/v1728899902/1728899898804_well.png",
+    logo: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729531295/e-commerce/wellness/g7navflgyefrevbyaiea.png",
     bgColor: "#C9FFD0",
     hasProducts: true,
     items: [],
