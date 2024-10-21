@@ -1,39 +1,44 @@
-const { category, items } = require("./") ;
+const { category, items } = require("./");
+const { categories } = require("./category");
 
-async function addItemToCategory(itemData) {
+// this function is to populate the categories
+(async function () {
+  categories.map(async (e) => {
     try {
-      // Create a new item object
-      const newItem = new items(itemData);
+      const newCategory = new category(e);
+      const updatedCategory = await category.create(newCategory);
 
-    //   Find the category by parentCategory and push the item to its items array
-      const updatedCategory = await category.findOneAndUpdate(
-        { cat: newItem.parentCategory }, // Match by cat field
-        { $push: { items: newItem } },   // Push the item to the items array
-        { new: true, upsert: true }      // Return the updated doc, create one if it doesn't exist
-      );
-        
-      if (updatedCategory) {
-        return updatedCategory.items[3];
-      } else {
-        throw new Error('Category not found');
-      }
+      if (updatedCategory) return "Categories Updated";
+      else throw new error("some issue");
     } catch (err) {
-      throw err;
+      console.log("some error", err);
     }
-  }
+  });
+})();
 
-  const exampleItem = {
-    name: 'Sample Item',
-    by: 'Brand c',
-    orgPrice: '100',
-    discPrice: '90',
-    description: 'Sample description',
-    parentCategory: 'Electronics',  // This should match with a category 'cat' value
-    subCategory: 'Mobile Phones',
-    image: 'image.jpg',
-    star: 4,
-  };
+// (async function addItemToCategory(itemData) {
+//     itemData.map((e)=> {
+//         if(e.items?.length >= 1){
+//            e.items?.map(async (elem) => {
+//             try{
+//             //  const newItem = new items(elem);
+//             //     await items.create(newItem);
+//                 const updateSubCategory = await category.findOne({
+//                     cat : elem.parentCategory
+//                 }) 
+//                 // console.log(updateSubCategory.cat, elem.subCategory)
+//                 // console.log(updateSubCategory.sub.includes(elem.subCategory))
+//                 if(!updateSubCategory.sub.includes(elem.subCategory)){
+//                     console.log(updateSubCategory.sub.length)
+//                     updateSubCategory.sub.push(elem.subCategory)
+//                     await updateSubCategory.save();
+//                 }
+//             }
+//             catch(err){
+//                 return `Some error occured : ${err}`
+//             }
+//            })
+//         }
+//     })
+// })(categories)
 
-  addItemToCategory(exampleItem)
-  .then(result => console.log('Item added successfully:', result))
-  .catch(err => console.error('Error:', err));

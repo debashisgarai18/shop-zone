@@ -14,11 +14,11 @@ const itemsSchema = new mongoose.Schema({
     type : String,
     required : true
   },
-  orgPRice: {
+  orgPrice: {
     type : String,
     required : true
   },
-  discPrice : {
+  disPrice : {
     type : String,
     required : true
   },
@@ -31,8 +31,9 @@ const itemsSchema = new mongoose.Schema({
     type : String,
     required : true
   },
-  image: String,
+  img: String,
   star: Number,
+  availableCount : Number 
 });
 
 // categories Schema to hold the items for each category
@@ -44,17 +45,22 @@ const categoriesSchema = new mongoose.Schema({
   },
   expand : {
     type : Boolean,
-    required : true
+    required : true,
+    default : false
   },
   hasProducts : {
     type: Boolean,
-    required : true
+    required : true,
+    default : false
   },
+  // TODO : This needs to be updated with a default value -> and is to be taken from item's subcategory
   sub : [String],
   logo : String,
   bgColor : String,
   // This needs to be taken from the item schema
-  items : [itemsSchema]
+  items : [itemsSchema],
+  // this is exclusively for shop
+  drops : []
 })
 
 // schema for the admin database
