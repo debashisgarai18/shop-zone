@@ -52,7 +52,7 @@ const categories = [
         parentCategory: "Fashion",
         subCategory: "Men",
         availableCount: 200,
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/95b29c844c05d0f44c72e56602b25d89/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456133/e-commerce/fashion/items/men/lcqi7qm8sfdrcktklzfx.webp",
       },
       {
         name: "men casual t-shirt",
@@ -63,7 +63,7 @@ const categories = [
         parentCategory: "Fashion",
         subCategory: "Men",
         availableCount: 200,
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/d920c24744d5fb30889fe8460b8cde72/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456133/e-commerce/fashion/items/men/tufwezsxyzejghfnqsh7.webp",
       },
       {
         name: "men polo t-shirt",
@@ -74,7 +74,7 @@ const categories = [
         parentCategory: "Fashion",
         subCategory: "Men",
         availableCount: 200,
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/513a02b0b5955fbc84d7c8de4ff4e2e2/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456133/e-commerce/fashion/items/men/bynzspc338pyp2mvjl96.webp",
       },
       {
         name: "men casual shirt",
@@ -85,7 +85,7 @@ const categories = [
         parentCategory: "Fashion",
         subCategory: "Men",
         availableCount: 200,
-        img: "	https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/ca521f689a8c2126519ef9155839644f/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456133/e-commerce/fashion/items/men/zjsctsdu6v2vcmza7tdb.webp",
       },
       {
         name: "men matte black shirt ",
@@ -96,7 +96,7 @@ const categories = [
         parentCategory: "Fashion",
         subCategory: "Men",
         availableCount: 200,
-        img: "	https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/9c1d14ad53670e1a1eb08676c2ac123a/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456133/e-commerce/fashion/items/men/zjsctsdu6v2vcmza7tdb.webp",
       },
       {
         name: "men white polo t-shirt",
@@ -107,7 +107,7 @@ const categories = [
         parentCategory: "Fashion",
         subCategory: "Men",
         availableCount: 200,
-        img: "	https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/9f26b94d5fd5649ea933e5d0e7855142/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456132/e-commerce/fashion/items/men/mn8jrytoomualwfydhsa.webp",
       },
       {
         name: "women t-shirt",
@@ -116,10 +116,9 @@ const categories = [
         disPrice: "Rs 300",
         orgPrice: "Rs 600",
         parentCategory: "Fashion",
-
         availableCount: 200,
         subCategory: "Women",
-        img: "	https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/ffdcad7e5fb3edfb493dac4290144980/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456292/e-commerce/fashion/items/women/cclkmfpqjd9od3ktmhnd.webp",
       },
       {
         name: "women skirt",
@@ -128,10 +127,9 @@ const categories = [
         disPrice: "Rs 1300",
         orgPrice: "Rs 1600",
         parentCategory: "Fashion",
-
         availableCount: 200,
         subCategory: "Women",
-        img: "	https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/71e4cc39bd0d5e7a956cedb8a6240f71/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456292/e-commerce/fashion/items/women/dz83lqddzek0wgofd8au.webp",
       },
       {
         name: "women black dress",
@@ -140,10 +138,9 @@ const categories = [
         disPrice: "Rs 4300",
         orgPrice: "Rs 5600",
         parentCategory: "Fashion",
-
         availableCount: 200,
         subCategory: "Women",
-        img: "	https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/f266894eaff93970edc3a5216fbd6baa/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456292/e-commerce/fashion/items/women/xjvv2fguoyduwf5i7pdt.webp",
       },
       {
         name: "women floral black and white dress",
@@ -152,10 +149,9 @@ const categories = [
         disPrice: "Rs 4300",
         orgPrice: "Rs 6600",
         parentCategory: "Fashion",
-
         availableCount: 200,
         subCategory: "Women",
-        img: "	https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/9167edb716c0770849a8b550b66936aa/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456292/e-commerce/fashion/items/women/q9loxqnjmosy4bz5vyku.webp",
       },
       {
         name: "women formal dress",
@@ -164,10 +160,9 @@ const categories = [
         disPrice: "Rs 2300",
         orgPrice: "Rs 3600",
         parentCategory: "Fashion",
-
         availableCount: 200,
         subCategory: "Women",
-        img: "	https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/cc561ec6197bc66f26e8797165faadf1/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456292/e-commerce/fashion/items/women/virpheojpsdijorf0nmc.webp",
       },
       {
         name: "kids t-shirt",
@@ -176,10 +171,9 @@ const categories = [
         disPrice: "Rs 300",
         orgPrice: "Rs 600",
         parentCategory: "Fashion",
-
         availableCount: 200,
         subCategory: "Kids",
-        img: "	https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/c876f4b72d9d8c3b649d6ac0406f7b6e/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456311/e-commerce/fashion/items/kids/iqvvrg96denilyog3lcr.webp",
       },
       {
         name: "kids t-shirt",
@@ -188,10 +182,9 @@ const categories = [
         disPrice: "Rs 300",
         orgPrice: "Rs 600",
         parentCategory: "Fashion",
-
         availableCount: 200,
         subCategory: "Kids",
-        img: "	https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/5ee015cc41003144058da19751423292/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456311/e-commerce/fashion/items/kids/nxgkh1ynbabn9cmsx0tn.webp",
       },
       {
         name: "kids multicolor t-shirt",
@@ -200,10 +193,9 @@ const categories = [
         disPrice: "Rs 300",
         orgPrice: "Rs 600",
         parentCategory: "Fashion",
-
         availableCount: 200,
         subCategory: "Kids",
-        img: "	https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/c2c7e2e59479b16e6766dd71a531278c/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456311/e-commerce/fashion/items/kids/pmdwuepbvaacsolliflb.webp",
       },
       {
         name: "kids multicolor hoodie",
@@ -212,10 +204,9 @@ const categories = [
         disPrice: "Rs 1300",
         orgPrice: "Rs 1600",
         parentCategory: "Fashion",
-
         availableCount: 200,
         subCategory: "Kids",
-        img: "	https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/e6e48d7830f13badb90caac441eed3df/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456310/e-commerce/fashion/items/kids/prnsqwqa6gian2yadrko.webp",
       },
       {
         name: "kids multicolor sweatshirt",
@@ -224,10 +215,9 @@ const categories = [
         disPrice: "Rs 2300",
         orgPrice: "Rs 2600",
         parentCategory: "Fashion",
-
         availableCount: 200,
         subCategory: "Kids",
-        img: "	https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/7bb5790f506fb6d0296310ba603f21b7/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456310/e-commerce/fashion/items/kids/w4xzueuwfz2j9jzitotl.webp",
       },
       {
         name: "kids full sleeve t-shirt",
@@ -236,10 +226,9 @@ const categories = [
         disPrice: "Rs 360",
         orgPrice: "Rs 800",
         parentCategory: "Fashion",
-
         availableCount: 200,
         subCategory: "Kids",
-        img: "	https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/2d0d0cda028b5c33a2b1b26abdc3a7a7/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456310/e-commerce/fashion/items/kids/mzxuu3fmhdprtfot2cis.webp",
       },
       {
         name: "kids full sleeve hoodie",
@@ -248,10 +237,9 @@ const categories = [
         disPrice: "Rs 1300",
         orgPrice: "Rs 2600",
         parentCategory: "Fashion",
-
         availableCount: 200,
         subCategory: "Kids",
-        img: "	https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/141e2169f8ce14aa205cecb35329ea16/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456310/e-commerce/fashion/items/kids/jlqr2qh3v8y1ysx66mde.webp",
       },
     ],
   },
@@ -272,7 +260,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Mobiles",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/318deb9e77c9e14d302d3db78b6dbd88/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457038/e-commerce/electronics/mobiles/lmgziok6xmpss8uhppol.webp",
       },
       {
         name: "Samsung Galaxy S24+",
@@ -283,7 +271,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Mobiles",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/542b051690a5164657a1fe2dc9bca77b/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457037/e-commerce/electronics/mobiles/gw9b7fl1p5hkk3plc7dg.webp",
       },
       {
         name: "iPhone 16 Pro Max",
@@ -294,7 +282,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Mobiles",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/934adccb4905473ca8eb4c4fc7faeffd/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457037/e-commerce/electronics/mobiles/bnrczqj1g3ktq1phxifj.webp",
       },
       {
         name: "iPhone 16",
@@ -305,7 +293,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Mobiles",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/27172e5b800d483a62dd3d5be2904063/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457037/e-commerce/electronics/mobiles/t4tzdu16sxxtyi0vh4mt.webp",
       },
       {
         name: "Samsung Galaxy Fold 6",
@@ -316,7 +304,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Mobiles",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/73f1fb73ca04cd0de204383d4cc87c1d/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457037/e-commerce/electronics/mobiles/gzfwxbeygb3u58xzrazw.webp",
       },
       {
         name: "Google Pixel 9 Pro XL",
@@ -327,7 +315,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Mobiles",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/eb75fa5506d1ec820b87a921196ca86c/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457037/e-commerce/electronics/mobiles/thc4nukh4atdx5ehox5k.webp",
       },
       {
         name: "Moto G85 5G",
@@ -338,7 +326,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Mobiles",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/b11007762ab26da2fb070a15cc6ac404/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457037/e-commerce/electronics/mobiles/xqpuyvkx0di7relystqh.webp",
       },
       {
         name: "Google Pixel 9",
@@ -349,7 +337,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Mobiles",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/597c316818365fdba2339d5c6c2ce6b7/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457036/e-commerce/electronics/mobiles/bpt9yszf6mcp9lmx1iwo.webp",
       },
       {
         name: "HyperX Cloud Alpha",
@@ -360,7 +348,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Headsets",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/657bf04b7a800837a0bc8845bac9ff53/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457197/e-commerce/electronics/headsets/aprsgohmfalnki4j1af3.jpg",
       },
       {
         name: "HyperX Cloud Pro",
@@ -371,7 +359,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Headsets",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/183efc4a5e7be891353119d5e3737b98/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457197/e-commerce/electronics/headsets/nopr68a2o5xzmwoxo6iv.jpg",
       },
       {
         name: "Razer Black Shark V2 LE",
@@ -382,7 +370,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Headsets",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/3a6485f2bb17148b57c828a6111b66fb/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457197/e-commerce/electronics/headsets/vdmazhbx96wwn8o08gub.jpg",
       },
       {
         name: "Razer Black Shark V2",
@@ -393,7 +381,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Headsets",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/70cb357a30faf62ec0103508fa14a93a/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457197/e-commerce/electronics/headsets/emrlzhar6wp7h7pmzszm.jpg",
       },
       {
         name: "MSI laptop",
@@ -404,7 +392,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Laptops",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/3da411a81ecb9b74b088346a7fc008f5/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457090/e-commerce/electronics/laptops/rnf1iypsrmbvt0n6l1mk.jpg",
       },
       {
         name: "Apple Macbook Air M2 13 inch",
@@ -415,7 +403,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Laptops",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/b31d64c293c7bf565190691b104a426b/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457090/e-commerce/electronics/laptops/nbcu9agfrdfacxi5doxp.webp",
       },
       {
         name: "Apple Macbook Pro M3 15.6 inch, 2TB",
@@ -426,7 +414,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Laptops",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/6f5a467ca083d7fa7709f48052e18543/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457090/e-commerce/electronics/laptops/ojycsi6uqacvp3mtnezt.webp",
       },
       {
         name: "Asus TUF A17",
@@ -437,7 +425,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Laptops",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/c6b07f894f519fe6d9cb55faaf3ffb77/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457089/e-commerce/electronics/laptops/wjbcj7dng2i70hicde6r.webp",
       },
       {
         name: "HP Omen Gaming",
@@ -448,7 +436,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Laptops",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/22d9edb9cd5aac6641ea2e032ca1fb3c/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457089/e-commerce/electronics/laptops/zdpossoga5vxdeanqqwi.jpg",
       },
       {
         name: "Fujifilm Camera",
@@ -459,7 +447,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "CamerasCamera",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/2a724dfeb7b449919aef999e7dec6070/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457274/e-commerce/electronics/cameras/vq8wxwdgozetxa7l1rj6.jpg",
       },
       {
         name: "Go Pro Hero 12",
@@ -470,7 +458,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Cameras",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/d718026baf2c5557c91ddcdf62120adb/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457274/e-commerce/electronics/cameras/brecduxryofbivkrtoqq.jpg",
       },
       {
         name: "Canon 1500D EOS Camera",
@@ -481,7 +469,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Cameras",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/cf03018b2d3d38fc31f5bd92d6175e58/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457274/e-commerce/electronics/cameras/ifyhaqad6oxqabqs00j0.jpg",
       },
       {
         name: "Fastrack SW",
@@ -492,7 +480,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Smart Watches",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/59189a3eeb81c84f0c23b0e5fea6f855/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457352/e-commerce/electronics/smart%20watches/dl4pvfjydgzcz7h7uelm.webp",
       },
       {
         name: "Boat SW",
@@ -503,7 +491,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Smart Watches",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/a158d22945cc19405a256816a635dade/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457352/e-commerce/electronics/smart%20watches/kkzx9q3xzcait9oy8bdp.webp",
       },
       {
         name: "Apple watch series 9 SW",
@@ -514,7 +502,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Smart Watches",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/b32b875c8c9458246a442ab74aae9b93/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457352/e-commerce/electronics/smart%20watches/fhcgne2f53fcwoszub9x.webp",
       },
       {
         name: "Apple watch ultra 2 SW",
@@ -525,7 +513,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Smart Watches",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/07c467536df73c1f96f89418c09abe2f/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457352/e-commerce/electronics/smart%20watches/jbl81n0jxubmhl1ve6u2.webp",
       },
       {
         name: "Firebolt BT Calling SW",
@@ -536,7 +524,7 @@ const categories = [
         parentCategory: "Electronics",
         availableCount: 200,
         subCategory: "Smart Watches",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/3d493cabef8ab8799246189d6b0da5f3/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457352/e-commerce/electronics/smart%20watches/emd4nig5opdnfky3or0l.webp",
       },
     ],
   },
@@ -555,10 +543,9 @@ const categories = [
         disPrice: "Rs 150",
         orgPrice: "Rs 170",
         parentCategory: "Groceries",
-
         availableCount: 200,
         subCategory: "Homecare",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/fd3235a6fc3e3753c4b9d96a0ffd9a79/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457987/e-commerce/groceries/homecare/ex7yka3yypk3navudhwp.webp",
       },
       {
         name: "Ariel Washing Liquid",
@@ -567,10 +554,9 @@ const categories = [
         disPrice: "Rs 250",
         orgPrice: "Rs 270",
         parentCategory: "Groceries",
-
         availableCount: 200,
         subCategory: "Homecare",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/065cc02b496748771c4d6d1dde742392/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457986/e-commerce/groceries/homecare/felyxzwdvump3iksczqw.webp",
       },
       {
         name: "Surf Excel Matic 4L",
@@ -579,10 +565,9 @@ const categories = [
         disPrice: "Rs 350",
         orgPrice: "Rs 470",
         parentCategory: "Groceries",
-
         availableCount: 200,
         subCategory: "Homecare",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/1c5dae27fc7833a9a6500f29bd0a3dd1/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457986/e-commerce/groceries/homecare/o4awtoipov9rfpylpkcl.webp",
       },
       {
         name: "Ujala Supreme",
@@ -591,10 +576,9 @@ const categories = [
         disPrice: "Rs 250",
         orgPrice: "Rs 270",
         parentCategory: "Groceries",
-
         availableCount: 200,
         subCategory: "Homecare",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/42999c4e3c42eae0f92c64e59eb445e2/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457986/e-commerce/groceries/homecare/pw7xr5lu3sy9byxcetcy.webp",
       },
       {
         name: "Ezee Liquid Detergent",
@@ -603,10 +587,9 @@ const categories = [
         disPrice: "Rs 250",
         orgPrice: "Rs 370",
         parentCategory: "Groceries",
-
         availableCount: 200,
         subCategory: "Homecare",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/4d313f6f8d97b733e6e54bc8b9ef84c1/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457985/e-commerce/groceries/homecare/f2nnjvly0omxahjhhetg.webp",
       },
       {
         name: "6 Lentils",
@@ -615,10 +598,9 @@ const categories = [
         disPrice: "Rs 230",
         orgPrice: "Rs 260",
         parentCategory: "Groceries",
-
         availableCount: 200,
         subCategory: "Cooking Essentials",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/f83afb07fcc2137d535925e263e1fff7/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729458001/e-commerce/groceries/cooking%20essentials/nxzaj0e6kht72ylovbkx.webp",
       },
       {
         name: "Office Lunch Box",
@@ -627,10 +609,9 @@ const categories = [
         disPrice: "Rs 430",
         orgPrice: "Rs 660",
         parentCategory: "Groceries",
-
         availableCount: 200,
         subCategory: "Cooking Essentials",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/e72b25a24a066a0ea55c2ec542b45531/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729458000/e-commerce/groceries/cooking%20essentials/dakbukkrfu2gdwr1tssd.webp",
       },
       {
         name: "Masala Box",
@@ -639,10 +620,9 @@ const categories = [
         disPrice: "Rs 230",
         orgPrice: "Rs 260",
         parentCategory: "Groceries",
-
         availableCount: 200,
         subCategory: "Cooking Essentials",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/0a6e2f6d939d97c7e051ff147d1bc41f/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729458000/e-commerce/groceries/cooking%20essentials/ejghkgmcnmoqbt0ned5o.webp",
       },
     ],
   },
@@ -661,10 +641,9 @@ const categories = [
         disPrice: "Rs 1969",
         orgPrice: "Rs 2999",
         parentCategory: "Footwear",
-
         availableCount: 200,
         subCategory: "Men",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/4062d7fa1f54a4eea359400d95e72cc3/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457742/e-commerce/footwear/mens/vtd1okgwdh4jswfzjf1l.webp",
       },
       {
         name: "Adidas running shoe",
@@ -673,10 +652,9 @@ const categories = [
         disPrice: "Rs 3969",
         orgPrice: "Rs 5999",
         parentCategory: "Footwear",
-
         availableCount: 200,
         subCategory: "Men",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/9656d7c958f7a0be5337a7a68cacaed4/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457741/e-commerce/footwear/mens/lr2bcamdzc7h5llpwyet.webp",
       },
       {
         name: "Reebok casual walking shoe",
@@ -685,10 +663,9 @@ const categories = [
         disPrice: "Rs 1969",
         orgPrice: "Rs 3999",
         parentCategory: "Footwear",
-
         availableCount: 200,
         subCategory: "Men",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/ea8af58b5da6e85bae7b5260722cf718/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457741/e-commerce/footwear/mens/ziub0lhfhmriwlel1e20.webp",
       },
       {
         name: "Reebok running shoe",
@@ -697,10 +674,9 @@ const categories = [
         disPrice: "Rs 4569",
         orgPrice: "Rs 5999",
         parentCategory: "Footwear",
-
         availableCount: 200,
         subCategory: "Men",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/014fd23c5b6d7e9b92a0f3087871060d/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457741/e-commerce/footwear/mens/u2cgtqnmviziglywvcnd.webp",
       },
       {
         name: "Puma walking shoe",
@@ -709,22 +685,20 @@ const categories = [
         disPrice: "Rs 1569",
         orgPrice: "Rs 2999",
         parentCategory: "Footwear",
-
         availableCount: 200,
         subCategory: "Men",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/26965a27b38f69e628ba49e8415c42f1/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457741/e-commerce/footwear/mens/v2fdybjtoqxzonueyigc.webp",
       },
       {
-        name: "Sparx runing shoe for women",
+        name: "Sparx running shoe for women",
         star: 5,
         by: "Sparx",
         disPrice: "Rs 869",
         orgPrice: "Rs 999",
         parentCategory: "Footwear",
-
         availableCount: 200,
         subCategory: "Women",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/a336bd67a7a5da1093de549a3fd8d964/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457755/e-commerce/footwear/womens/jk4zdakpfxoel8jl3jte.webp",
       },
       {
         name: "Sandals for women",
@@ -733,10 +707,9 @@ const categories = [
         disPrice: "Rs 569",
         orgPrice: "Rs 699",
         parentCategory: "Footwear",
-
         availableCount: 200,
         subCategory: "Women",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/c4bedb80e1df54d8ccbf7ab6e47c7d9e/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457754/e-commerce/footwear/womens/ieirohhpkzjjuzl0d9qe.webp",
       },
       {
         name: "white Sandals for women",
@@ -745,10 +718,9 @@ const categories = [
         disPrice: "Rs 1869",
         orgPrice: "Rs 1999",
         parentCategory: "Footwear",
-
         availableCount: 200,
         subCategory: "Women",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/f29212ce87201c67e20f76a71ac6baa2/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457754/e-commerce/footwear/womens/pyz0daath84yyu4rr4uu.webp",
       },
       {
         name: "Reebok running shoe for women",
@@ -757,10 +729,9 @@ const categories = [
         disPrice: "Rs 2769",
         orgPrice: "Rs 2999",
         parentCategory: "Footwear",
-
         availableCount: 200,
         subCategory: "Women",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/b970933f37df4d025ead6ef0705d7a29/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457754/e-commerce/footwear/womens/tebjuati0pcpenhdyrao.webp",
       },
       {
         name: "Casual sandals for women",
@@ -769,10 +740,9 @@ const categories = [
         disPrice: "Rs 469",
         orgPrice: "Rs 699",
         parentCategory: "Footwear",
-
         availableCount: 200,
         subCategory: "Women",
-        img: "https://res-console.cloudinary.com/dsqym1wwy/media_explorer_thumbnails/c55a0626e8d1bf7e776d3fae3588f0eb/detailed",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729457753/e-commerce/footwear/womens/rgkvljn1t2dpcxklm2f2.webp",
       },
     ],
   },
