@@ -4,36 +4,44 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import Rating from "@mui/material/Rating";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
 import { useEffect } from "react";
+import { categories } from "./categories";
 
 export const PopularProducts = ({ category }) => {
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
 
   // fetch all the catgeories from the DB
-  const getAllCategories = async () => {
-    const response = await axios({
-      method: "get",
-      url: "http://localhost:3000/common/getCategories",
-    });
-    setCategories(response.data.message);
-  };
+  // TODO : get all the data based on the category provided n some another endpoint
+  // const getAllCategories = async () => {
+  //   const response = await axios({
+  //     method: "get",
+  //     url: "http://localhost:3000/common/getCategories",
+  //   });
+  //   setCategories(response.data.message);
+  // };
 
-  useEffect(() => {
-    getAllCategories();
-  }, []);
-  
+  // useEffect(() => {
+  //   getAllCategories();
+  // }, []);
+
   // return <ProductCard key={idx} category={category} productInfo={e} productId={idx} />
   return (
     <div className="w-full grid grid-cols-5 px-[1rem] gap-[1.75rem] py-[1rem]">
       {
-      console.log(categories
-        .filter((elem) => elem.cat === category)[0])
-      // categories
-      //   .filter((elem) => elem.cat === category)[0].items?.map((e) => console.log(e))
-
-            
-}
+        // console.log(categories
+        //   .filter((elem) => elem.cat === category)[0])
+        categories
+          .filter((elem) => elem.cat === category)[0]
+          .items?.map((e, idx) => (
+            <ProductCard
+              key={idx}
+              category={category}
+              productInfo={e}
+              productId={idx}
+            />
+          ))
+      }
     </div>
   );
 };
@@ -49,7 +57,9 @@ export const ProductCard = ({ productInfo, category, productId }) => {
       } transition-all duration-300 ease-in border-[1px] border-[#E5E5E5]`}
       onMouseOver={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      onClick = {() =>  nav(`${category && `/product?category=${category}&id=${productId}`}`)}
+      onClick={() =>
+        nav(`${category && `/product?category=${category}&id=${productId}`}`)
+      }
     >
       {/* image part */}
       <div className="h-[300px] w-full relative transition-all duration-300 ease-in">
@@ -104,7 +114,7 @@ const WishlistView = () => {
 ProductCard.propTypes = {
   productInfo: PropTypes.object,
   category: PropTypes.string,
-  productId : PropTypes.number
+  productId: PropTypes.number,
 };
 
 PopularProducts.propTypes = {

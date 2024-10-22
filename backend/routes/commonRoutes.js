@@ -28,4 +28,6 @@ commonRouter.get("/getCategories", async (req, res) => {
     }
 })
 
+// TODO : have one endpoint to fetch the items given a catgegory 
+
 module.exports = commonRouter 
