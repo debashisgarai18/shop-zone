@@ -113,7 +113,7 @@ const FeaturedCategories = () => {
                   className="flex items-center justify-center rounded-[50%] px-[1.75rem] py-[1.75rem] hover:shadow-xl hover:-translate-y-2 cursor-pointer transition-all duration-200 ease-in-out"
                   style={{ backgroundColor: e.bgColor }}
                   onClick={() => nav(`/landing?category=${e.cat}`)}
-                >{console.log(e.logo)}
+                >
                   <img className="w-[70px] h-[70px]" src={e.logo} alt={e.cat} />
                 </div>
                 <div className="text-lg font-medium text-[#333333]">

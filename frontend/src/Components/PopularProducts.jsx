@@ -3,19 +3,37 @@ import { useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import Rating from "@mui/material/Rating";
-import { categories } from "./categories";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"
+import { useEffect } from "react";
 
 export const PopularProducts = ({ category }) => {
+  const [categories, setCategories] = useState([]);
+
+  // fetch all the catgeories from the DB
+  const getAllCategories = async () => {
+    const response = await axios({
+      method: "get",
+      url: "http://localhost:3000/common/getCategories",
+    });
+    setCategories(response.data.message);
+  };
+
+  useEffect(() => {
+    getAllCategories();
+  }, []);
+  
+  // return <ProductCard key={idx} category={category} productInfo={e} productId={idx} />
   return (
     <div className="w-full grid grid-cols-5 px-[1rem] gap-[1.75rem] py-[1rem]">
-      {categories
-        .filter((elem) => elem.cat === category)
-        .map((elem) =>
-          elem.items.map((e, idx) => (
-            <ProductCard key={idx} category={category} productInfo={e} productId={idx} />
-          ))
-        )}
+      {
+      console.log(categories
+        .filter((elem) => elem.cat === category)[0])
+      // categories
+      //   .filter((elem) => elem.cat === category)[0].items?.map((e) => console.log(e))
+
+            
+}
     </div>
   );
 };
