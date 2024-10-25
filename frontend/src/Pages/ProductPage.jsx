@@ -46,6 +46,7 @@ const ProductPage = () => {
             {/* main Image */}
             <div className="w-full h-[650px] rounded-2xl relative">
               <img
+                loading="lazy"
                 src={productToBeShown.img}
                 alt="product main image"
                 className="w-full h-full rounded-2xl object-cover"

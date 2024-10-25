@@ -27,7 +27,7 @@ export const PopularProducts = ({ category }) => {
   return (
     <div className="w-full grid grid-cols-5 px-[1rem] gap-[1.75rem] py-[1rem]">
       {items.map((e) => {
-        return <ProductCard key={e._id} category={category} productInfo={e} />;
+        return <ProductCard key={e._id} category={category} productInfo={e} productId={e._id} />;
       })}
     </div>
   );
