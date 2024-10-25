@@ -6,42 +6,29 @@ import Rating from "@mui/material/Rating";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
-import { categories } from "./categories";
 
 export const PopularProducts = ({ category }) => {
-  // const [categories, setCategories] = useState([]);
+  const [items, setItems] = useState([]);
 
   // fetch all the catgeories from the DB
   // TODO : get all the data based on the category provided n some another endpoint
-  // const getAllCategories = async () => {
-  //   const response = await axios({
-  //     method: "get",
-  //     url: "http://localhost:3000/common/getCategories",
-  //   });
-  //   setCategories(response.data.message);
-  // };
+  const getAllCategories = async (cat) => {
+    const response = await axios({
+      method: "get",
+      url: `http://localhost:3000/common/getProducts/${cat}`,
+    });
+    setItems(response.data.message);
+  };
 
-  // useEffect(() => {
-  //   getAllCategories();
-  // }, []);
+  useEffect(() => {
+    getAllCategories(category);
+  }, [category]);
 
-  // return <ProductCard key={idx} category={category} productInfo={e} productId={idx} />
   return (
     <div className="w-full grid grid-cols-5 px-[1rem] gap-[1.75rem] py-[1rem]">
-      {
-        // console.log(categories
-        //   .filter((elem) => elem.cat === category)[0])
-        categories
-          .filter((elem) => elem.cat === category)[0]
-          .items?.map((e, idx) => (
-            <ProductCard
-              key={idx}
-              category={category}
-              productInfo={e}
-              productId={idx}
-            />
-          ))
-      }
+      {items.map((e) => {
+        return <ProductCard key={e._id} category={category} productInfo={e} />;
+      })}
     </div>
   );
 };
