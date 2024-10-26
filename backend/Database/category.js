@@ -30,7 +30,7 @@ const categories = [
         parentCategory: "Fashion",
         subCategory: "Men",
         availableCount: 200,
-        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729541910/Fashion/uy4xyohsombs5jcvj5ww.webp",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456133/e-commerce/fashion/items/men/m4s1ryxadp6svhqqatns.webp",
       },
       {
         name: "men formal shirt",
@@ -41,7 +41,7 @@ const categories = [
         parentCategory: "Fashion",
         subCategory: "Men",
         availableCount: 200,
-        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729541911/Fashion/yziary7y5ubb1go7dmqm.webp",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456133/e-commerce/fashion/items/men/skpbaicadgo5g2l5b4wb.webp",
       },
       {
         name: "men casual shirt",
@@ -96,7 +96,7 @@ const categories = [
         parentCategory: "Fashion",
         subCategory: "Men",
         availableCount: 200,
-        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456133/e-commerce/fashion/items/men/zjsctsdu6v2vcmza7tdb.webp",
+        img: "https://res.cloudinary.com/dsqym1wwy/image/upload/v1729456133/e-commerce/fashion/items/men/lnh1rkkchleaqwycxait.webp",
       },
       {
         name: "men white polo t-shirt",
