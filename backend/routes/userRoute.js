@@ -7,7 +7,16 @@ const signupInputval = require("../middlewares/inputVal/user/singupInput");
 const signinInputVal = require("../middlewares/inputVal/user/signinInput");
 const { user, items } = require("../Database");
 const userAuth = require("../middlewares/authMiddleware/userAuth");
- 
+
+// the me endpoint
+// to check when the user is logged in, if they go to signin/signup page, it should redirect to the current page
+// else if they are not logged in they shouldn't be able to go to any of the pages in Ui except the signin and signup
+userRouter.get("/me", userAuth, (req, res) => {
+  if (req.userId)
+    return res.status(200).json({
+      message: "User found",
+    });
+});
 
 userRouter.post("/signup", signupInputval, async (req, res) => {
   const { fname, phno, uname, pwd } = req.body;

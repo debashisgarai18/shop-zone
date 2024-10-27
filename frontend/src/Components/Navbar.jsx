@@ -26,10 +26,13 @@ const Navbar = () => {
 
 // this is the first header for the navbar
 const TopHeader = () => {
-  const nav = useNavigate()
+  const nav = useNavigate();
   return (
     <div className="w-[97%] flex item-center py-[1rem]">
-      <div className="w-[23%] flex items-center gap-[0.75rem] cursor-pointer" onClick={() => nav("/")}>
+      <div
+        className="w-[23%] flex items-center gap-[0.75rem] cursor-pointer"
+        onClick={() => nav("/")}
+      >
         <img src={UseImage} className="h-[2rem] md:h-[2.5rem]" />
         <span className="text-[1.75rem] hidden md:inline">Demo</span>
       </div>
@@ -61,14 +64,14 @@ const RightTopNav = () => {
 
   const nav = useNavigate();
   const handleClick = () => {
-    nav("/signin")
-  }
+    nav("/signin");
+  };
   return (
     <div className="w-[33%] hidden md:flex gap-[1rem]">
       <div className="w-[35%] flex items-center justify-center relative">
         <Select
           data={countries}
-          icon=<FaLocationDot className="absolute left-[5px] text-[#35baf6]" />
+          icon={<FaLocationDot className="absolute left-[5px] text-[#35baf6]" />}
           bgColor="bg-white"
           rounded={false}
           border
@@ -86,7 +89,13 @@ const RightTopNav = () => {
           logo=<FiShoppingCart className="text-[1.2rem]" />
           count={0}
         />
-        <Button label="Sign in" textSize="16px" rounded="rounded-md" active click = {handleClick} />
+        <Button
+          label="Sign in"
+          textSize="16px"
+          rounded="rounded-md"
+          active
+          click={handleClick}
+        />
       </div>
     </div>
   );
@@ -118,7 +127,12 @@ const HamburgerMenu = () => {
             <span className="text-[1rem] font-medium">Cart</span>
           </div>
           <div className="w-full h-[3rem] ">
-            <Button label="Sign in" textSize="1rem" rounded="rounded-md" active />
+            <Button
+              label="Sign in"
+              textSize="1rem"
+              rounded="rounded-md"
+              active
+            />
           </div>
         </div>
       )}

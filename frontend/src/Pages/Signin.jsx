@@ -1,6 +1,7 @@
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
+import axios from "axios";
 
 const Signin = () => {
   const nav = useNavigate();
@@ -11,6 +12,30 @@ const Signin = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // the me endpoint -> for UI side
+  // to check when the user is logged in, if they go to signin/signup page, it should redirect to the current page
+  // else if they are not logged in they shouldn't be able to go to any of the pages in Ui except the signin and signup
+  const checkMe = useCallback(async () => {
+    const token = localStorage.getItem("token") ?? "jhgdghjsdjkhada";
+    try {
+      const resp = await axios({
+        method: "get",
+        url: "http://localhost:3000/user/me/",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (resp) nav("/");
+    } catch (err) {
+      nav("/signin");
+      console.log("somerror : ", err);
+    }
+  }, [nav]);
+
+  useEffect(() => {
+    checkMe();
+  }, [checkMe]);
 
   return (
     <div className="w-full bg-[#F1F1F1] mb-[2rem] flex items-center justify-center py-[3rem]">
