@@ -7,40 +7,46 @@ const signupInputval = require("../middlewares/inputVal/user/singupInput");
 const signinInputVal = require("../middlewares/inputVal/user/signinInput");
 const { user, items } = require("../Database");
 const userAuth = require("../middlewares/authMiddleware/userAuth");
+ 
 
 userRouter.post("/signup", signupInputval, async (req, res) => {
-  const { fname, lname, phno, uname, pwd } = req.body;
+  const { fname, phno, uname, pwd } = req.body;
 
-  // check whether the user exists or not
-  const check = await user.findOne({
-    username: uname,
-  });
-
-  if (check) {
-    res.status(200).json({
-      message: "This user already exits!!",
-    });
-    return;
-  } else {
-    // hashing the password to save to DB
-    const hashedPwd = await bcrypt.hash(pwd, 10);
-    // add to the database
-    const response = await user.create({
+  try {
+    // check whether the user exists or not
+    const check = await user.findOne({
       username: uname,
-      firstName: fname,
-      lastName: lname,
-      phoneNumber: phno,
-      password: hashedPwd,
     });
 
-    if (response) {
-      const token = jwt.sign({ id: response._id }, JWT_SECRET, {
-        expiresIn: "12h",
-      });
+    if (check) {
       res.status(200).json({
-        token: token,
+        message: "This user already exits!!",
       });
+      return;
+    } else {
+      // hashing the password to save to DB
+      const hashedPwd = await bcrypt.hash(pwd, 10);
+      // add to the database
+      const response = await user.create({
+        username: uname,
+        fullName: fname,
+        phoneNumber: phno,
+        password: hashedPwd,
+      });
+
+      if (response) {
+        const token = jwt.sign({ id: response._id }, JWT_SECRET, {
+          expiresIn: "12h",
+        });
+        res.status(200).json({
+          token: token,
+        });
+      }
     }
+  } catch (err) {
+    return res.status(404).json({
+      message: `Some error occured :${err}`,
+    });
   }
 });
 
@@ -261,8 +267,8 @@ userRouter.get("/paymentPage", userAuth, async (req, res) => {
 // endpoint for, if the user is logged in and still trying to access the signin/signup endpoint
 userRouter.get("/me", userAuth, (req, res) => {
   res.status(200).json({
-    message : "Logged in"
-  })
-})
+    message: "Logged in",
+  });
+});
 
 module.exports = userRouter;

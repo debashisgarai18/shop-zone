@@ -3,7 +3,6 @@ const zod = require("zod");
 const valSchema = zod.object({
   uname: zod.string().email(),
   fname: zod.string(),
-  lname: zod.string(),
   phno: zod.string().superRefine((val, ctx) => {
     if (val.length !== 10) {
       ctx.addIssue({
@@ -32,7 +31,6 @@ const signupInputval = (req, res, next) => {
   const check = valSchema.safeParse({
     uname,
     fname,
-    lname,
     phno,
     pwd,
   });
