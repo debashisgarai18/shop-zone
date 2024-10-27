@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 const Select = ({
-  data,
+  data = [],
   icon,
   bgColor,
   rounded,
@@ -9,7 +9,7 @@ const Select = ({
   textSize,
   border,
   fontWeight,
-}) => {
+} = {}) => {
   return (
     <>
       {icon}

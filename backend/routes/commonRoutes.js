@@ -2,6 +2,7 @@
 const { Router } = require("express");
 const { category } = require("../Database");
 const commonRouter = Router();
+const {ObjectId} = require("mongodb")
 
 // endpoint to get all the parentCategory names
 commonRouter.get("/getCategories", async (req, res) => {
@@ -49,5 +50,32 @@ commonRouter.get("/getProducts/:category", async (req, res) => {
     });
   }
 });
+
+// endpoint to get a specific item of given category and item ID
+commonRouter.get("/getProductInfo/", async (req, res) => {
+  const queryParams = req.query;
+  const prodId = new ObjectId(queryParams.productId)
+  try{
+    const resp = await category.find({
+      cat : queryParams.cat
+    })
+    const matchedItem = resp[0].items.find((e) => e._id.equals(prodId))
+    if(matchedItem) {
+      return res.status(200).json({
+        message : matchedItem
+      })
+    }
+    else{
+      return res.status(404).json({
+        message : "item not found"
+      })
+    }
+  }
+  catch(err){
+    return res.status(400).json({
+      message : `Something went wrong!! : ${err}`
+    })
+  }
+})
 
 module.exports = commonRouter;
