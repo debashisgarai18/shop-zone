@@ -16,6 +16,7 @@ commonRouter.get("/getCategories", async (req, res) => {
         drops: e.drops,
         logo: e.logo,
         bgColor: e.bgColor,
+        hasProducts : e.hasProducts
       });
     });
     return res.status(200).json({
@@ -28,7 +29,7 @@ commonRouter.get("/getCategories", async (req, res) => {
   }
 });
 
-// TODO : have one endpoint to fetch the items given a catgegory
+// endpoint to fetch the items given a catgegory
 commonRouter.get("/getPRoducts/:category", async (req, res) => {
   const getCat = req.params.category;
   try {
@@ -39,9 +40,8 @@ commonRouter.get("/getPRoducts/:category", async (req, res) => {
       return res.status(404).json({
         message: "No category found",
       });
-
     return res.status(200).json({
-      message: cat.items,
+      message: cat,
     });
   } catch (err) {
     return res.status(403).json({

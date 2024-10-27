@@ -17,7 +17,7 @@ export const PopularProducts = ({ category }) => {
       method: "get",
       url: `http://localhost:3000/common/getProducts/${cat}`,
     });
-    setItems(response.data.message);
+    setItems(response.data.message.items);
   };
 
   useEffect(() => {
