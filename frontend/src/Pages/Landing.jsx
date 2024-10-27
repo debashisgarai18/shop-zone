@@ -1,15 +1,35 @@
 import PropTypes from "prop-types";
 import { categories } from "../Components/categories";
 import { Slider } from "@mui/material";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Rating from "@mui/material/Rating";
 import { ProductCard } from "../Components/PopularProducts";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
+import axios from "axios";
 
 // TODO : Navigation to this page on the basis of the category
 const Landing = () => {
   const [searchParams] = useSearchParams();
+  const category = searchParams.get("category");
+  const [sub, setSub] = useState([]);
+
+  // wrpping it inside usecallback coz it should run only when the category changes, not in every render
+  const getData = useCallback(async () => {
+    try {
+      const resp = await axios({
+        method: "get",
+        url: `http://localhost:3000/common/getProducts/${category}`,
+      });
+      setSub(resp.data.message.sub);
+    } catch (err) {
+      alert(`error : ${err}`);
+    }
+  }, [category]);
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -18,10 +38,10 @@ const Landing = () => {
   return (
     <section className="w-full h-fit flex justify-center py-[1rem] ">
       <div className="w-[97%] h-fit ">
-        <LandingPageTitle category={searchParams.get("category")} />
+        <LandingPageTitle category={category} sub={sub} />
         <div className="w-full mt-[1rem] flex justify-center gap-[1rem]">
           <FilterCategoryPart />
-          <ItemsPart category={searchParams.get("category")} />
+          <ItemsPart category={category} />
         </div>
       </div>
     </section>
@@ -29,14 +49,22 @@ const Landing = () => {
 };
 
 // TODO : Do the responsiveness part
-const LandingPageTitle = ({ category }) => {
+const LandingPageTitle = ({ category, sub }) => {
   return (
     <div className="w-full bg-[#CDFAFE] flex gap-[1rem] flex-col rounded-2xl py-[1rem] px-[2rem]">
       {categories.filter((e) => e.cat === category)[0].hasProducts && (
         <div className="text-[2rem] font-medium">{category}</div>
       )}
       <div className="w-full flex gap-[1rem]">
-        {categories.filter((e) => e.cat === category)[0].hasProducts &&
+        {sub &&
+          sub.map((_, idx) => {
+            return (
+              <div key={idx} className="cursor-pointer">
+                {_}
+              </div>
+            );
+          })}
+        {/* {categories.filter((e) => e.cat === category)[0].hasProducts &&
           categories.filter((e) => e.cat === category)[0].sub &&
           categories
             .filter((e) => e.cat === category)[0]
@@ -46,7 +74,7 @@ const LandingPageTitle = ({ category }) => {
                   {e}
                 </div>
               );
-            })}
+            })} */}
       </div>
     </div>
   );
@@ -54,6 +82,7 @@ const LandingPageTitle = ({ category }) => {
 
 LandingPageTitle.propTypes = {
   category: PropTypes.string,
+  sub: PropTypes.array,
 };
 
 // TODO : Do the responsiveness part
@@ -61,6 +90,7 @@ const FilterCategoryPart = () => {
   const [value, setValue] = useState([100, 1000000]);
   const [minVal, setMinVal] = useState(100);
   const [maxVal, setMaxVal] = useState(1000000);
+  const [categories, setCategories] = useState([]);
 
   const nav = useNavigate();
 
@@ -73,6 +103,22 @@ const FilterCategoryPart = () => {
   const handleClick = (cat) => {
     nav(`/landing?category=${cat}`);
   };
+
+  const getData = async () => {
+    try {
+      const resp = await axios({
+        method: "get",
+        url: "http://localhost:3000/common/getCategories/",
+      });
+      setCategories(resp.data.message);
+    } catch (err) {
+      alert(`Error : ${err}`);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div className="w-[25%] h-fit flex flex-col justify-center gap-[1.5rem]">
@@ -175,13 +221,30 @@ const FilterCategoryPart = () => {
 
 // TODO : Do the responsiveness part
 const ItemsPart = ({ category }) => {
+  const [categories, setCategories] = useState({});
+
+  const getData = useCallback(async () => {
+    try {
+      const resp = await axios({
+        method: "get",
+        url: `http://localhost:3000/common/getProducts/${category}`,
+      });
+      setCategories(resp.data.message);
+    } catch (err) {
+      alert(`Error : ${err}`);
+    }
+  }, [category]);
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
   return (
     <div className="w-[75%] px-[1rem] py-[1rem]">
-      {categories.filter((e) => e.cat === category)[0].hasProducts ? (
+      {categories.hasProducts ? (
         <div className="text-[#7E7E7E] text-lg">
           We&apos;ve found{" "}
           <span className="text-[#35BAF6] font-medium">
-            {categories.filter((e) => e.cat === category)[0].items?.length}
+            {categories.items?.length}
           </span>{" "}
           items for you!
         </div>
@@ -191,19 +254,17 @@ const ItemsPart = ({ category }) => {
           items for you!
         </div>
       )}
-      {categories.filter((e) => e.cat === category)[0].hasProducts ? (
+      {categories.hasProducts ? (
         <div className="w-full grid grid-cols-4 gap-[1.75rem] py-[1rem]">
-          {categories
-            .filter((e) => e.cat === category)[0]
-            .items?.map((e, idx) => (
-              // TODO : need to send the category and the product index (as of now) to the product display page -> onClick
-              <ProductCard
-                key={idx}
-                productInfo={e}
-                category={category}
-                productId={idx}
-              />
-            ))}
+          {categories.items?.map((e) => (
+            // TODO : need to send the category and the product index (as of now) to the product display page -> onClick
+            <ProductCard
+              key={e._id}
+              productInfo={e}
+              category={category}
+              productId={e._id}
+            />
+          ))}
         </div>
       ) : (
         <div className="w-full text-center font-medium text-2xl py-[2rem]">

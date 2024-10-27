@@ -30,7 +30,7 @@ commonRouter.get("/getCategories", async (req, res) => {
 });
 
 // endpoint to fetch the items given a catgegory
-commonRouter.get("/getPRoducts/:category", async (req, res) => {
+commonRouter.get("/getProducts/:category", async (req, res) => {
   const getCat = req.params.category;
   try {
     const cat = await category.findOne({
