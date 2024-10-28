@@ -1,23 +1,78 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home, Signin, Signup, Landing, ProductPage, Checkout } from "./Pages";
-import Navbar from "./Components/Navbar";
-import Menubar from "./Components/Menubar";
-import Footer from "./Components/Footer";
+import { lazy, Suspense } from "react";
+
+const Navbar = lazy(() => import("./Components/Navbar"));
+const Menubar = lazy(() => import("./Components/Menubar"));
+const Footer = lazy(() => import("./Components/Footer"));
+const Home = lazy(() => import("./Pages/Home"));
+const Signin = lazy(() => import("./Pages/Signin"));
+const Signup = lazy(() => import("./Pages/Signup"));
+const Landing = lazy(() => import("./Pages/Landing"));
+const ProductPage = lazy(() => import("./Pages/ProductPage"));
+const Checkout = lazy(() => import("./Pages/Checkout"));
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
-      <Menubar />
+      <Suspense fallback={"Loading..."}>
+        <Navbar />
+      </Suspense>
+      <Suspense fallback={"Loading..."}>
+        <Menubar />
+      </Suspense>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/landing" element={<Landing />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/product" element={<ProductPage />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route
+          path="/"
+          element={
+            <Suspense fallback={"Loading...."}>
+              <Home />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/landing"
+          element={
+            <Suspense fallback={"Loading..."}>
+              <Landing />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <Suspense fallback={"Loading..."}>
+              <Signup />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/signin"
+          element={
+            <Suspense fallback={"Loading..."}>
+              <Signin />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <Suspense fallback={"Loading..."}>
+              <Checkout />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/product"
+          element={
+            <Suspense fallback={"Loading..."}>
+              <ProductPage />
+            </Suspense>
+          }
+        />
       </Routes>
-      <Footer />
+      <Suspense fallback={"Loading..."}>
+        <Footer />
+      </Suspense>
     </BrowserRouter>
   );
 }
