@@ -1,13 +1,12 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { FiEye } from "react-icons/fi";
+import { FiEyeOff } from "react-icons/fi";
 
 const Signup = () => {
   const nav = useNavigate();
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -17,13 +16,13 @@ const Signup = () => {
   // to check when the user is logged in, if they go to signin/signup page, it should redirect to the current page
   // else if they are not logged in they shouldn't be able to go to any of the pages in Ui except the signin and signup
   const checkMe = useCallback(async () => {
-    const token = localStorage.getItem("token") ?? "jhgdghjsdjkhada";
+    const token = localStorage.getItem("token") ?? "";
     try {
       const resp = await axios({
         method: "get",
         url: "http://localhost:3000/user/me/",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: token,
         },
       });
       if (resp) nav("/");
@@ -37,6 +36,42 @@ const Signup = () => {
     checkMe();
   }, [checkMe]);
 
+  // states for form management
+  const [fname, setFname] = useState();
+  const [uname, setUname] = useState();
+  const [phno, setPhno] = useState();
+  const [pwd, setPwd] = useState();
+  const [showPwd, setShowPwd] = useState(false);
+
+  const clearReasponse = () => {
+    setFname("");
+    setUname("");
+    setPwd("");
+    setPhno("");
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    const formData = {
+      fname,
+      uname,
+      phno,
+      pwd,
+    };
+    try {
+      const resp = await axios({
+        method: "post",
+        url: "http://localhost:3000/user/signup",
+        data: formData,
+      });
+      localStorage.setItem("token", `Bearer ${resp.data.token}`);
+      nav("/");
+      clearReasponse();
+    } catch (err) {
+      alert(`Some error : ${err}`);
+    }
+  };
+
   return (
     <div className="w-full bg-[#F1F1F1] mb-[2rem] flex items-center justify-center py-[3rem]">
       <div className="w-[30%] px-[2rem] py-[2rem] bg-white rounded-2xl shadow-xl">
@@ -49,31 +84,50 @@ const Signup = () => {
             <div className="w-full text-lg">
               <input
                 type="text"
-                className="w-full h-full px-[1rem] py-[0.75rem] border-[1px] rounded-xl border-[#7E7E7E]"
+                className="w-full h-full px-[1rem] py-[0.75rem] border-[1px] rounded-xl border-[#7E7E7E] focus:outline-none"
                 placeholder="Full Name"
+                value={fname}
+                onChange={(e) => setFname(e.target.value)}
               />
             </div>
             <div className="w-full text-lg">
               <input
                 type="text"
-                className="w-full h-full px-[1rem] py-[0.75rem] border-[1px] rounded-xl border-[#7E7E7E]"
+                className="w-full h-full px-[1rem] py-[0.75rem] border-[1px] rounded-xl border-[#7E7E7E] focus:outline-none"
                 placeholder="Email"
+                value={uname}
+                onChange={(e) => setUname(e.target.value)}
               />
             </div>
             <div className="w-full text-lg">
               <input
                 type="text"
-                className="w-full h-full px-[1rem] py-[0.75rem] border-[1px] rounded-xl border-[#7E7E7E]"
+                className="w-full h-full px-[1rem] py-[0.75rem] border-[1px] rounded-xl border-[#7E7E7E] focus:outline-none"
                 placeholder="Phone"
+                value={phno}
+                onChange={(e) => setPhno(e.target.value)}
               />
             </div>
             {/* // TODO : Add the eye button to display the password / not show the password */}
-            <div className="w-full text-lg">
+            <div className="w-full text-lg relative flex items-center border-[#7E7E7E] border-[1px]  rounded-xl pr-[1rem]">
               <input
-                type="password"
-                className="w-full h-full px-[1rem] py-[0.75rem] border-[1px] rounded-xl border-[#7E7E7E]"
+                type={showPwd ? "text" : "password"}
+                className="w-full h-full px-[1rem] py-[0.75rem] border-none rounded-xl focus:outline-none"
                 placeholder="Password"
+                value={pwd}
+                onChange={(e) => setPwd(e.target.value)}
               />
+              {showPwd ? (
+                <FiEyeOff
+                  className="cursor-pointer z-10"
+                  onClick={() => setShowPwd((prev) => !prev)}
+                />
+              ) : (
+                <FiEye
+                  className="cursor-pointer z-10"
+                  onClick={() => setShowPwd((prev) => !prev)}
+                />
+              )}
             </div>
           </div>
           <button

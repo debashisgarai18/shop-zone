@@ -2,12 +2,12 @@ import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useCallback } from "react";
 import axios from "axios";
+import { useState } from "react";
+import { FiEye } from "react-icons/fi";
+import { FiEyeOff } from "react-icons/fi";
 
 const Signin = () => {
   const nav = useNavigate();
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -23,7 +23,7 @@ const Signin = () => {
         method: "get",
         url: "http://localhost:3000/user/me/",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: token,
         },
       });
       if (resp) nav("/");
@@ -36,6 +36,36 @@ const Signin = () => {
   useEffect(() => {
     checkMe();
   }, [checkMe]);
+
+  // states for form management
+  const [uname, setUname] = useState();
+  const [pwd, setPwd] = useState();
+  const [showPwd, setShowPwd] = useState(false);
+
+  const clearReasponse = () => {
+    setUname("");
+    setPwd("");
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    const formData = {
+      uname,
+      pwd,
+    };
+    try {
+      const resp = await axios({
+        method: "post",
+        url: "http://localhost:3000/user/signin",
+        data: formData,
+      });
+      localStorage.setItem("token", `Bearer ${resp.data.token}`);
+      nav("/");
+      clearReasponse();
+    } catch (err) {
+      alert(`Some error : ${err}`);
+    }
+  };
 
   return (
     <div className="w-full bg-[#F1F1F1] mb-[2rem] flex items-center justify-center py-[3rem]">
@@ -51,15 +81,30 @@ const Signin = () => {
                 type="text"
                 className="w-full h-full px-[1rem] py-[0.75rem] border-[1px] rounded-xl border-[#7E7E7E]"
                 placeholder="Email"
+                value={uname}
+                onChange={(e) => setUname(e.target.value)}
               />
             </div>
             {/* // TODO : Add the eye button to display the password / not show the password */}
-            <div className="w-full text-lg">
+            <div className="w-full text-lg  flex items-center border-[#7E7E7E] border-[1px]  rounded-xl pr-[1rem]">
               <input
-                type="password"
-                className="w-full h-full px-[1rem] py-[0.75rem] border-[1px] rounded-xl border-[#7E7E7E]"
+                type={showPwd ? "text" : "password"}
+                className="w-full h-full px-[1rem] py-[0.75rem] border-none rounded-xl focus:outline-none"
                 placeholder="Password"
+                value={pwd}
+                onChange={(e) => setPwd(e.target.value)}
               />
+              {showPwd ? (
+                <FiEyeOff
+                  className="cursor-pointer z-10"
+                  onClick={() => setShowPwd((prev) => !prev)}
+                />
+              ) : (
+                <FiEye
+                  className="cursor-pointer z-10"
+                  onClick={() => setShowPwd((prev) => !prev)}
+                />
+              )}
             </div>
           </div>
           <button

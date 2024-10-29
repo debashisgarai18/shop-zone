@@ -11,6 +11,8 @@ const Landing = lazy(() => import("./Pages/Landing"));
 const ProductPage = lazy(() => import("./Pages/ProductPage"));
 const Checkout = lazy(() => import("./Pages/Checkout"));
 
+// TODO : Improve the loading of the JSX components
+
 function App() {
   return (
     <BrowserRouter>

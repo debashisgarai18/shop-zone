@@ -1,4 +1,3 @@
-import UseImage from "../assets/react.svg";
 import mainLogo from "../assets/LogoMain.png"
 import { IoMdSearch } from "react-icons/io";
 import Select from "./Select";
