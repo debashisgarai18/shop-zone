@@ -5,7 +5,7 @@ const { JWT_SECRET } = require("../config");
 const bcrypt = require("bcrypt");
 const signupInputval = require("../middlewares/inputVal/user/singupInput");
 const signinInputVal = require("../middlewares/inputVal/user/signinInput");
-const { user, items } = require("../Database");
+const { user, items} = require("../Database");
 const userAuth = require("../middlewares/authMiddleware/userAuth");
 
 // the me endpoint
@@ -91,28 +91,51 @@ userRouter.post("/signin", signinInputVal, async (req, res) => {
 });
 
 // this is the endpoint to get all the items
-userRouter.get("/allItems", async (req, res) => {
-  const response = await items.find({});
-  if (response) {
-    res.status(200).json(
-      response.map((e) => {
-        return {
-          id: e.id,
-          title: e.title,
-          price: e.price,
-          desc: e.description,
-          category: e.category,
-          image: e.image,
-          rating: e.rating,
-        };
+// TODO : Remove this
+// userRouter.get("/allItems", async (req, res) => {
+//   const response = await items.find({});
+//   if (response) {
+//     res.status(200).json(
+//       response.map((e) => {
+//         return {
+//           id: e.id,
+//           title: e.title,
+//           price: e.price,
+//           desc: e.description,
+//           category: e.category,
+//           image: e.image,
+//           rating: e.rating,
+//         };
+//       })
+//     );
+//   } else {
+//     res.status(404).json({
+//       message: "There is some issue in getting the Items!!",
+//     });
+//   }
+// });
+
+// endpoint to extarct the user deatils after authenticatiom
+userRouter.get("/getUser", userAuth, async(req, res) => {
+  const userId = req.userId;
+  try{
+      const userData = await user.findOne({
+        _id : userId
+      });
+      if(!userData) return res.status(404).json({
+        message : "The requested user not found!!"
       })
-    );
-  } else {
-    res.status(404).json({
-      message: "There is some issue in getting the Items!!",
-    });
+
+      return res.status(200).json({
+        message : userData
+      })
   }
-});
+  catch(err){
+    return res.status(404).json({
+      message : `Error : ${err}`
+    })
+  }
+})
 
 // endpoint to extract all the categories
 userRouter.get("/categories", async (req, res) => {
