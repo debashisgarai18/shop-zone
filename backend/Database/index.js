@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { MONGO_URI } = require("../config");
-const { boolean } = require("zod");
+const { boolean, string } = require("zod");
 
 mongoose.connect(MONGO_URI);
 
@@ -82,6 +82,10 @@ const adminSchema = new mongoose.Schema({
 
 // schema for the items in the cart and its count
 const cartItemSchema = new mongoose.Schema({
+  category : {
+    type : String,
+    required : true
+  },
   itemId: {
     type: String,
     required: true,
@@ -110,6 +114,10 @@ const cartItemSchema = new mongoose.Schema({
 
 // this is the scehma for the items in the wishlist
 const wishlistItemSchema = new mongoose.Schema({
+  category : {
+    type : String,
+    required : true
+  },
   itemId: {
     type: String,
     required: true,

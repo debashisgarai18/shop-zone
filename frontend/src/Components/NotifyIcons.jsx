@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 
-const NotifyIcons = ({ label, logo, count }) => {
+const NotifyIcons = ({ label, logo, count, click }) => {
   return (
-    <div className="flex items-center justify-center gap-[1rem] h-full cursor-pointer">
+    <div className="flex items-center justify-center gap-[1rem] h-full cursor-pointer" onClick={click}>
       <div className="h-full flex items-center justify-center relative">
         {logo}
         <div className="h-[1.2rem] font-medium w-[1.2rem] rounded-full bg-[#35baf6] flex items-center justify-center absolute text-[10px] top-[6%] right-[-56%] text-white">
@@ -18,5 +18,6 @@ NotifyIcons.propTypes = {
   label: PropTypes.string,
   logo: PropTypes.elementType,
   count: PropTypes.number,
+  click : PropTypes.func
 };
 export default NotifyIcons;

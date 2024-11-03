@@ -69,6 +69,8 @@ const RightTopNav = () => {
 
   // states
   const [avatar, setAvatar] = useState("");
+  const [wishListCount, setWishlistCount] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
 
   // check the auth and get the 1st letter of the username if the token is found  
   const getUser = async () => {
@@ -81,6 +83,8 @@ const RightTopNav = () => {
         },
       });
       setAvatar(resp.data.message.username[0]);
+      setWishlistCount(resp.data.message.wishlistItems.length);
+      setCartCount(resp.data.message.cartItems.length)
     } catch (err) {
       alert(`ERROR : ${err}`);
     }
@@ -114,12 +118,14 @@ const RightTopNav = () => {
         <NotifyIcons
           label="Wishlist"
           logo=<FaRegHeart className="text-[1.2rem]" />
-          count={0}
+          count={wishListCount}
+          click = {() => nav("/wishlist")}
         />
         <NotifyIcons
           label="Cart"
           logo=<FiShoppingCart className="text-[1.2rem]" />
-          count={0}
+          count={cartCount}
+          click = {() => nav("/checkout")}
         />
         {!localStorage.getItem("token") ? (
           <Button

@@ -10,8 +10,9 @@ const Signup = lazy(() => import("./Pages/Signup"));
 const Landing = lazy(() => import("./Pages/Landing"));
 const ProductPage = lazy(() => import("./Pages/ProductPage"));
 const Checkout = lazy(() => import("./Pages/Checkout"));
+const WishlistPage = lazy(() => import("./Pages/WishlistPage"))
 
-// TODO : Improve the loading of the JSX components
+// TODO : Improve the loading animation of the JSX components
 
 function App() {
   return (
@@ -68,6 +69,14 @@ function App() {
           element={
             <Suspense fallback={"Loading..."}>
               <ProductPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/wishlist"
+          element={
+            <Suspense fallback={"Loading..."}>
+              <WishlistPage />
             </Suspense>
           }
         />
