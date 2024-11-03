@@ -66,9 +66,11 @@ function App() {
         <Route
           path="/checkout"
           element={
-            <Suspense fallback={"Loading..."}>
-              <Checkout />
-            </Suspense>
+            <cartContext.Provider value={{ cartCount, setCartCount }}>
+              <Suspense fallback={"Loading..."}>
+                <Checkout />
+              </Suspense>
+            </cartContext.Provider>
           }
         />
         <Route

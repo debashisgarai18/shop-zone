@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
 import Rating from "@mui/material/Rating";
@@ -16,35 +16,31 @@ const WishlistPage = () => {
   // getting value from the contexts
   const { wishlistCount, setWishlistCount } = useContext(wishlistContext);
 
-  const getWishlistItems = useCallback(async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:3000/user/showWishlist",
-        {
-          headers: {
-            Authorization: localStorage.getItem("token"),
-          },
-        }
-      );
-      setWishlistData(response.data.wishlist);
-    } catch (err) {
-      console.log(`Some error: ${err}`);
-    }
-  }, []);
-
-  // check if the token is present or not
-  // if present then continue, else nav back to the signin endpoint
-  if (localStorage.getItem("token")) {
-    getWishlistItems();
-  }
-
-  // if the token not present then redirect to the signin page with an alert
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       alert("You must signin to see the wishlist");
       nav("/signin");
+      return;
     }
-  }, [nav]);
+
+    const getWishlistItems = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/user/showWishlist",
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
+        setWishlistData(response.data.wishlist);
+      } catch (err) {
+        console.log(`Some error: ${err}`);
+      }
+    };
+
+    getWishlistItems();
+  }, [nav, wishlistCount]);
 
   return (
     <div className="w-full flex items-center justify-center py-[1.75rem]">
