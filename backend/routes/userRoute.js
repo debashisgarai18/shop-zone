@@ -214,7 +214,10 @@ userRouter.put("/updateCart/addItem", userAuth, async (req, res) => {
 
     await getUser.save();
     return res.status(200).json({
-      message: "Item Added Successfully",
+      message: {
+        text : "Item Added Successfully",
+        length : getUser.cartItems.length
+      }
     });
   } catch (err) {
     return res.status(500).json({

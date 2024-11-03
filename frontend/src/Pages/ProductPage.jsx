@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { IoMdSearch } from "react-icons/io";
 import Rating from "@mui/material/Rating";
 import { FaRegHeart } from "react-icons/fa";
@@ -13,6 +13,9 @@ import { cartContext, wishlistContext } from "../contexts/countContext";
 // TODO : Responsiveness part
 const ProductPage = () => {
   const [searchParams] = useSearchParams();
+  const nav = useNavigate()
+
+  // states
   const [counter, setCounter] = useState(1);
   const [productToBeShown, setProductToBeShown] = useState({});
 
@@ -26,8 +29,6 @@ const ProductPage = () => {
   // todo
   const {setCartCount} = useContext(cartContext);
 
-  // const productToBeShown = categories.filter((e) => e.cat === category)[0]
-  //   .items[searchParams.get("id")];
   // fetching the product details from the endpoint provided
   const getProduct = useCallback(async () => {
     try {
@@ -64,7 +65,8 @@ const ProductPage = () => {
   const addToWishlist = async () => {
     if (!localStorage.getItem("token")) {
       alert("Please signin to your account to add in the wishlist");
-      return;
+      nav("/signin")
+      return
     }
 
     try {
@@ -91,6 +93,38 @@ const ProductPage = () => {
     }
   };
 
+
+  // function to add items to the cart
+  const handleAddToCart = async () => {
+    // check for the availability of the token
+    if(!localStorage.getItem("token")){
+      alert("You must signin first to add to cart");
+      nav("/signin")
+      return
+    }
+
+    try{
+      const response = await axios.put("http://localhost:3000/user/updateCart/addItem", {
+          category: productToBeShown.parentCategory,
+          itemId: productToBeShown._id,
+          name: productToBeShown.name,
+          img: productToBeShown.img,
+          star: productToBeShown.star,
+          disPrice: productToBeShown.disPrice,
+          count : counter
+      }, {
+        headers : {
+          Authorization : localStorage.getItem("token"),
+          "Content-Type" : 'application/json'
+        }
+      })
+      setCartCount(response.data.message.length)
+    }
+    catch(err){
+      console.log(`Some error : ${err}`)
+    }
+  }
+  
   // effect to scroll back to the top of the page
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -200,7 +234,7 @@ const ProductPage = () => {
                     <IoMdAdd />
                   </div>
                 </div>
-                <div className="h-[40px]">
+                <div className="h-[40px]" onClick={handleAddToCart}>
                   <Button
                     label="Add To Cart"
                     textSize="2xl"
