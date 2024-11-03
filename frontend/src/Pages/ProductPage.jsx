@@ -5,9 +5,10 @@ import { FaRegHeart } from "react-icons/fa";
 import Button from "../Components/Button";
 import { IoMdAdd } from "react-icons/io";
 import { GrFormSubtract } from "react-icons/gr";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import axios from "axios";
+import { cartContext, wishlistContext } from "../contexts/countContext";
 
 // TODO : Responsiveness part
 const ProductPage = () => {
@@ -18,6 +19,12 @@ const ProductPage = () => {
   // getting the category and the product Id from the query params
   const category = searchParams.get("category");
   const productId = searchParams.get("id");
+
+
+  // get the contexts
+  const {setWishlistCount} = useContext(wishlistContext);
+  // todo
+  const {setCartCount} = useContext(cartContext);
 
   // const productToBeShown = categories.filter((e) => e.cat === category)[0]
   //   .items[searchParams.get("id")];
@@ -78,7 +85,7 @@ const ProductPage = () => {
           },
         }
       );
-      console.log(resp.data);
+      setWishlistCount(resp.data.message.length);
     } catch (err) {
       console.log(`Some error : ${err}`);
     }
@@ -202,8 +209,8 @@ const ProductPage = () => {
                     icon=<FiShoppingCart />
                   />
                 </div>
-                <div className="w-[40px] h-[40px] flex justify-center items-center border-[1px] cursor-pointer hover:bg-[#35BAF6] hover:text-white rounded-md border-[#BFBFBF]">
-                  <FaRegHeart className="text-xl" onClick={addToWishlist} />
+                <div className="w-[40px] h-[40px] flex justify-center items-center border-[1px] cursor-pointer hover:bg-[#35BAF6] hover:text-white rounded-md border-[#BFBFBF]" onClick={addToWishlist}>
+                  <FaRegHeart className="text-xl" />
                 </div>
               </div>
             </div>

@@ -8,10 +8,11 @@ import { FaRegHeart } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaLocationDot } from "react-icons/fa6";
 // import { GiHamburgerMenu } from "react-icons/gi";
-import { useState } from "react";
+import { useContext, useState } from "react";
 // import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { cartContext, wishlistContext } from "../contexts/countContext";
 
 // TODO : Implement the hamburger for mobile devices
 const Navbar = () => {
@@ -69,8 +70,11 @@ const RightTopNav = () => {
 
   // states
   const [avatar, setAvatar] = useState("");
-  const [wishListCount, setWishlistCount] = useState(0);
-  const [cartCount, setCartCount] = useState(0);
+  const {wishlistCount, setWishlistCount} = useContext(wishlistContext)
+  const {cartCount, setCartCount} = useContext(cartContext)
+  // const [wishListCount, setWishlistCount] = useState(0);
+  // const [cartCount, setCartCount] = useState(0);
+
 
   // check the auth and get the 1st letter of the username if the token is found  
   const getUser = async () => {
@@ -118,7 +122,7 @@ const RightTopNav = () => {
         <NotifyIcons
           label="Wishlist"
           logo=<FaRegHeart className="text-[1.2rem]" />
-          count={wishListCount}
+          count={wishlistCount}
           click = {() => nav("/wishlist")}
         />
         <NotifyIcons

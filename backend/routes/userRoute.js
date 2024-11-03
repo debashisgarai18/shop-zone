@@ -121,7 +121,7 @@ userRouter.put("/updateWishlist/addItem", userAuth, async (req, res) => {
 
     // to check if the item exists in the wishlist
     // cannot use equals here as it is used for the obejct values only not for strings
-    console.log(payload.category);
+    console.log(payload.category)
     const isItemPresent = getUser.wishlistItems.find(
       (e) => e.itemId === payload.itemId
     );
@@ -131,7 +131,10 @@ userRouter.put("/updateWishlist/addItem", userAuth, async (req, res) => {
     await getUser.save();
 
     return res.status(200).json({
-      message: "Item added to wishlist!!",
+      message: {
+        text : "Item added to wishlist!!",
+        length : getUser.wishlistItems.length
+      }
     });
   } catch (err) {
     return res.status(500).json({
@@ -146,8 +149,8 @@ userRouter.put(
   userAuth,
   async (req, res) => {
     const userId = req.userId;
-    const itemId = req.params.itemId;
     try {
+      const itemId = req.params.itemId;
       const getUser = await user.findOne({
         _id: userId,
       });
@@ -160,8 +163,8 @@ userRouter.put(
 
       return res.status(200).json({
         message: {
-          text: "The wishlist is updated successfully",
-          length: getUser.wishlistItems.length,
+          text : "The wishlist is updated successfully",
+          length : getUser.wishlistItems.length
         },
       });
     } catch (err) {
@@ -264,27 +267,28 @@ userRouter.get("/showCart", userAuth, async (req, res) => {
 
 // endpoint to get the total price of the cart
 // todo : this can be done in the client side as well
-userRouter.get("/getTotalPrice", userAuth, async (req, res) => {
+userRouter.get("/getTotalPrice", userAuth, async(req, res) => {
   const userId = req.userId;
-  try {
+  try{
     const getUser = await user.findOne({
-      _id: userId,
-    });
+      _id : userId
+    })
     let totalCost = 0;
     getUser.cartItems.map((e) => {
       const price = e.count * parseInt(e.disPrice.split(" ")[1]);
-      totalCost += price;
-    });
+      totalCost += price
+    })
 
     return res.status(200).json({
-      price: totalCost,
-    });
-  } catch (err) {
-    return res.status(500).json({
-      message: `Internal Server Error : ${err}`,
-    });
+      price : totalCost
+    })
   }
-});
+  catch(err){
+    return res.status(500).json({
+      message : `Internal Server Error : ${err}`
+    })
+  }
+})
 
 // endpoint for, if the user is logged in and still trying to access the signin/signup endpoint
 userRouter.get("/me", userAuth, (req, res) => {

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState } from "react";
+import { wishlistContext, cartContext } from "./contexts/countContext";
 
 const Navbar = lazy(() => import("./Components/Navbar"));
 const Menubar = lazy(() => import("./Components/Menubar"));
@@ -10,16 +11,22 @@ const Signup = lazy(() => import("./Pages/Signup"));
 const Landing = lazy(() => import("./Pages/Landing"));
 const ProductPage = lazy(() => import("./Pages/ProductPage"));
 const Checkout = lazy(() => import("./Pages/Checkout"));
-const WishlistPage = lazy(() => import("./Pages/WishlistPage"))
+const WishlistPage = lazy(() => import("./Pages/WishlistPage"));
 
 // TODO : Improve the loading animation of the JSX components
 
 function App() {
+  const [wishlistCount, setWishlistCount] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
   return (
     <BrowserRouter>
-      <Suspense fallback={"Loading..."}>
-        <Navbar />
-      </Suspense>
+      <wishlistContext.Provider value={{ wishlistCount, setWishlistCount }}>
+        <cartContext.Provider value={{ cartCount, setCartCount }}>
+          <Suspense fallback={"Loading..."}>
+            <Navbar />
+          </Suspense>
+        </cartContext.Provider>
+      </wishlistContext.Provider>
       <Suspense fallback={"Loading..."}>
         <Menubar />
       </Suspense>
@@ -67,17 +74,27 @@ function App() {
         <Route
           path="/product"
           element={
-            <Suspense fallback={"Loading..."}>
-              <ProductPage />
-            </Suspense>
+            <wishlistContext.Provider
+              value={{ wishlistCount, setWishlistCount }}
+            >
+              <cartContext.Provider value={{ cartCount, setCartCount }}>
+                <Suspense fallback={"Loading..."}>
+                  <ProductPage />
+                </Suspense>
+              </cartContext.Provider>
+            </wishlistContext.Provider>
           }
         />
         <Route
           path="/wishlist"
           element={
-            <Suspense fallback={"Loading..."}>
-              <WishlistPage />
-            </Suspense>
+            <wishlistContext.Provider
+              value={{ wishlistCount, setWishlistCount }}
+            >
+              <Suspense fallback={"Loading..."}>
+                <WishlistPage />
+              </Suspense>
+            </wishlistContext.Provider>
           }
         />
       </Routes>
