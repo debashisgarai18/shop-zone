@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
 import Rating from "@mui/material/Rating";
@@ -34,9 +34,13 @@ const WishlistPage = () => {
   // if present then continue, else nav back to the signin endpoint
   if (localStorage.getItem("token")) {
     getWishlistItems();
-  } else {
-    nav("/signin");
   }
+
+  // if the token not present then redirect to the signin page with an alert
+  useEffect(() => {
+    alert("You must signin to see the wishlist");
+    nav("/signin");
+  }, [nav]);
 
   return (
     <div className="w-full flex items-center justify-center py-[1.75rem]">
