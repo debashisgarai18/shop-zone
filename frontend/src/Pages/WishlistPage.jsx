@@ -38,8 +38,10 @@ const WishlistPage = () => {
 
   // if the token not present then redirect to the signin page with an alert
   useEffect(() => {
-    alert("You must signin to see the wishlist");
-    nav("/signin");
+    if (!localStorage.getItem("token")) {
+      alert("You must signin to see the wishlist");
+      nav("/signin");
+    }
   }, [nav]);
 
   return (

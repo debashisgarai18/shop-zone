@@ -53,6 +53,38 @@ const ProductPage = () => {
     if (counter <= 1) setCounter(1);
   };
 
+  // function to add to the wishlist
+  const addToWishlist = async () => {
+    if (!localStorage.getItem("token")) {
+      alert("Please signin to your account to add in the wishlist");
+      return;
+    }
+
+    try {
+      const resp = await axios.put(
+        "http://localhost:3000/user/updateWishlist/addItem",
+        {
+          category: productToBeShown.parentCategory,
+          itemId: productToBeShown._id,
+          name: productToBeShown.name,
+          img: productToBeShown.img,
+          star: productToBeShown.star,
+          disPrice: productToBeShown.disPrice,
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(resp.data);
+    } catch (err) {
+      console.log(`Some error : ${err}`);
+    }
+  };
+
+  // effect to scroll back to the top of the page
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -171,7 +203,7 @@ const ProductPage = () => {
                   />
                 </div>
                 <div className="w-[40px] h-[40px] flex justify-center items-center border-[1px] cursor-pointer hover:bg-[#35BAF6] hover:text-white rounded-md border-[#BFBFBF]">
-                  <FaRegHeart className="text-xl" />
+                  <FaRegHeart className="text-xl" onClick={addToWishlist} />
                 </div>
               </div>
             </div>

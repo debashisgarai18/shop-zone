@@ -94,10 +94,10 @@ export const ProductCard = ({ productInfo, category, productId }) => {
 
 const WishlistView = () => {
   return (
-    <div className="w-[90px] h-[50px] rounded-2xl absolute bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border-[1px] border-[#55BAF6]">
-      <div className="w-[50%] h-full flex items-center justify-center border-r-[1px] border-r-[#55BAF6]">
-        <FaRegHeart className="text-xl hover:text-[#55BAF6]" />
-      </div>
+    <div className="w-[90px] h-[50px] rounded-2xl z-10 absolute bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center border-[1px] border-[#55BAF6]">
+      {/* <div className="w-[50%] h-full flex items-center justify-center border-r-[1px] border-r-[#55BAF6]">
+        <FaRegHeart className="text-xl hover:text-[#55BAF6]" onClick={() => console.log("clicked")}/>
+      </div> */}
       <div className="w-[50%] h-full flex items-center justify-center">
         <FaRegEye className="text-xl hover:text-[#55BAF6]" />
       </div>
@@ -108,7 +108,7 @@ const WishlistView = () => {
 ProductCard.propTypes = {
   productInfo: PropTypes.object,
   category: PropTypes.string,
-  productId: PropTypes.number,
+  productId: PropTypes.string,
 };
 
 PopularProducts.propTypes = {
