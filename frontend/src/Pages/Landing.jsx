@@ -86,6 +86,7 @@ LandingPageTitle.propTypes = {
 };
 
 // TODO : Do the responsiveness part
+
 const FilterCategoryPart = () => {
   const [value, setValue] = useState([100, 1000000]);
   const [minVal, setMinVal] = useState(100);
@@ -147,6 +148,7 @@ const FilterCategoryPart = () => {
         </div>
       </div>
       {/* // Filter by price part */}
+      {/* // todo : need to filter out the products on the specifc range provided of the specific category  */}
       <div className="w-full h-[425px] shadow-xl flex flex-col gap-[1.75rem] px-[1.5rem] py-[1rem] rounded-xl">
         <div className="text-[1.5rem] font-medium">Filter by price</div>
         <div className="w-full flex">

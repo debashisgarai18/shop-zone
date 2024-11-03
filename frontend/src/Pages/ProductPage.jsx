@@ -130,6 +130,7 @@ const ProductPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // todo : render realted products of the specific category of the product --> taken from a common endpoint
   if (productToBeShown && Object.keys(productToBeShown).length > 0) {
     return (
       <div className="w-full flex justify-center py-[2rem]">

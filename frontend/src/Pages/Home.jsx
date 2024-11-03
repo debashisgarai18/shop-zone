@@ -178,6 +178,7 @@ const PopularProductsMenu = () => {
 };
 
 // PRoduct Slider => Bottom Slider
+// todo : need to change the images here--> images got expired
 const ProductSliderPart = () => {
   let settings = {
     dots: false,
@@ -249,6 +250,7 @@ const ProductSliderPart = () => {
 
 // Featured Products Slider part
 // TODO : Responsiveness Part
+// todo : set the random products from the db as the featured products
 const FeaturedProducts = () => {
   let settings = {
     dots: false,

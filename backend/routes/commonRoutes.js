@@ -78,4 +78,9 @@ commonRouter.get("/getProductInfo/", async (req, res) => {
   }
 })
 
+// todo : endpont to render some random products from the DB of random category and name and put them as the featured products
+// todo : one endpoint to get related products --> given a category
+// todo : the search and the filter endpoints -> for the landing page
+// todo : endpoint need to filter out the products on the specifc range provided of the specific category 
+
 module.exports = commonRouter;
