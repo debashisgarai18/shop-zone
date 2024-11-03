@@ -1,5 +1,6 @@
 import FooterImage from "../assets/newsletter.5931358dd220a40019fc.png";
 import Button from "./Button";
+import mainLogo from "../assets/LogoMain.png";
 import { IoNavigateOutline } from "react-icons/io5";
 import PropTypes from "prop-types";
 import { IoMdPricetags } from "react-icons/io";
@@ -7,7 +8,6 @@ import { FaHandshake } from "react-icons/fa6";
 import { RiMoneyRupeeCircleFill } from "react-icons/ri";
 import { TbHierarchy3 } from "react-icons/tb";
 import { PiPackageBold } from "react-icons/pi";
-import UseImage from "../assets/react.svg";
 import { MdOutlineHeadsetMic } from "react-icons/md";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { LuMail } from "react-icons/lu";
@@ -177,8 +177,7 @@ const BottomPart = () => {
     <div className="w-full flex gap-[1.75rem] mb-[1.rem]">
       <div className="w-[25%] px-[1rem] py-[1rem] flex flex-col gap-[1.75rem]">
         <div className="w-full flex items-">
-          <img src={UseImage} className="h-[2rem] md:h-[2.5rem]" />
-          <span className="text-[1.75rem] hidden md:inline">Demo</span>
+          <img src={mainLogo} className="h-[2rem] md:h-[2.5rem]" />
         </div>
         <div className="w-full text-lg">Awesome multi store website</div>
         <div className="w-full flex flex-col gap-[0.5rem]">

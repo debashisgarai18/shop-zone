@@ -96,7 +96,6 @@ const RightTopNav = () => {
 
   if (localStorage.getItem("token")) {
     getUser();
-    console.log("token found");
   }
 
   const handleSigninClick = () => {

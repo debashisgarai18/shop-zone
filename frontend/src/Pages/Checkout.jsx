@@ -6,14 +6,28 @@ import { IoMdAdd } from "react-icons/io";
 import { RiSubtractLine } from "react-icons/ri";
 import Rating from "@mui/material/Rating";
 import { MdDeleteOutline } from "react-icons/md";
+import Button from "../Components/Button";
+import { FaArrowLeft } from "react-icons/fa";
 
 // todo : update the functionality increment and decrement button
 const Checkout = () => {
+  const nav = useNavigate();
   return (
     <div className="w-full flex items-center justify-center py-[2rem]">
-      <div className="w-[97%] py-[0.75rem] flex justify-between">
-        <ItemPart />
-        <ShowPrice />
+      <div className="w-[97%] py-[0.75rem] flex flex-col justify-between gap-[1.75rem]">
+        <div className="w-full py-[0.75rem] flex justify-between">
+          <ItemPart />
+          <ShowPrice />
+        </div>
+        <Button
+          label="Continue Shopping"
+          textSize="text-2xl"
+          rounded="rounded-lg"
+          active
+          width="w-[20%]"
+          icon={<FaArrowLeft />}
+          click={() => nav("/")}
+        />
       </div>
     </div>
   );
@@ -154,7 +168,64 @@ const ItemPart = () => {
 };
 
 const ShowPrice = () => {
-  return <div className="w-[27%] h-[200px] bg-green-500"></div>;
+  // states
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    const getFullPrice = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/user/getTotalPrice",
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
+        setTotalPrice(response.data.price);
+      } catch (err) {
+        console.log(`Some error : ${err}`);
+      }
+    };
+
+    getFullPrice();
+  }, []);
+
+  return (
+    <div className="w-[27%] border-[1px] flex gap-[1.75rem] flex-col justify-between rounded-xl bg-[#FAFAFA] border-[#a7a7a7] px-[1.75rem] py-[1rem]">
+      <div className="flex flex-col gap-[1rem]">
+        <div className="w-full flex items-center justify-between">
+          <div className="text-lg">Subtotal</div>
+          <div className="text-xl font-bold text-[#35BAF6]">
+            Rs {totalPrice}
+          </div>
+        </div>
+        <div className="w-full flex items-center justify-between">
+          <div className="text-lg">Shipping</div>
+          <div className="text-xl font-semibold">Free</div>
+        </div>
+        <div className="w-full flex items-center justify-between">
+          <div className="text-lg">Shipping Country</div>
+          <div className="text-xl font-semibold">India</div>
+        </div>
+        <div className="w-full flex items-center justify-between">
+          <div className="text-lg">Total</div>
+          <div className="text-xl font-bold text-[#35BAF6]">
+            Rs {totalPrice}
+          </div>
+        </div>
+      </div>
+      <div>
+        <Button
+          label="Proceed To Checkout"
+          textSize="text-2xl"
+          rounded="rounded-lg"
+          active
+          click={() => alert("Bus itna hi")}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default Checkout;
