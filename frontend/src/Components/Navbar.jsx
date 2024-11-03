@@ -70,7 +70,7 @@ const RightTopNav = () => {
   // states
   const [avatar, setAvatar] = useState("");
 
-  // check the auth and get the 1st letter of the username if the token is found
+  // check the auth and get the 1st letter of the username if the token is found  
   const getUser = async () => {
     try {
       const resp = await axios({

@@ -8,60 +8,60 @@ mongoose.connect(MONGO_URI);
 const itemsSchema = new mongoose.Schema({
   name: {
     type: String,
-    required : true
+    required: true,
   },
-  by : {
-    type : String,
-    required : true
+  by: {
+    type: String,
+    required: true,
   },
   orgPrice: {
-    type : String,
-    required : true
+    type: String,
+    required: true,
   },
-  disPrice : {
-    type : String,
-    required : true
+  disPrice: {
+    type: String,
+    required: true,
   },
   description: String,
   parentCategory: {
-    type : String,
-    required : true
+    type: String,
+    required: true,
   },
-  subCategory : {
-    type : String,
-    required : true
+  subCategory: {
+    type: String,
+    required: true,
   },
   img: String,
   star: Number,
-  availableCount : Number 
+  availableCount: Number,
 });
 
 // categories Schema to hold the items for each category
 const categoriesSchema = new mongoose.Schema({
-  cat : {
-    type : String,
-    required : true,
-    unique : true 
+  cat: {
+    type: String,
+    required: true,
+    unique: true,
   },
-  expand : {
-    type : Boolean,
-    required : true,
-    default : false
-  },
-  hasProducts : {
+  expand: {
     type: Boolean,
-    required : true,
-    default : false
+    required: true,
+    default: false,
+  },
+  hasProducts: {
+    type: Boolean,
+    required: true,
+    default: false,
   },
   // TODO : This needs to be updated with a default value -> and is to be taken from item's subcategory
-  sub : [String],
-  logo : String,
-  bgColor : String,
+  sub: [String],
+  logo: String,
+  bgColor: String,
   // This needs to be taken from the item schema
-  items : [itemsSchema],
+  items: [itemsSchema],
   // this is exclusively for shop
-  drops : []
-})
+  drops: [],
+});
 
 // schema for the admin database
 const adminSchema = new mongoose.Schema({
@@ -81,15 +81,55 @@ const adminSchema = new mongoose.Schema({
 });
 
 // schema for the items in the cart and its count
-const userItemsSchema = new mongoose.Schema({
-  itemID: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Items",
+const cartItemSchema = new mongoose.Schema({
+  itemId: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  img: {
+    type: String,
+    required: true,
+  },
+  star: {
+    type: Number,
+    required: true,
+  },
+  disPrice: {
+    type: String,
+    required: true,
   },
   count: {
     type: Number,
     default: 1,
-  }
+  },
+});
+
+// this is the scehma for the items in the wishlist
+const wishlistItemSchema = new mongoose.Schema({
+  itemId: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  img: {
+    type: String,
+    required: true,
+  },
+  star: {
+    type: Number,
+    required: true,
+  },
+  disPrice: {
+    type: String,
+    required: true,
+  },
 });
 
 // schema for the user data
@@ -111,7 +151,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  items: [userItemsSchema],
+  cartItems: [cartItemSchema],
+  wishlistItems: [wishlistItemSchema],
   orderDate: {
     type: Date,
     default: Date.now,
@@ -119,7 +160,7 @@ const userSchema = new mongoose.Schema({
 });
 
 const items = mongoose.model("Items", itemsSchema);
-const category = mongoose.model("Category", categoriesSchema)
+const category = mongoose.model("Category", categoriesSchema);
 const user = mongoose.model("User", userSchema);
 const admin = mongoose.model("Admin", adminSchema);
 

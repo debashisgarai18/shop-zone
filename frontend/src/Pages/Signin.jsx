@@ -47,6 +47,7 @@ const Signin = () => {
     setPwd("");
   };
 
+  // todo : set the item in the localstorage for the specific amount of time if the JWt is set to expire within 12hrs
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const formData = {
