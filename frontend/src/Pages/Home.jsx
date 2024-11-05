@@ -128,7 +128,6 @@ const FeaturedCategories = () => {
 
 // Popular Product Part
 // TODO : Responsiveness Part -> later
-// TODO : redesign the upperpart sec div => learn from video
 const PopularProductsMenu = () => {
   // states
   const [selectedCategory, setSelectedCategory] = useState("Fashion");
@@ -190,7 +189,6 @@ const ProductSliderPart = () => {
   return (
     <div className="w-[97%]">
       <div className="w-full relative px-[1rem]">
-        {/* // TODO : popularize this thing on the basic of the categories available -> like 1/2 tile for each category to navigate to the category? */}
         <Slider {...settings} className="w-full rounded-[20px] overflow-hidden">
           <div className="h-[200px] md:h-[200px] w-[25%]">
             <img
@@ -248,7 +246,6 @@ const ProductSliderPart = () => {
 
 // Featured Products Slider part
 // TODO : Responsiveness Part
-// todo : set the random products from the db as the featured products
 const FeaturedProducts = () => {
   let settings = {
     dots: false,
@@ -289,7 +286,6 @@ const FeaturedProducts = () => {
             {...settings}
             className="w-full rounded-[20px] overflow-hidden"
           >
-            {/* // TODO : check if the data can be fed from the API call or not? */}
             {dummy_featured_products.map((e, idx) => (
               <div
                 key={idx}

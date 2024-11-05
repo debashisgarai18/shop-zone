@@ -8,7 +8,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 
-// TODO : Navigation to this page on the basis of the category
+
 const Landing = () => {
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
@@ -259,7 +259,6 @@ const ItemsPart = ({ category }) => {
       {categories.hasProducts ? (
         <div className="w-full grid grid-cols-4 gap-[1.75rem] py-[1rem]">
           {categories.items?.map((e) => (
-            // TODO : need to send the category and the product index (as of now) to the product display page -> onClick
             <ProductCard
               key={e._id}
               productInfo={e}

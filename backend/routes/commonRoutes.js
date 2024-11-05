@@ -76,7 +76,7 @@ commonRouter.get("/getProductInfo/", async (req, res) => {
   }
 });
 
-// todo : endpoint to render some random products from the DB of random category and name and put them as the featured products
+// endpoint to render some random products from the DB of random category and name and put them as the featured products
 commonRouter.get("/getRandomProducts", async (req, res) => {
   try {
     const resp = await category.find({});
@@ -122,8 +122,33 @@ commonRouter.get("/getRandomProducts", async (req, res) => {
   }
 });
 
-// todo : one endpoint to get related products --> given a category
 // todo : the search and the filter endpoints -> for the landing page
+commonRouter.get("/filterProduct", async (req, res) => {
+  const cats = req.query.category;
+  const minVal = req.query.minVal;
+  const maxVal = req.query.maxVal;
+  console.log(typeof minVal, typeof maxVal);
+  try {
+    const resp = await category.findOne({
+      cat: cats,
+    });
+    const filteredProducts = resp.items.filter(
+      (e) =>
+        parseInt(e.disPrice.split(" ")[1]) >= parseInt(minVal) &&
+        parseInt(e.disPrice.split(" ")[1]) <= parseInt(maxVal)
+    );
+
+    return res.status(200).json({
+      message: filteredProducts,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: `Internal Server Error : ${err}}`,
+    });
+  }
+});
+
 // todo : endpoint need to filter out the products on the specifc range provided of the specific category
+// todo : one endpoint to get related products --> given a category
 
 module.exports = commonRouter;
