@@ -70,13 +70,10 @@ const RightTopNav = () => {
 
   // states
   const [avatar, setAvatar] = useState("");
-  const {wishlistCount, setWishlistCount} = useContext(wishlistContext)
-  const {cartCount, setCartCount} = useContext(cartContext)
-  // const [wishListCount, setWishlistCount] = useState(0);
-  // const [cartCount, setCartCount] = useState(0);
+  const { wishlistCount, setWishlistCount } = useContext(wishlistContext);
+  const { cartCount, setCartCount } = useContext(cartContext);
 
-
-  // check the auth and get the 1st letter of the username if the token is found  
+  // check the auth and get the 1st letter of the username if the token is found
   const getUser = async () => {
     try {
       const resp = await axios({
@@ -88,7 +85,7 @@ const RightTopNav = () => {
       });
       setAvatar(resp.data.message.username[0]);
       setWishlistCount(resp.data.message.wishlistItems.length);
-      setCartCount(resp.data.message.cartItems.length)
+      setCartCount(resp.data.message.cartItems.length);
     } catch (err) {
       alert(`ERROR : ${err}`);
     }
@@ -101,6 +98,8 @@ const RightTopNav = () => {
   const handleSigninClick = () => {
     setAvatar("");
     localStorage.removeItem("token");
+    setWishlistCount(0);
+    setCartCount(0);
   };
 
   return (
@@ -122,13 +121,13 @@ const RightTopNav = () => {
           label="Wishlist"
           logo=<FaRegHeart className="text-[1.2rem]" />
           count={wishlistCount}
-          click = {() => nav("/wishlist")}
+          click={() => nav("/wishlist")}
         />
         <NotifyIcons
           label="Cart"
           logo=<FiShoppingCart className="text-[1.2rem]" />
           count={cartCount}
-          click = {() => nav("/checkout")}
+          click={() => nav("/checkout")}
         />
         {!localStorage.getItem("token") ? (
           <Button

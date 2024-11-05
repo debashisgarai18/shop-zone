@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense, useState } from "react";
 import { wishlistContext, cartContext } from "./contexts/countContext";
+import { CircularProgress } from '@mui/material';
 
 const Navbar = lazy(() => import("./Components/Navbar"));
 const Menubar = lazy(() => import("./Components/Menubar"));
@@ -13,8 +14,6 @@ const ProductPage = lazy(() => import("./Pages/ProductPage"));
 const Checkout = lazy(() => import("./Pages/Checkout"));
 const WishlistPage = lazy(() => import("./Pages/WishlistPage"));
 
-// TODO : Improve the loading animation of the JSX components
-
 function App() {
   const [wishlistCount, setWishlistCount] = useState(0);
   const [cartCount, setCartCount] = useState(0);
@@ -22,19 +21,19 @@ function App() {
     <BrowserRouter>
       <wishlistContext.Provider value={{ wishlistCount, setWishlistCount }}>
         <cartContext.Provider value={{ cartCount, setCartCount }}>
-          <Suspense fallback={"Loading..."}>
+          <Suspense fallback={<CircularProgress/>}>
             <Navbar />
           </Suspense>
         </cartContext.Provider>
       </wishlistContext.Provider>
-      <Suspense fallback={"Loading..."}>
+      <Suspense fallback={<CircularProgress/>}>
         <Menubar />
       </Suspense>
       <Routes>
         <Route
           path="/"
           element={
-            <Suspense fallback={"Loading...."}>
+            <Suspense fallback={<CircularProgress/>}>
               <Home />
             </Suspense>
           }
@@ -42,7 +41,7 @@ function App() {
         <Route
           path="/landing"
           element={
-            <Suspense fallback={"Loading..."}>
+            <Suspense fallback={<CircularProgress/>}>
               <Landing />
             </Suspense>
           }
@@ -50,7 +49,7 @@ function App() {
         <Route
           path="/signup"
           element={
-            <Suspense fallback={"Loading..."}>
+            <Suspense fallback={<CircularProgress/>}>
               <Signup />
             </Suspense>
           }
@@ -58,7 +57,7 @@ function App() {
         <Route
           path="/signin"
           element={
-            <Suspense fallback={"Loading..."}>
+            <Suspense fallback={<CircularProgress/>}>
               <Signin />
             </Suspense>
           }
@@ -67,7 +66,7 @@ function App() {
           path="/checkout"
           element={
             <cartContext.Provider value={{ cartCount, setCartCount }}>
-              <Suspense fallback={"Loading..."}>
+              <Suspense fallback={<CircularProgress/>}>
                 <Checkout />
               </Suspense>
             </cartContext.Provider>
@@ -80,7 +79,7 @@ function App() {
               value={{ wishlistCount, setWishlistCount }}
             >
               <cartContext.Provider value={{ cartCount, setCartCount }}>
-                <Suspense fallback={"Loading..."}>
+                <Suspense fallback={<CircularProgress/>}>
                   <ProductPage />
                 </Suspense>
               </cartContext.Provider>
@@ -93,14 +92,14 @@ function App() {
             <wishlistContext.Provider
               value={{ wishlistCount, setWishlistCount }}
             >
-              <Suspense fallback={"Loading..."}>
+              <Suspense fallback={<CircularProgress/>}>
                 <WishlistPage />
               </Suspense>
             </wishlistContext.Provider>
           }
         />
       </Routes>
-      <Suspense fallback={"Loading..."}>
+      <Suspense fallback={<CircularProgress/>}>
         <Footer />
       </Suspense>
     </BrowserRouter>
