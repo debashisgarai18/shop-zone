@@ -151,6 +151,7 @@ const RightTopNav = () => {
           />
         ) : (
           <>
+          {/* // todo : add the drop down menu with features to sign out, view Cart view Wishlist and signout */}
             <div
               className="h-full bg-[#35BAF6] flex items-center justify-center w-[2.75rem] rounded-[50%] cursor-pointer"
               onClick={handleSigninClick}
