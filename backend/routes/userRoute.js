@@ -292,7 +292,7 @@ userRouter.get("/getTotalPrice", userAuth, async (req, res) => {
   }
 });
 
-// todo : get an endpoint to update the increment and decrement of the items in the checkout page
+// todo : add checks that no-one can add more than 5 items and remove < 1 items
 userRouter.put(
   "/updateCart/incrementButton/:itemId",
   userAuth,
@@ -304,8 +304,14 @@ userRouter.put(
       const getUser = await user.findOne({
         _id: userId,
       });
-      getUser.cartItems.find((e) => e.itemId === itemId).count += 1;
 
+      if(getUser.cartItems.find((e) => e.itemId === itemId).count >= 5){
+        return res.status(400).json({
+          message : "Cannot add more than 5 items in the Cart"
+        })
+      }
+
+      getUser.cartItems.find((e) => e.itemId === itemId).count += 1;
       await getUser.save();
       return res.status(200).json({
         message: `The count of the product ${itemId} is incremented`,
@@ -329,6 +335,13 @@ userRouter.put(
       const getUser = await user.findOne({
         _id: userId,
       });
+
+      if(getUser.cartItems.find((e) => e.itemId === itemId).count <= 1){
+        return res.status(400).json({
+          message : "Cannot have 0 item in the Cart"
+        })
+      }
+
       getUser.cartItems.find((e) => e.itemId === itemId).count -= 1;
 
       await getUser.save();

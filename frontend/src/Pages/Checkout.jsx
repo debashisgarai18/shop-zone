@@ -8,16 +8,19 @@ import Rating from "@mui/material/Rating";
 import { MdDeleteOutline } from "react-icons/md";
 import Button from "../Components/Button";
 import { FaArrowLeft } from "react-icons/fa";
+import PropTypes from "prop-types";
 
 // todo : update the functionality increment and decrement button
 const Checkout = () => {
   const nav = useNavigate();
+  const [itemCount, setItemCount] = useState(0);
+
   return (
     <div className="w-full flex items-center justify-center py-[2rem]">
       <div className="w-[97%] py-[0.75rem] flex flex-col justify-between gap-[1.75rem]">
         <div className="w-full py-[0.75rem] flex justify-between">
-          <ItemPart />
-          <ShowPrice />
+          <ItemPart setItemCount={setItemCount} itemCount={itemCount} />
+          <ShowPrice itemCount={itemCount} />
         </div>
         <Button
           label="Continue Shopping"
@@ -33,7 +36,7 @@ const Checkout = () => {
   );
 };
 
-const ItemPart = () => {
+const ItemPart = ({ setItemCount, itemCount }) => {
   const nav = useNavigate();
 
   // take the values from the context
@@ -41,7 +44,6 @@ const ItemPart = () => {
 
   // states
   const [cartData, setCartData] = useState([]);
-  // const [itemCount, setItemCount] = useState(0)
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -65,7 +67,7 @@ const ItemPart = () => {
       }
     };
     getCartItems();
-  }, [nav, cartCount]);
+  }, [nav, cartCount, itemCount]);
 
   return (
     <div className="w-[70%] flex flex-col gap-[2rem]">
@@ -127,11 +129,50 @@ const ItemPart = () => {
               </div>
               {/* // todo : update the functionality increment and decrement button */}
               <div className="w-[15%] flex items-center justify-around">
-                <div className="w-[40px] h-[40px] flex items-center justify-center rounded-full cursor-pointer bg-[#EDEEF5] hover:bg-[#CCCCCC]">
+                <div
+                  className="w-[40px] h-[40px] flex items-center justify-center rounded-full cursor-pointer bg-[#EDEEF5] hover:bg-[#CCCCCC]"
+                  onClick={async () => {
+                    try {
+                      await axios.put(
+                        `http://localhost:3000/user/updateCart/decrementButton/${e.itemId}`,
+                        {},
+                        {
+                          headers: {
+                            Authorization: localStorage.getItem("token"),
+                          },
+                        }
+                      );
+
+                      setItemCount((prev) => prev - 1);
+                    } catch (err) {
+                      alert(err.response.data.message);
+                      return;
+                    }
+                  }}
+                >
                   <RiSubtractLine />
                 </div>
                 <div>{e.count}</div>
-                <div className="w-[40px] h-[40px] flex items-center justify-center cursor-pointer rounded-full bg-[#EDEEF5] hover:bg-[#CCCCCC]">
+                <div
+                  className="w-[40px] h-[40px] flex items-center justify-center cursor-pointer rounded-full bg-[#EDEEF5] hover:bg-[#CCCCCC]"
+                  onClick={async () => {
+                    try {
+                      await axios.put(
+                        `http://localhost:3000/user/updateCart/incrementButton/${e.itemId}`,
+                        {},
+                        {
+                          headers: {
+                            Authorization: localStorage.getItem("token"),
+                          },
+                        }
+                      );
+                      setItemCount((prev) => prev + 1);
+                    } catch (err) {
+                      alert(err.response.data.message);
+                      return;
+                    }
+                  }}
+                >
                   <IoMdAdd />
                 </div>
               </div>
@@ -167,7 +208,12 @@ const ItemPart = () => {
   );
 };
 
-const ShowPrice = () => {
+ItemPart.propTypes = {
+  setItemCount: PropTypes.func,
+  itemCount: PropTypes.number,
+};
+
+const ShowPrice = ({ itemCount }) => {
   // states
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -189,7 +235,7 @@ const ShowPrice = () => {
     };
 
     getFullPrice();
-  }, []);
+  }, [itemCount]);
 
   return (
     <div className="w-[27%] border-[1px] flex gap-[1.75rem] flex-col justify-between rounded-xl bg-[#FAFAFA] border-[#a7a7a7] px-[1.75rem] py-[1rem]">
@@ -226,6 +272,10 @@ const ShowPrice = () => {
       </div>
     </div>
   );
+};
+
+ShowPrice.propTypes = {
+  itemCount: PropTypes.number,
 };
 
 export default Checkout;
