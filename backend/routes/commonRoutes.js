@@ -122,29 +122,65 @@ commonRouter.get("/getRandomProducts", async (req, res) => {
   }
 });
 
-// endpoint to search and the filter items on the basis of rangeof values given
+// endpoint to search and the filter items on the basis of rangeof values given + 
+// also return the items whose name are given as search input values
 commonRouter.get("/filterProduct", async (req, res) => {
   const cats = req.query.category;
   const minVal = req.query.minVal;
   const maxVal = req.query.maxVal;
-  console.log(typeof minVal, typeof maxVal);
-  try {
-    const resp = await category.findOne({
-      cat: cats,
-    });
-    const filteredProducts = resp.items.filter(
-      (e) =>
-        parseInt(e.disPrice.split(" ")[1]) >= parseInt(minVal) &&
-        parseInt(e.disPrice.split(" ")[1]) <= parseInt(maxVal)
-    );
+  const searchValue = req.query.search;
 
-    return res.status(200).json({
-      message: filteredProducts,
-    });
-  } catch (err) {
-    return res.status(500).json({
-      message: `Internal Server Error : ${err}}`,
-    });
+  if (!searchValue) {
+    try {
+      const resp = await category.findOne({
+        cat: cats,
+      });
+      const filteredProducts = resp.items.filter(
+        (e) =>
+          parseInt(e.disPrice.split(" ")[1]) >= parseInt(minVal) &&
+          parseInt(e.disPrice.split(" ")[1]) <= parseInt(maxVal)
+      );
+
+      return res.status(200).json({
+        message: filteredProducts,
+      });
+    } catch (err) {
+      return res.status(500).json({
+        message: `Internal Server Error : ${err}}`,
+      });
+    }
+  } else {
+    try {
+      const getFilteredItem = await category.find({});
+      const tempProducts = [];
+      getFilteredItem
+        .map((e) => e.items)
+        .map((e) => {
+          return e.map((ele) => {
+            if (
+              ele.name.includes(searchValue) ||
+              ele.subCategory.includes(searchValue) ||
+              ele.parentCategory.includes(searchValue)
+            )
+              tempProducts.push(ele);
+          });
+        });
+
+      // checking that the filtered products lie in the value range
+      const filteredProducts = tempProducts.filter(
+        (e) =>
+          parseInt(e.disPrice.split(" ")[1]) >= parseInt(minVal) &&
+          parseInt(e.disPrice.split(" ")[1]) <= parseInt(maxVal)
+      );
+
+      return res.status(200).json({
+        message: filteredProducts,
+      });
+    } catch (err) {
+      return res.status(500).json({
+        message: `Internal Server Error : ${err}}`,
+      });
+    }
   }
 });
 
