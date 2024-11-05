@@ -14,9 +14,9 @@ const Landing = () => {
 
   // states
   const [sub, setSub] = useState([]);
-  const [value, setValue] = useState([100, 1000000]);
+  const [value, setValue] = useState([100, 500000]);
   const [minVal, setMinVal] = useState(100);
-  const [maxVal, setMaxVal] = useState(1000000);
+  const [maxVal, setMaxVal] = useState(500000);
   const [item, setItem] = useState([]);
 
   // debouncing the function values to set the values
@@ -38,7 +38,6 @@ const Landing = () => {
         const resp = await axios.get(
           `http://localhost:3000/common/filterProduct?category=${category}&minVal=${minVal}&maxVal=${maxVal}`
         );
-        // console.log(resp.data.message)
         setItem(resp.data.message);
       } catch (err) {
         console.log(`Some error Occured : ${err}`);
@@ -193,7 +192,6 @@ const FilterCategoryPart = ({
         </div>
       </div>
       {/* // Filter by price part */}
-      {/* // todo : need to filter out the products on the specifc range provided of the specific category  */}
       <div className="w-full h-[425px] shadow-xl flex flex-col gap-[1.75rem] px-[1.5rem] py-[1rem] rounded-xl">
         <div className="text-[1.5rem] font-medium">Filter by price</div>
         <div className="w-full flex">
@@ -203,7 +201,7 @@ const FilterCategoryPart = ({
         <div className="w-full flex flex-col">
           <Slider
             min={100}
-            max={1000000}
+            max={500000}
             value={value}
             onChange={debounedChange}
             valueLabelDisplay="auto"

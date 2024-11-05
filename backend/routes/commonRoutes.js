@@ -122,7 +122,7 @@ commonRouter.get("/getRandomProducts", async (req, res) => {
   }
 });
 
-// todo : the search and the filter endpoints -> for the landing page
+// endpoint to search and the filter items on the basis of rangeof values given
 commonRouter.get("/filterProduct", async (req, res) => {
   const cats = req.query.category;
   const minVal = req.query.minVal;
@@ -148,7 +148,6 @@ commonRouter.get("/filterProduct", async (req, res) => {
   }
 });
 
-// todo : endpoint need to filter out the products on the specifc range provided of the specific category
 // todo : one endpoint to get related products --> given a category
 
 module.exports = commonRouter;
