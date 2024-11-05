@@ -8,11 +8,43 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 
-
 const Landing = () => {
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
+
+  // states
   const [sub, setSub] = useState([]);
+  const [value, setValue] = useState([100, 1000000]);
+  const [minVal, setMinVal] = useState(100);
+  const [maxVal, setMaxVal] = useState(1000000);
+  const [item, setItem] = useState([]);
+
+  // debouncing the function values to set the values
+  // const debouncedFunction = (fn, delay) => {
+  //   let timer;
+
+  //   return (...args) => {
+  //     clearTimeout(timer);
+  //     timer = setTimeout(() => {
+  //       fn(...args);
+  //     }, delay);
+  //   };
+  // };
+
+  // effect to filter the values in the given range
+  useEffect(() => {
+    (async function () {
+      try {
+        const resp = await axios.get(
+          `http://localhost:3000/common/filterProduct?category=${category}&minVal=${minVal}&maxVal=${maxVal}`
+        );
+        // console.log(resp.data.message)
+        setItem(resp.data.message);
+      } catch (err) {
+        console.log(`Some error Occured : ${err}`);
+      }
+    })();
+  }, [category, minVal, maxVal]);
 
   // wrpping it inside usecallback coz it should run only when the category changes, not in every render
   const getData = useCallback(async () => {
@@ -40,8 +72,15 @@ const Landing = () => {
       <div className="w-[97%] h-fit ">
         <LandingPageTitle category={category} sub={sub} />
         <div className="w-full mt-[1rem] flex justify-center gap-[1rem]">
-          <FilterCategoryPart />
-          <ItemsPart category={category} />
+          <FilterCategoryPart
+            value={value}
+            setValue={setValue}
+            minVal={minVal}
+            setMinVal={setMinVal}
+            maxVal={maxVal}
+            setMaxVal={setMaxVal}
+          />
+          <ItemsPart category={category} item={item} />
         </div>
       </div>
     </section>
@@ -64,17 +103,6 @@ const LandingPageTitle = ({ category, sub }) => {
               </div>
             );
           })}
-        {/* {categories.filter((e) => e.cat === category)[0].hasProducts &&
-          categories.filter((e) => e.cat === category)[0].sub &&
-          categories
-            .filter((e) => e.cat === category)[0]
-            .sub.map((e, idx) => {
-              return (
-                <div key={idx} className="cursor-pointer">
-                  {e}
-                </div>
-              );
-            })} */}
       </div>
     </div>
   );
@@ -87,19 +115,36 @@ LandingPageTitle.propTypes = {
 
 // TODO : Do the responsiveness part
 
-const FilterCategoryPart = () => {
-  const [value, setValue] = useState([100, 1000000]);
-  const [minVal, setMinVal] = useState(100);
-  const [maxVal, setMaxVal] = useState(1000000);
+const FilterCategoryPart = ({
+  value,
+  setValue,
+  minVal,
+  setMinVal,
+  maxVal,
+  setMaxVal,
+}) => {
   const [categories, setCategories] = useState([]);
 
   const nav = useNavigate();
+
+  // debounce the change => to restrict to call the API every time the value changes
+  const debouncedFunction = (fn, delay) => {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        fn(...args);
+      }, delay);
+    };
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
     setMinVal(newValue[0]);
     setMaxVal(newValue[1]);
   };
+
+  const debounedChange = debouncedFunction(handleChange, 300);
 
   const handleClick = (cat) => {
     nav(`/landing?category=${cat}`);
@@ -113,7 +158,7 @@ const FilterCategoryPart = () => {
       });
       setCategories(resp.data.message);
     } catch (err) {
-      alert(`Error : ${err}`);
+      console.log(`Error : ${err}`);
     }
   };
 
@@ -160,7 +205,7 @@ const FilterCategoryPart = () => {
             min={100}
             max={1000000}
             value={value}
-            onChange={handleChange}
+            onChange={debounedChange}
             valueLabelDisplay="auto"
           />
           <div className="w-full flex items-center justify-between">
@@ -221,33 +266,23 @@ const FilterCategoryPart = () => {
   );
 };
 
+FilterCategoryPart.propTypes = {
+  value: PropTypes.array,
+  setValue: PropTypes.func,
+  minVal: PropTypes.number,
+  setMinVal: PropTypes.func,
+  maxVal: PropTypes.number,
+  setMaxVal: PropTypes.func,
+};
+
 // TODO : Do the responsiveness part
-const ItemsPart = ({ category }) => {
-  const [categories, setCategories] = useState({});
-
-  const getData = useCallback(async () => {
-    try {
-      const resp = await axios({
-        method: "get",
-        url: `http://localhost:3000/common/getProducts/${category}`,
-      });
-      setCategories(resp.data.message);
-    } catch (err) {
-      alert(`Error : ${err}`);
-    }
-  }, [category]);
-
-  useEffect(() => {
-    getData();
-  }, [getData]);
+const ItemsPart = ({ category, item }) => {
   return (
     <div className="w-[75%] px-[1rem] py-[1rem]">
-      {categories.hasProducts ? (
+      {item.length >= 1 ? (
         <div className="text-[#7E7E7E] text-lg">
           We&apos;ve found{" "}
-          <span className="text-[#35BAF6] font-medium">
-            {categories.items?.length}
-          </span>{" "}
+          <span className="text-[#35BAF6] font-medium">{item.length}</span>{" "}
           items for you!
         </div>
       ) : (
@@ -256,9 +291,9 @@ const ItemsPart = ({ category }) => {
           items for you!
         </div>
       )}
-      {categories.hasProducts ? (
+      {item ? (
         <div className="w-full grid grid-cols-4 gap-[1.75rem] py-[1rem]">
-          {categories.items?.map((e) => (
+          {item?.map((e) => (
             <ProductCard
               key={e._id}
               productInfo={e}
@@ -277,6 +312,7 @@ const ItemsPart = ({ category }) => {
 };
 ItemsPart.propTypes = {
   category: PropTypes.string,
+  item: PropTypes.array,
 };
 
 export default Landing;
