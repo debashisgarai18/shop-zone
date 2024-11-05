@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { categories } from "../Components/categories";
 import { Slider } from "@mui/material";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import Rating from "@mui/material/Rating";
 import { ProductCard } from "../Components/PopularProducts";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -11,6 +11,7 @@ import axios from "axios";
 const Landing = () => {
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
+  const searchValue = searchParams.get("search");
 
   // states
   const [sub, setSub] = useState([]);
@@ -36,61 +37,82 @@ const Landing = () => {
     (async function () {
       try {
         const resp = await axios.get(
-          `http://localhost:3000/common/filterProduct?category=${category}&minVal=${minVal}&maxVal=${maxVal}`
+          category
+            ? `http://localhost:3000/common/filterProduct?category=${category}&minVal=${minVal}&maxVal=${maxVal}`
+            : `http://localhost:3000/common/filterProduct?minVal=${minVal}&maxVal=${maxVal}&search=${searchValue}`
         );
         setItem(resp.data.message);
       } catch (err) {
         console.log(`Some error Occured : ${err}`);
       }
     })();
-  }, [category, minVal, maxVal]);
+  }, [category, minVal, maxVal, searchValue]);
 
-  // wrpping it inside usecallback coz it should run only when the category changes, not in every render
-  const getData = useCallback(async () => {
-    try {
-      const resp = await axios({
-        method: "get",
-        url: `http://localhost:3000/common/getProducts/${category}`,
-      });
-      setSub(resp.data.message.sub);
-    } catch (err) {
-      alert(`error : ${err}`);
-    }
-  }, [category]);
-
+  // this will be called whenever ctaegory is provided to give the subs of the category
   useEffect(() => {
-    getData();
-  }, [getData]);
+    const getData = async () => {
+      try {
+        const resp = await axios({
+          method: "get",
+          url: `http://localhost:3000/common/getProducts/${category}`,
+        });
+        setSub(resp.data.message.sub);
+      } catch (err) {
+        alert(`error : ${err}`);
+      }
+    };
+    if (category) getData();
+  }, [category]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  return (
-    <section className="w-full h-fit flex justify-center py-[1rem] ">
-      <div className="w-[97%] h-fit ">
-        <LandingPageTitle category={category} sub={sub} />
-        <div className="w-full mt-[1rem] flex justify-center gap-[1rem]">
-          <FilterCategoryPart
-            value={value}
-            setValue={setValue}
-            minVal={minVal}
-            setMinVal={setMinVal}
-            maxVal={maxVal}
-            setMaxVal={setMaxVal}
-          />
-          <ItemsPart category={category} item={item} />
+  if (category) {
+    return (
+      <section className="w-full h-fit flex justify-center py-[1rem] ">
+        <div className="w-[97%] h-fit ">
+          <LandingPageTitle category={category} sub={sub} />
+          <div className="w-full mt-[1rem] flex justify-center gap-[1rem]">
+            <FilterCategoryPart
+              value={value}
+              setValue={setValue}
+              minVal={minVal}
+              setMinVal={setMinVal}
+              maxVal={maxVal}
+              setMaxVal={setMaxVal}
+            />
+            <ItemsPart item={item} />
+          </div>
         </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
+  } else {
+    return (
+      <section className="w-full h-fit flex justify-center py-[1rem] ">
+        <div className="w-[97%] h-fit ">
+          <div className="w-full mt-[1rem] flex justify-center gap-[1rem]">
+            <FilterCategoryPart
+              value={value}
+              setValue={setValue}
+              minVal={minVal}
+              setMinVal={setMinVal}
+              maxVal={maxVal}
+              setMaxVal={setMaxVal}
+            />
+            <ItemsPart item={item} />
+          </div>
+        </div>
+      </section>
+    );
+  }
 };
 
 // TODO : Do the responsiveness part
 const LandingPageTitle = ({ category, sub }) => {
   return (
     <div className="w-full bg-[#CDFAFE] flex gap-[1rem] flex-col rounded-2xl py-[1rem] px-[2rem]">
-      {categories.filter((e) => e.cat === category)[0].hasProducts && (
+      {categories?.filter((e) => e.cat === category)[0].hasProducts && (
         <div className="text-[2rem] font-medium">{category}</div>
       )}
       <div className="w-full flex gap-[1rem]">
@@ -274,7 +296,7 @@ FilterCategoryPart.propTypes = {
 };
 
 // TODO : Do the responsiveness part
-const ItemsPart = ({ category, item }) => {
+const ItemsPart = ({ item }) => {
   return (
     <div className="w-[75%] px-[1rem] py-[1rem]">
       {item.length >= 1 ? (
@@ -295,7 +317,7 @@ const ItemsPart = ({ category, item }) => {
             <ProductCard
               key={e._id}
               productInfo={e}
-              category={category}
+              category={e.parentCategory}
               productId={e._id}
             />
           ))}
@@ -309,7 +331,6 @@ const ItemsPart = ({ category, item }) => {
   );
 };
 ItemsPart.propTypes = {
-  category: PropTypes.string,
   item: PropTypes.array,
 };
 

@@ -29,6 +29,16 @@ const Navbar = () => {
 // this is the first header for the navbar
 const TopHeader = () => {
   const nav = useNavigate();
+
+  // states
+  const [searchOutput, setSearchOutput] = useState("");
+
+  // function to handelSearch
+  const handleSearchClick = () => {
+    nav(`/landing?search=${searchOutput}`)
+    setSearchOutput("")
+  }
+
   return (
     <div className="w-[97%] flex item-center py-[1rem]">
       <div
@@ -38,10 +48,11 @@ const TopHeader = () => {
         <img src={mainLogo} className="h-[2rem] md:h-[2.5rem]" />
       </div>
       <div className="w-[45%] flex relative flex-row items-center">
-        {/* // todo : get the values in the search bar and find those values in the backend */}
         <input
           type="text"
           placeholder="Search for items...."
+          value={searchOutput}
+          onChange={(e) => setSearchOutput(e.target.value)}
           className="text-[1rem] hidden md:inline px-[1rem] h-full w-[70%] focus:outline-none border-[1px] border-[#cbcbcc]"
         />
         {/* <input
@@ -49,7 +60,7 @@ const TopHeader = () => {
           className="absolute inline md:hidden w-full h-full px-[1rem] right-[-25%] focus:outline-none border-[1px] py-[1rem] border-[#cbcbcc] rounded-xl"
           placeholder="Search"
         /> */}
-        <IoMdSearch className="text-[1.5rem] absolute right-[-42%] md:right-[32%] cursor-pointer" />
+        <IoMdSearch className="text-[1.5rem] absolute right-[-42%] md:right-[32%] cursor-pointer" onClick={handleSearchClick}/>
       </div>
       <RightTopNav />
       {/* <HamburgerMenu /> */}

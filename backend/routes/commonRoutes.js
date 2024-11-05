@@ -130,7 +130,7 @@ commonRouter.get("/filterProduct", async (req, res) => {
   const maxVal = req.query.maxVal;
   const searchValue = req.query.search;
 
-  if (!searchValue) {
+  if (category && !searchValue) {
     try {
       const resp = await category.findOne({
         cat: cats,
