@@ -16,6 +16,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { IoLogoGithub } from "react-icons/io5";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { FiInstagram } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const dummyFeatures = [
   {
@@ -173,10 +174,11 @@ const FeaturesPart = ({ title, desc, icon }) => {
 
 // 3rd part
 const BottomPart = () => {
+  const nav = useNavigate()
   return (
     <div className="w-full flex gap-[1.75rem] mb-[1.rem]">
       <div className="w-[25%] px-[1rem] py-[1rem] flex flex-col gap-[1.75rem]">
-        <div className="w-full flex items-">
+        <div className="w-full flex" onClick={() => nav("/")}>
           <img src={mainLogo} className="h-[2rem] md:h-[2.5rem]" />
         </div>
         <div className="w-full text-lg">Awesome multi store website</div>

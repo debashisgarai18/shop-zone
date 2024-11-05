@@ -207,6 +207,11 @@ userRouter.put("/updateCart/addItem", userAuth, async (req, res) => {
       (e) => e.itemId === payload.itemId
     );
     if (isProductPresent) {
+      if (isProductPresent.count >= 5) {
+        return res.status(404).json({
+          message: "Cannot add more than 5 items",
+        });
+      }
       isProductPresent.count += payload.count;
     } else {
       getUser.cartItems.push(payload);
@@ -305,10 +310,10 @@ userRouter.put(
         _id: userId,
       });
 
-      if(getUser.cartItems.find((e) => e.itemId === itemId).count >= 5){
+      if (getUser.cartItems.find((e) => e.itemId === itemId).count >= 5) {
         return res.status(400).json({
-          message : "Cannot add more than 5 items in the Cart"
-        })
+          message: "Cannot add more than 5 items in the Cart",
+        });
       }
 
       getUser.cartItems.find((e) => e.itemId === itemId).count += 1;
@@ -336,10 +341,10 @@ userRouter.put(
         _id: userId,
       });
 
-      if(getUser.cartItems.find((e) => e.itemId === itemId).count <= 1){
+      if (getUser.cartItems.find((e) => e.itemId === itemId).count <= 1) {
         return res.status(400).json({
-          message : "Cannot have 0 item in the Cart"
-        })
+          message: "Cannot have 0 item in the Cart",
+        });
       }
 
       getUser.cartItems.find((e) => e.itemId === itemId).count -= 1;

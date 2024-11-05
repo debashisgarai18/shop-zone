@@ -13,7 +13,7 @@ import { cartContext, wishlistContext } from "../contexts/countContext";
 // TODO : Responsiveness part
 const ProductPage = () => {
   const [searchParams] = useSearchParams();
-  const nav = useNavigate()
+  const nav = useNavigate();
 
   // states
   const [counter, setCounter] = useState(1);
@@ -23,11 +23,10 @@ const ProductPage = () => {
   const category = searchParams.get("category");
   const productId = searchParams.get("id");
 
-
   // get the contexts
-  const {setWishlistCount} = useContext(wishlistContext);
+  const { setWishlistCount } = useContext(wishlistContext);
   // todo
-  const {setCartCount} = useContext(cartContext);
+  const { setCartCount } = useContext(cartContext);
 
   // fetching the product details from the endpoint provided
   const getProduct = useCallback(async () => {
@@ -65,8 +64,8 @@ const ProductPage = () => {
   const addToWishlist = async () => {
     if (!localStorage.getItem("token")) {
       alert("Please signin to your account to add in the wishlist");
-      nav("/signin")
-      return
+      nav("/signin");
+      return;
     }
 
     try {
@@ -93,38 +92,41 @@ const ProductPage = () => {
     }
   };
 
-
   // function to add items to the cart
   const handleAddToCart = async () => {
     // check for the availability of the token
-    if(!localStorage.getItem("token")){
+    if (!localStorage.getItem("token")) {
       alert("You must signin first to add to cart");
-      nav("/signin")
-      return
+      nav("/signin");
+      return;
     }
 
-    try{
-      const response = await axios.put("http://localhost:3000/user/updateCart/addItem", {
+    try {
+      const response = await axios.put(
+        "http://localhost:3000/user/updateCart/addItem",
+        {
           category: productToBeShown.parentCategory,
           itemId: productToBeShown._id,
           name: productToBeShown.name,
           img: productToBeShown.img,
           star: productToBeShown.star,
           disPrice: productToBeShown.disPrice,
-          count : counter
-      }, {
-        headers : {
-          Authorization : localStorage.getItem("token"),
-          "Content-Type" : 'application/json'
+          count: counter,
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+            "Content-Type": "application/json",
+          },
         }
-      })
-      setCartCount(response.data.message.length)
+      );
+      setCartCount(response.data.message.length);
+    } catch (err) {
+      alert(err.response.data.message);
+      return;
     }
-    catch(err){
-      console.log(`Some error : ${err}`)
-    }
-  }
-  
+  };
+
   // effect to scroll back to the top of the page
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -244,7 +246,10 @@ const ProductPage = () => {
                     icon=<FiShoppingCart />
                   />
                 </div>
-                <div className="w-[40px] h-[40px] flex justify-center items-center border-[1px] cursor-pointer hover:bg-[#35BAF6] hover:text-white rounded-md border-[#BFBFBF]" onClick={addToWishlist}>
+                <div
+                  className="w-[40px] h-[40px] flex justify-center items-center border-[1px] cursor-pointer hover:bg-[#35BAF6] hover:text-white rounded-md border-[#BFBFBF]"
+                  onClick={addToWishlist}
+                >
                   <FaRegHeart className="text-xl" />
                 </div>
               </div>
