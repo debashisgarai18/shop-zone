@@ -11,7 +11,6 @@ export const PopularProducts = ({ category }) => {
   const [items, setItems] = useState([]);
 
   // fetch all the catgeories from the DB
-  // TODO : get all the data based on the category provided n some another endpoint
   const getAllCategories = useCallback(async () => {
     const response = await axios({
       method: "get",

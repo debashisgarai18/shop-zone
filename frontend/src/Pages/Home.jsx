@@ -7,7 +7,6 @@ import SliderImg3 from "../assets/sliderImg/slider3.webp";
 import SliderImg4 from "../assets/sliderImg/slider4.webp";
 import SliderImg5 from "../assets/sliderImg/slider5.webp";
 import "../css/Home.css";
-import { dummy_featured_products } from "../Components/categories";
 import { PopularProducts, ProductCard } from "../Components/PopularProducts";
 import { useState } from "react";
 import SliderComponent from "../Components/SliderComponent";
@@ -178,7 +177,6 @@ const PopularProductsMenu = () => {
 };
 
 // PRoduct Slider => Bottom Slider
-// todo : need to change the images here--> images got expired
 const ProductSliderPart = () => {
   let settings = {
     dots: false,
@@ -197,7 +195,7 @@ const ProductSliderPart = () => {
           <div className="h-[200px] md:h-[200px] w-[25%]">
             <img
               loading="lazy"
-              src="https://res.cloudinary.com/dy2p0n2xc/image/upload/v1729058177/1729058173850_New_Project_22.jpg"
+              src="https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/ba13ca2134f7c538.jpg?q=20"
               alt="Image"
               className="w-full h-full object-cover hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
             />
@@ -205,7 +203,7 @@ const ProductSliderPart = () => {
           <div className="h-[200px] md:h-[200px] w-[25%]">
             <img
               loading="lazy"
-              src="https://res.cloudinary.com/dy2p0n2xc/image/upload/v1729058192/1729058190698_New_Project_19.jpg"
+              src="https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2022/5/3/846beb79-ada7-48c3-a6c6-4448f276c2111651599573979-Sports-Shoes_Desk.jpg"
               alt="Image"
               className="w-full h-full object-cover hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
             />
@@ -261,6 +259,27 @@ const FeaturedProducts = () => {
     fade: false,
     arrows: true,
   };
+
+  const nav = useNavigate();
+
+  // states
+  const [dummy_featured_products, setDummy_featured_products] = useState([]);
+
+  useEffect(() => {
+    const getRandomProducts = async () => {
+      try {
+        const resp = await axios.get(
+          "http://localhost:3000/common/getRandomProducts"
+        );
+        setDummy_featured_products(resp.data.message);
+      } catch (err) {
+        console.log(`Some axios error: ${err}`);
+      }
+    };
+
+    getRandomProducts();
+  }, []);
+
   return (
     <div className="w-[97%] px-[1rem] gap-[1rem] flex flex-col justify-between">
       <div className="text-2xl font-medium">Featured Products</div>
@@ -272,8 +291,14 @@ const FeaturedProducts = () => {
           >
             {/* // TODO : check if the data can be fed from the API call or not? */}
             {dummy_featured_products.map((e, idx) => (
-              <div key={idx} className="w-[25%] h-full">
-                <ProductCard productInfo={e} productId={idx} />
+              <div
+                key={idx}
+                className="w-[25%] h-full"
+                onClick={() =>
+                  nav(`/product?category=${e.parentCategory}&id=${e._id}`)
+                }
+              >
+                <ProductCard productInfo={e} productId={e._id} />
               </div>
             ))}
           </Slider>

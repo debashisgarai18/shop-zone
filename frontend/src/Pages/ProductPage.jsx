@@ -25,7 +25,6 @@ const ProductPage = () => {
 
   // get the contexts
   const { setWishlistCount } = useContext(wishlistContext);
-  // todo
   const { setCartCount } = useContext(cartContext);
 
   // fetching the product details from the endpoint provided
