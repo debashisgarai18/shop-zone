@@ -5,6 +5,8 @@ import axios from "axios";
 import { useState } from "react";
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../Firebase/firebase";
 
 const Signin = () => {
   const nav = useNavigate();
@@ -47,7 +49,6 @@ const Signin = () => {
     setPwd("");
   };
 
-  // todo : set the item in the localstorage for the specific amount of time if the JWt is set to expire within 12hrs
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const formData = {
@@ -66,6 +67,23 @@ const Signin = () => {
     } catch (err) {
       alert(`Some error : ${err}`);
     }
+  };
+
+  // function to signin with google
+  const signinWithGoogle = async () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        console.log(token, user);
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
   };
 
   return (
@@ -115,7 +133,11 @@ const Signin = () => {
             Sign In
           </button>
           <div className="w-full text-center">OR</div>
-          <button className="bg-white border-[1px] border-[#35baf6] w-full h-full py-[1rem]  text-black uppercase cursor-pointer  rounded-xl flex font-medium items-center justify-center gap-[1rem] hover:bg-[#F6FAFD]">
+          <button
+            type="button"
+            className="bg-white border-[1px] border-[#35baf6] w-full h-full py-[1rem]  text-black uppercase cursor-pointer  rounded-xl flex font-medium items-center justify-center gap-[1rem] hover:bg-[#F6FAFD]"
+            onClick={signinWithGoogle}
+          >
             <FcGoogle className="text-2xl" />
             <div className="text-sm">sign in with google</div>
           </button>

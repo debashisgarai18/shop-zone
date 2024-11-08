@@ -368,4 +368,9 @@ userRouter.get("/me", userAuth, (req, res) => {
   });
 });
 
+// endpoint for the integration of the firebase google auth with the frontend
+userRouter.post("/googleAuth", async (req, res) => {
+  
+})
+
 module.exports = userRouter;
