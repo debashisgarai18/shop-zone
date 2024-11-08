@@ -1,29 +1,49 @@
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../../config");
+const admin = require("firebase-admin");
 
-const userAuth = (req, res, next) => {
+// initialize the admin
+admin.initializeApp({
+  credential: admin.credential.applicationDefault(),
+});
+
+const userAuth = async (req, res, next) => {
   const headToken = req.headers.authorization;
   if (!headToken) {
     return res.status(404).json({
-      message: "Token not found",
+      message: "Auth header not found",
+    });
+  }
+  // get the token
+  const token = headToken.split(" ")[1];
+  if (!token) {
+    return res.status(404).json({
+      message: "The token is not found",
     });
   }
   try {
-    const token = headToken.split(" ")[1];
+    // here check for the google firebase auth, provided the idToken
+    const decodeFBToken = await admin.auth().verifyIdToken(token);
+    console.log(decodeFBToken);
+    return next();
+  } catch (firebaseErr) {
+    // if the jwt for firebaseAuth isnot found then we need to proceed with the normal jwt token
     const decode = jwt.verify(token, JWT_SECRET);
-    if (decode) {
-      req.userId = decode.id;
-      next();
-    } else {
-      res.status(404).json({
-        message: "There is some issue in User Authentication",
+    try {
+      if (decode) {
+        req.userId = decode.id;
+        return next();
+      } else {
+        res.status(404).json({
+          message: "There is some issue in User Authentication",
+        });
+        return;
+      }
+    } catch (err) {
+      return res.status(404).json({
+        message: `Some error : ${err}`,
       });
-      return;
     }
-  } catch (err) {
-    return res.status(404).json({
-      message: `Some error : ${err}`,
-    });
   }
 };
 

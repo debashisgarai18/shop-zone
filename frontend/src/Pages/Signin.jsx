@@ -71,19 +71,26 @@ const Signin = () => {
 
   // function to signin with google
   const signinWithGoogle = async () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        const user = result.user;
-        console.log(token, user);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-      });
+    // signInWithPopup(auth, provider)
+    //   .then((result) => {
+    //     const credential = GoogleAuthProvider.credentialFromResult(result);
+    //     const token = credential.accessToken;
+    //     const user = result.user;
+    //     console.log(token, user);
+    //   })
+    //   .catch((error) => {
+    //     // Handle Errors here.
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     console.log(errorCode, errorMessage);
+    //   });
+    try {
+      const resp = await signInWithPopup(auth, provider);
+      console.log(resp); // get the auth token from here
+      // todo : store the auth token in the local storage
+    } catch (err) {
+      console.log(`Some firebase Error : ${err}`);
+    }
   };
 
   return (
