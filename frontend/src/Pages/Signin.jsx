@@ -86,7 +86,8 @@ const Signin = () => {
     //   });
     try {
       const resp = await signInWithPopup(auth, provider);
-      console.log(resp); // get the auth token from here
+      const idToken = await resp.user.getIdToken(); // get the auth token from here
+      console.log(idToken)
       // todo : store the auth token in the local storage
     } catch (err) {
       console.log(`Some firebase Error : ${err}`);

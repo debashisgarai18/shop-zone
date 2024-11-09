@@ -13,8 +13,9 @@ const { ZodFirstPartyTypeKind } = require("zod");
 // to check when the user is logged in, if they go to signin/signup page, it should redirect to the current page
 // else if they are not logged in they shouldn't be able to go to any of the pages in Ui except the signin and signup
 userRouter.get("/me", userAuth, (req, res) => {
-  if (req.userId)
+  if (req.user)
     return res.status(200).json({
+      username : req.user,
       message: "User found",
     });
 });
@@ -45,7 +46,7 @@ userRouter.post("/signup", signupInputval, async (req, res) => {
       });
 
       if (response) {
-        const token = jwt.sign({ id: response._id }, JWT_SECRET);
+        const token = jwt.sign({ username: response.username }, JWT_SECRET);
         res.status(200).json({
           token: token,
         });
@@ -69,7 +70,7 @@ userRouter.post("/signin", signinInputVal, async (req, res) => {
   if (userExists) {
     const mainPwd = await bcrypt.compare(pwd, userExists.password);
     if (mainPwd) {
-      const token = jwt.sign({ id: userExists._id }, JWT_SECRET);
+      const token = jwt.sign({ username: userExists.username }, JWT_SECRET);
       res.status(200).json({
         token: token,
       });
@@ -89,10 +90,10 @@ userRouter.post("/signin", signinInputVal, async (req, res) => {
 
 // endpoint to extarct the user deatils after authenticatiom
 userRouter.get("/getUser", userAuth, async (req, res) => {
-  const userId = req.userId;
+  const email = req.user;
   try {
     const userData = await user.findOne({
-      _id: userId,
+      username: email,
     });
     if (!userData)
       return res.status(404).json({
@@ -111,12 +112,12 @@ userRouter.get("/getUser", userAuth, async (req, res) => {
 
 // endpoint to add the items on the wishlist given the item details
 userRouter.put("/updateWishlist/addItem", userAuth, async (req, res) => {
-  const userId = req.userId;
+  const email = req.user;
   const payload = req.body;
   try {
     // find the user
     const getUser = await user.findOne({
-      _id: userId,
+      username: email,
     });
 
     // to check if the item exists in the wishlist
@@ -148,11 +149,11 @@ userRouter.put(
   "/updateWishlist/removeItem/:itemId",
   userAuth,
   async (req, res) => {
-    const userId = req.userId;
+    const email = req.user;
     try {
       const itemId = req.params.itemId;
       const getUser = await user.findOne({
-        _id: userId,
+        username: email,
       });
 
       // find the item in the wishlist
@@ -177,10 +178,10 @@ userRouter.put(
 
 // endpoint to view the wishlist of a user
 userRouter.get("/showWishlist", userAuth, async (req, res) => {
-  const userId = req.userId;
+  const email = req.user;
   try {
     const getUser = await user.findOne({
-      _id: userId,
+      usename: email,
     });
 
     return res.status(200).json({
@@ -196,10 +197,10 @@ userRouter.get("/showWishlist", userAuth, async (req, res) => {
 // endpoint to add the items in the cart provided the payload
 userRouter.put("/updateCart/addItem", userAuth, async (req, res) => {
   const payload = req.body;
-  const userId = req.userId;
+  const email = req.user;
   try {
     const getUser = await user.findOne({
-      _id: userId,
+      username: email,
     });
 
     // check if the product is present in the cart or not
@@ -233,11 +234,11 @@ userRouter.put("/updateCart/addItem", userAuth, async (req, res) => {
 
 // endpoint to remove the item from the cart
 userRouter.put("/updateCart/removeItem/:itemId", userAuth, async (req, res) => {
-  const userId = req.userId;
+  const email = req.user;
   const itemId = req.params.itemId;
   try {
     const getUser = await user.findOne({
-      _id: userId,
+      username: email,
     });
 
     const findItem = getUser.cartItems.find((e) => e.itemId === itemId);
@@ -257,10 +258,10 @@ userRouter.put("/updateCart/removeItem/:itemId", userAuth, async (req, res) => {
 
 // endpoint to show all the items in the cart provided the userID
 userRouter.get("/showCart", userAuth, async (req, res) => {
-  const userId = req.userId;
+  const email = req.user;
   try {
     const getUser = await user.findOne({
-      _id: userId,
+      username: email,
     });
 
     return res.status(200).json({
@@ -276,10 +277,10 @@ userRouter.get("/showCart", userAuth, async (req, res) => {
 // endpoint to get the total price of the cart
 // todo : this can be done in the client side as well
 userRouter.get("/getTotalPrice", userAuth, async (req, res) => {
-  const userId = req.userId;
+  const email = req.user;
   try {
     const getUser = await user.findOne({
-      _id: userId,
+      username: email,
     });
     let totalCost = 0;
     getUser.cartItems.map((e) => {
@@ -303,11 +304,11 @@ userRouter.put(
   userAuth,
   async (req, res) => {
     const itemId = req.params.itemId;
-    const userId = req.userId;
+    const email = req.user;
 
     try {
       const getUser = await user.findOne({
-        _id: userId,
+        username: email,
       });
 
       if (getUser.cartItems.find((e) => e.itemId === itemId).count >= 5) {
@@ -334,11 +335,11 @@ userRouter.put(
   userAuth,
   async (req, res) => {
     const itemId = req.params.itemId;
-    const userId = req.userId;
+    const email = req.user;
 
     try {
       const getUser = await user.findOne({
-        _id: userId,
+        username: email,
       });
 
       if (getUser.cartItems.find((e) => e.itemId === itemId).count <= 1) {
@@ -361,15 +362,43 @@ userRouter.put(
   }
 );
 
-// endpoint for, if the user is logged in and still trying to access the signin/signup endpoint
-userRouter.get("/me", userAuth, (req, res) => {
-  res.status(200).json({
-    message: "Logged in",
-  });
+// endpoint for the integration of the firebase google auth with the frontend for signup
+userRouter.post("/signup/googleAuth", async (req, res) => {
+  const userData = req.body;
+  // put the userData in the DB for both signup and signin routes
+  try{
+    // check whether the user exists or not
+    const user = await user.findOne({
+      username : userData.email
+    })
+    if(user){
+      return res.status(404).json({
+        message : "The user already exists"
+      }) 
+    }
+    const putUser = await user.create({
+      username : userData.email,
+      fullName : userData.name
+    })
+    
+    return res.status(200).json({
+      message : "The user is created successfully"
+    })
+  }
+  catch(err){
+    return res.status(404).json({
+      message : `Some error while putting things into the DB : ${err}`
+    })
+  }
 });
 
-// endpoint for the integration of the firebase google auth with the frontend
-// todo : from google auth get the user details then put then in the create user func
-userRouter.post("/googleAuth", async (req, res) => {});
+// endpoint to nav to a specific page, once signin is completed
+userRouter.get("/signin/googleAuth", userAuth, async(req, res) => {
+  if(req.user){
+    return res.status(200).json({
+      message : "You are signed in"
+    })
+  }
+})  
 
 module.exports = userRouter;

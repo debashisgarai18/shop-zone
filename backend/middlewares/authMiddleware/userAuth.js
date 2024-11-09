@@ -1,10 +1,12 @@
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../../config");
 const admin = require("firebase-admin");
+const serviceAccount = require("../../firebase-secret-key/shopzone-deba018-firebase-adminsdk-t6v0j-56555f8497.json");
 
 // initialize the admin
 admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
+  credential: admin.credential.cert(serviceAccount),
+  projectId: serviceAccount.project_id,
 });
 
 const userAuth = async (req, res, next) => {
@@ -24,15 +26,16 @@ const userAuth = async (req, res, next) => {
   try {
     // here check for the google firebase auth, provided the idToken
     const decodeFBToken = await admin.auth().verifyIdToken(token);
+    req.user = decodeFBToken.email;
     console.log(decodeFBToken);
-    return next();
+    next();
   } catch (firebaseErr) {
     // if the jwt for firebaseAuth isnot found then we need to proceed with the normal jwt token
     const decode = jwt.verify(token, JWT_SECRET);
     try {
       if (decode) {
-        req.userId = decode.id;
-        return next();
+        req.user = decode.username;
+        next();
       } else {
         res.status(404).json({
           message: "There is some issue in User Authentication",
