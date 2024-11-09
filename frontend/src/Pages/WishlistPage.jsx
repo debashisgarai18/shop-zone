@@ -6,8 +6,6 @@ import Rating from "@mui/material/Rating";
 import { wishlistContext } from "../contexts/countContext";
 
 const WishlistPage = () => {
-  // todo : add the auth check first -> if the token is not found then send in the signin page
-  // todo : if token find then fetch the details of the wishlist from the DB after auth check
   const nav = useNavigate();
 
   // states

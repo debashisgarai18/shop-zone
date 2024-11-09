@@ -110,7 +110,7 @@ const Signin = () => {
                 onChange={(e) => setUname(e.target.value)}
               />
             </div>
-            {/* // TODO : Add the eye button to display the password / not show the password */}
+        
             <div className="w-full text-lg  flex items-center border-[#7E7E7E] border-[1px]  rounded-xl pr-[1rem]">
               <input
                 type={showPwd ? "text" : "password"}

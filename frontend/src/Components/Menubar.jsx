@@ -116,7 +116,6 @@ const BrowseDropDown = () => {
 };
 
 // function to diaplay all the categories
-// TODO : Change the dummy data to the original fetched data
 const ExpandedCategories = () => {
   const [categories, setCategories] = useState([]);
 

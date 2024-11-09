@@ -275,7 +275,6 @@ userRouter.get("/showCart", userAuth, async (req, res) => {
 });
 
 // endpoint to get the total price of the cart
-// todo : this can be done in the client side as well
 userRouter.get("/getTotalPrice", userAuth, async (req, res) => {
   const email = req.user;
   try {
@@ -298,7 +297,6 @@ userRouter.get("/getTotalPrice", userAuth, async (req, res) => {
   }
 });
 
-// todo : add checks that no-one can add more than 5 items and remove < 1 items
 userRouter.put(
   "/updateCart/incrementButton/:itemId",
   userAuth,

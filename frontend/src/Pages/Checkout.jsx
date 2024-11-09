@@ -10,7 +10,6 @@ import Button from "../Components/Button";
 import { FaArrowLeft } from "react-icons/fa";
 import PropTypes from "prop-types";
 
-// todo : update the functionality increment and decrement button
 const Checkout = () => {
   const nav = useNavigate();
   const [itemCount, setItemCount] = useState(0);
@@ -127,7 +126,6 @@ const ItemPart = ({ setItemCount, itemCount }) => {
               <div className="w-[10%] text-[#27272f] font-bold capitalize">
                 {e.disPrice}
               </div>
-              {/* // todo : update the functionality increment and decrement button */}
               <div className="w-[15%] flex items-center justify-around">
                 <div
                   className="w-[40px] h-[40px] flex items-center justify-center rounded-full cursor-pointer bg-[#EDEEF5] hover:bg-[#CCCCCC]"
