@@ -15,7 +15,7 @@ const { ZodFirstPartyTypeKind } = require("zod");
 userRouter.get("/me", userAuth, (req, res) => {
   if (req.user)
     return res.status(200).json({
-      username : req.user,
+      username: req.user,
       message: "User found",
     });
 });
@@ -365,40 +365,40 @@ userRouter.put(
 // endpoint for the integration of the firebase google auth with the frontend for signup
 userRouter.post("/signup/googleAuth", async (req, res) => {
   const userData = req.body;
+
   // put the userData in the DB for both signup and signin routes
-  try{
+  try {
     // check whether the user exists or not
-    const user = await user.findOne({
-      username : userData.email
-    })
-    if(user){
+    const getUser = await user.findOne({
+      username: userData.uname,
+    });
+    if (getUser) {
       return res.status(404).json({
-        message : "The user already exists"
-      }) 
+        message: "The user already exists",
+      });
     }
     const putUser = await user.create({
-      username : userData.email,
-      fullName : userData.name
-    })
-    
+      username: userData.uname,
+      fullName: userData.fname,
+    });
+
     return res.status(200).json({
-      message : "The user is created successfully"
-    })
-  }
-  catch(err){
+      message: "The user is created successfully",
+    });
+  } catch (err) {
     return res.status(404).json({
-      message : `Some error while putting things into the DB : ${err}`
-    })
+      message: `Some error while putting things into the DB : ${err}`,
+    });
   }
 });
 
 // endpoint to nav to a specific page, once signin is completed
-userRouter.get("/signin/googleAuth", userAuth, async(req, res) => {
-  if(req.user){
+userRouter.get("/signin/googleAuth", userAuth, async (req, res) => {
+  if (req.user) {
     return res.status(200).json({
-      message : "You are signed in"
-    })
+      message: "You are signed in",
+    });
   }
-})  
+});
 
 module.exports = userRouter;

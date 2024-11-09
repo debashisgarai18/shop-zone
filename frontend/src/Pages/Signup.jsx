@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../Firebase/firebase";
 
 const Signup = () => {
   const nav = useNavigate();
@@ -72,6 +74,37 @@ const Signup = () => {
     }
   };
 
+  // function to do google auth signup
+  const googleAuthSignup = async () => {
+    try {
+      const resp = await signInWithPopup(auth, provider);
+      const idToken = await resp.user.getIdToken(); // get the auth token from here
+      const payload = {
+        uname: resp.user.email,
+        fname: resp.user.displayName,
+        phno: "",
+        pwd: "",
+      };
+      console.log(idToken);
+      // access the signin endpoint for the firebase
+      const signupUser = await axios.post(
+        "http://localhost:3000/user/signup/googleAuth",
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          },
+        }
+      );
+      if (signupUser.status === 200) {
+        localStorage.setItem("token", `Bearer ${idToken}`);
+        nav("/");
+      }
+    } catch (err) {
+      console.log(`Some firebase Error : ${err}`);
+    }
+  };
+
   return (
     <div className="w-full bg-[#F1F1F1] mb-[2rem] flex items-center justify-center py-[3rem]">
       <div className="w-[30%] px-[2rem] py-[2rem] bg-white rounded-2xl shadow-xl">
@@ -137,7 +170,11 @@ const Signup = () => {
             Sign Up
           </button>
           <div className="w-full text-center">OR</div>
-          <button className="bg-white border-[1px] border-[#35baf6] w-full h-full py-[1rem]  text-black uppercase cursor-pointer  rounded-xl flex font-medium items-center justify-center gap-[1rem] hover:bg-[#F6FAFD]">
+          <button
+            type="button"
+            className="bg-white border-[1px] border-[#35baf6] w-full h-full py-[1rem]  text-black uppercase cursor-pointer  rounded-xl flex font-medium items-center justify-center gap-[1rem] hover:bg-[#F6FAFD]"
+            onClick={googleAuthSignup}
+          >
             <FcGoogle className="text-2xl" />
             <div className="text-sm">sign in with google</div>
           </button>

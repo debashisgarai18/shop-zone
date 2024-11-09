@@ -27,7 +27,6 @@ const userAuth = async (req, res, next) => {
     // here check for the google firebase auth, provided the idToken
     const decodeFBToken = await admin.auth().verifyIdToken(token);
     req.user = decodeFBToken.email;
-    console.log(decodeFBToken);
     next();
   } catch (firebaseErr) {
     // if the jwt for firebaseAuth isnot found then we need to proceed with the normal jwt token

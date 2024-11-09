@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../Firebase/firebase";
 
 const Signin = () => {
@@ -71,24 +71,22 @@ const Signin = () => {
 
   // function to signin with google
   const signinWithGoogle = async () => {
-    // signInWithPopup(auth, provider)
-    //   .then((result) => {
-    //     const credential = GoogleAuthProvider.credentialFromResult(result);
-    //     const token = credential.accessToken;
-    //     const user = result.user;
-    //     console.log(token, user);
-    //   })
-    //   .catch((error) => {
-    //     // Handle Errors here.
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     console.log(errorCode, errorMessage);
-    //   });
     try {
       const resp = await signInWithPopup(auth, provider);
       const idToken = await resp.user.getIdToken(); // get the auth token from here
-      console.log(idToken)
-      // todo : store the auth token in the local storage
+      // access the signin endpoint for the firebase
+      const signedIn = await axios.get(
+        "http://localhost:3000/user/signin/googleAuth",
+        {
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          },
+        }
+      );
+      if (signedIn.status === 200) {
+        localStorage.setItem("token", `Bearer ${idToken}`);
+        nav("/");
+      }
     } catch (err) {
       console.log(`Some firebase Error : ${err}`);
     }

@@ -87,6 +87,7 @@ const RightTopNav = () => {
 
   // check the auth and get the 1st letter of the username if the token is found
   const getUser = async () => {
+    console.log(localStorage.getItem("token"))
     try {
       const resp = await axios({
         method: "get",
